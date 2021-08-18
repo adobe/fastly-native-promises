@@ -53,7 +53,7 @@
     "semantic-release": "17.4.4"
   },
   "dependencies": {
-    "@adobe/helix-fetch": "2.4.1",
+    "@adobe/helix-fetch": "2.4.2",
     "object-hash": "2.2.0"
   },
   "config": {
