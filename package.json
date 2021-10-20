@@ -32,7 +32,7 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@adobe/helix-testutils": "0.4.5",
+    "@adobe/helix-testutils": "0.4.10",
     "@semantic-release/changelog": "6.0.0",
     "@semantic-release/git": "10.0.0",
     "codecov": "3.8.3",
