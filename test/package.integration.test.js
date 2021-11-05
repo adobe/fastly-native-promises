@@ -14,7 +14,7 @@ describe('#integration compute@edge packages', () => {
   before(() => {
     nock.restore();
 
-    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_CE_SERVICE_ID);
+    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_CE_SERVICE_ID, 60000);
   });
 
   after(() => {

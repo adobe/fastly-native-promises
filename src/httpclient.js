@@ -1,6 +1,6 @@
 const hash = require('object-hash');
 const fetchAPI = require('@adobe/helix-fetch');
-const FormData = require('form-data');
+const { FormData, Blob } = require('formdata-node');
 
 const { AbortError, Headers } = fetchAPI;
 const { Lock } = require('./lock');
@@ -110,32 +110,25 @@ function create({ baseURL, timeout, headers }) {
       // set body or form based on content type. default is form, except for patch ;-)
       const contentType = myHeaders.get('content-type')
         || (method === 'patch' ? 'application/json' : 'application/x-www-form-urlencoded');
-      options.headers.set('content-type', contentType);
+
       if (method && method !== 'get' && method !== 'head') {
         // GET (default) and HEAD requests can't have a body
         if (body instanceof Buffer) {
           // multipart formdata
           const form = new FormData();
-          form.append('package', body, {
-            filename: 'test.tar.gz',
-            contentType: 'application/x-gzip',
-          });
-          // override headers to include content type and boundary
-          options.headers = form.getHeaders({
-            'Fastly-Key': options.headers.get('fastly-key'),
-          });
+          form.append('package', new Blob(body, { type: 'application/x-gzip' }), 'test.tar.gz');
           // set body
-          options.body = form.getBuffer();// .toString();
-          // console.log(options.body.toString('base64'));
+          options.body = form;
         } else if (contentType === 'application/x-www-form-urlencoded') {
           // create form data
           options.body = new URLSearchParams(Object.entries(body || {})).toString();
+          options.headers.set('content-type', contentType);
         } else {
           // send JSON
           options.body = JSON.stringify(body);
+          options.headers.set('content-type', contentType);
         }
       }
-
       const start = Date.now();
 
       const reqfn = (attempt) => fetch(uri, options).then((response) => {
