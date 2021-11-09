@@ -19,7 +19,9 @@ class Lock {
 
   async acquire() {
     if (this._acquired) {
-      return new Promise((resolve) => this._waiting.push(resolve));
+      return new Promise((resolve) => {
+        this._waiting.push(resolve);
+      });
     }
 
     this._acquired = true;

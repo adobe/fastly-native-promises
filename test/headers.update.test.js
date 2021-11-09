@@ -49,14 +49,16 @@ describe('#fastly.headers.update', () => {
       'set',
       'http.X-Location',
       'request',
-    )({
-      condition: 'req.url.basename == "new.html"',
-      expression: '"https://new.example.com"',
-    },
-    {
-      condition: 'req.url.basename == "index.html"',
-      expression: 'https://www.example.com',
-    });
+    )(
+      {
+        condition: 'req.url.basename == "new.html"',
+        expression: '"https://new.example.com"',
+      },
+      {
+        condition: 'req.url.basename == "index.html"',
+        expression: 'https://www.example.com',
+      },
+    );
   });
 
   it('All requests have been made', () => {

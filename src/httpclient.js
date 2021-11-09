@@ -92,8 +92,10 @@ function create({ baseURL, timeout, headers }) {
    */
   function makereq(method, memoize = false, retries = 0) {
     const myreq = function req(path, body, config) {
-      const myHeaders = new Headers(Object.assign(headers,
-        config && config.headers ? config.headers : {}));
+      const myHeaders = new Headers(Object.assign(
+        headers,
+        config && config.headers ? config.headers : {},
+      ));
 
       const options = {
         method,
