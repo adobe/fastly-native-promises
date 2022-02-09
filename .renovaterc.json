@@ -7,8 +7,8 @@
   "timezone": "Europe/Zurich",
   "packageRules": [
     {
-      "packageNames": ["circleci/node"],
-      "allowedVersions": "12"
+      "packageNames": ["cimg/node"],
+      "allowedVersions": "<15"
     },
     {
       "packagePatterns": [
