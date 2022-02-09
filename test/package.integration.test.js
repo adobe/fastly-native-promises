@@ -14,7 +14,7 @@ describe('#integration compute@edge packages', () => {
   before(() => {
     nock.restore();
 
-    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_CE_SERVICE_ID);
+    fastly = f(process.env.FASTLY_AUTH_CE, process.env.FASTLY_CE_SERVICE_ID);
   });
 
   after(() => {
@@ -30,7 +30,7 @@ describe('#integration compute@edge packages', () => {
     });
   });
 
-  condit('Get Package Metadata', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_CE_SERVICE_ID']), async () => {
+  condit('Get Package Metadata', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const { data } = await fastly.readPackage(2);
     assert.deepStrictEqual(data, {
       created_at: '2021-06-16T12:53:33Z',
@@ -50,7 +50,7 @@ describe('#integration compute@edge packages', () => {
     });
   }).timeout(5000);
 
-  condit('Update Package', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_CE_SERVICE_ID']), async () => {
+  condit('Update Package', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const buffer = await fs.readFile(path.resolve(__dirname, 'compute/pkg/Test.tar.gz'));
 
     const res = await fastly.writePackage(3, buffer);
