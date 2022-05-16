@@ -4,7 +4,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/createSnippet.response');
@@ -24,22 +24,22 @@ describe('#createSnippet', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an object', () => {
-    expect(typeof res.data).toBe('object');
+    assert.strictEqual(typeof res.data, 'object');
   });
 
   it('response body properties should be created', () => {
-    expect(res.data.name).toBe('my_snippet');
-    expect(res.data.priority).toBe('10');
-    expect(res.data.dynamic).toBe('1');
-    expect(res.data.type).toBe('fetch');
+    assert.strictEqual(res.data.name, 'my_snippet');
+    assert.strictEqual(res.data.priority, '10');
+    assert.strictEqual(res.data.dynamic, '1');
+    assert.strictEqual(res.data.type, 'fetch');
   });
 
   it('response body should contain all properties', () => {
@@ -56,7 +56,7 @@ describe('#createSnippet', () => {
       'updated_at',
       'id',
     ].forEach((e) => {
-      expect(Object.keys(res.data)).toContain(e);
+      assert.ok(Object.keys(res.data).indexOf(e) >= 0);
     });
   });
 });

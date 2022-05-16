@@ -2,7 +2,7 @@
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const { condit } = require('@adobe/helix-testutils');
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const f = require('../src/index');
 
 describe('#integration condition updates', () => {
@@ -22,7 +22,7 @@ describe('#integration condition updates', () => {
     Object.values(fastly.requestmonitor.stats).forEach((val) => {
       // all stats should be numbers
       if (!Number.isNaN(val)) {
-        expect(val).toBeGreaterThan(0);
+        assert.ok(val > 0);
       }
     });
   });

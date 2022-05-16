@@ -4,7 +4,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/dictitem.response');
@@ -23,22 +23,22 @@ describe('#readDictItem (write-only)', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(403);
+    assert.strictEqual(res.status, 403);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an object', () => {
-    expect(typeof res.data).toBe('object');
+    assert.strictEqual(typeof res.data, 'object');
   });
 
   it('response value should match', () => {
-    expect(res.data.item_value).toBeUndefined();
-    expect(res.data.created_at).toBeUndefined();
-    expect(res.data.deleted_at).toBeUndefined();
-    expect(res.data.updated_at).toBeUndefined();
+    assert.strictEqual(res.data.item_value, undefined);
+    assert.strictEqual(res.data.created_at, undefined);
+    assert.strictEqual(res.data.deleted_at, undefined);
+    assert.strictEqual(res.data.updated_at, undefined);
   });
 
   it('response body should contain all properties', () => {
@@ -51,7 +51,7 @@ describe('#readDictItem (write-only)', () => {
       'deleted_at',
       'updated_at',
     ].forEach((e) => {
-      expect(Object.keys(res.data)).toContain(e);
+      assert.ok(Object.keys(res.data).indexOf(e) >= 0);
     });
   });
 });

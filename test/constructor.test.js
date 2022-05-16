@@ -3,19 +3,19 @@
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
-const expect = require('expect');
+const assert = require('assert');
 const fastlyPromises = require('../src/index');
 
 describe('#constructor', () => {
   const instance = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
 
   it('class instance should exist', () => {
-    expect(instance).toBeTruthy();
+    assert.ok(instance);
   });
 
   it('class instance should have service_id and request properties', () => {
     ['service_id', 'request'].forEach((e) => {
-      expect(Object.keys(instance)).toContain(e);
+      assert.ok(Object.keys(instance).indexOf(e) >= 0);
     });
   });
 
@@ -42,7 +42,7 @@ describe('#constructor', () => {
       .map((e) => e.replace(/(^|\s)\S/g, (l) => l.toUpperCase()))
       .forEach((e) => {
         ['read'].forEach((f) => {
-          expect(typeof instance[f + e]).toBe('function');
+          assert.strictEqual(typeof instance[f + e], 'function');
         });
       });
   });

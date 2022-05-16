@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/condition.response');
@@ -35,11 +35,11 @@ describe('#fastly.conditions.update', () => {
   });
 
   it('Returns a map', () => {
-    expect(typeof map).toBe('object');
+    assert.strictEqual(typeof map, 'object');
   });
 
   it('Creates stable hashes', () => {
-    expect(map['req.url.basename == "new.html"'].name).toEqual('test-5d02ca762cb6470172b3fd92c21d15e5b0e44925');
+    assert.strictEqual(map['req.url.basename == "new.html"'].name, 'test-5d02ca762cb6470172b3fd92c21d15e5b0e44925');
   });
 
   it('All requests have been made', () => {
@@ -47,6 +47,6 @@ describe('#fastly.conditions.update', () => {
   });
 
   it('Creates stable hashes', () => {
-    expect(map['req.url.basename == "new.html"'].name).toEqual('test-5d02ca762cb6470172b3fd92c21d15e5b0e44925');
+    assert.strictEqual(map['req.url.basename == "new.html"'].name, 'test-5d02ca762cb6470172b3fd92c21d15e5b0e44925');
   });
 });

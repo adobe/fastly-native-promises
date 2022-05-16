@@ -3,15 +3,15 @@
 'use strict';
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 
 describe('#mainEntryPoint', () => {
   it('property should exist', () => {
-    expect(config.mainEntryPoint).toBeTruthy();
+    assert.ok(config.mainEntryPoint);
   });
 
   it('property should be a string', () => {
-    expect(typeof config.mainEntryPoint).toBe('string');
+    assert.strictEqual(typeof config.mainEntryPoint, 'string');
   });
 });

@@ -4,7 +4,7 @@
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/activateVersion.response');
@@ -28,26 +28,26 @@ describe('#activateVersion', () => {
   });
 
   it('response should be a status 400', () => {
-    expect(res).not.toBeDefined();
-    expect(err instanceof Error).toBeTruthy();
-    expect(err.status).toBe(400);
+    assert.strictEqual(res, undefined);
+    assert.ok(err instanceof Error);
+    assert.strictEqual(err.status, 400);
   });
 
   it('error body should exist', () => {
-    expect(err.data).toBeTruthy();
+    assert.ok(err.data);
   });
 
   it('error code should exist', () => {
-    expect(err.code).toBeTruthy();
-    expect(err.code).toBe('Bad request');
+    assert.ok(err.code);
+    assert.strictEqual(err.code, 'Bad request');
   });
 
   it('error message should exist', () => {
-    expect(err.message).toBeTruthy();
+    assert.ok(err.message);
   });
 
   it('error body should be an object', () => {
-    expect(typeof err.data).toBe('object');
+    assert.strictEqual(typeof err.data, 'object');
   });
 
   it('response err should contain all properties', () => {
@@ -55,7 +55,7 @@ describe('#activateVersion', () => {
       'msg',
       'detail',
     ].forEach((e) => {
-      expect(Object.keys(err.data)).toContain(e);
+      assert.ok(Object.keys(err.data).indexOf(e) >= 0);
     });
   });
 });

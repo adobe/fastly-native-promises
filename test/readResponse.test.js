@@ -4,7 +4,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/response.response');
@@ -22,20 +22,20 @@ describe('#readResponse', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an object', () => {
-    expect(typeof res.data).toBe('object');
+    assert.strictEqual(typeof res.data, 'object');
   });
 
   it('response body properties should be created', () => {
-    expect(res.data.name).toBe('test-response');
-    expect(res.data.content).toBe('This message means all is okay.');
+    assert.strictEqual(res.data.name, 'test-response');
+    assert.strictEqual(res.data.content, 'This message means all is okay.');
   });
 
   it('response body should contain all properties', () => {
@@ -50,7 +50,7 @@ describe('#readResponse', () => {
       'status',
       'version',
     ].forEach((e) => {
-      expect(Object.keys(res.data)).toContain(e);
+      assert.ok(Object.keys(res.data).indexOf(e) >= 0);
     });
   });
 });

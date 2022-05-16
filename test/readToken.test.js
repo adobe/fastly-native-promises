@@ -17,7 +17,6 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 
 const nock = require('nock');
 const assert = require('assert');
-const expect = require('expect');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/tokens.response');
@@ -30,7 +29,7 @@ describe('#readToken', () => {
       .reply(200, response.tokens);
     const res = await fastly.readToken('deadbeefEEiDptTRb90e');
 
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should contain all properties', async () => {
@@ -40,7 +39,7 @@ describe('#readToken', () => {
       .reply(200, response.tokens);
     const res = await fastly.readToken('deadbeefEEiDptTRb90e');
 
-    expect(res.data).toStrictEqual(response.tokens[0]);
+    assert.deepStrictEqual(res.data, response.tokens[0]);
   });
 
   it('should fail if token does not exit', async () => {
@@ -53,7 +52,7 @@ describe('#readToken', () => {
       await fastly.readToken('does not exist');
       assert.fail('non existent token should fail');
     } catch (e) {
-      expect(e.message).toBe('No such token.');
+      assert.strictEqual(e.message, 'No such token.');
     }
   });
 });

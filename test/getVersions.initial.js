@@ -4,7 +4,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/readVersions.initial.response');
@@ -22,15 +22,15 @@ describe('#getVersions(inital)', () => {
   });
 
   it('active version should be undefined', () => {
-    expect(versions.active).toBeUndefined();
+    assert.strictEqual(versions.active, undefined);
   });
 
   it('latest version should be 1', () => {
-    expect(versions.latest).toBe(1);
+    assert.strictEqual(versions.latest, 1);
   });
 
   it('current version should be undefined', () => {
-    expect(versions.current).toBeUndefined();
+    assert.strictEqual(versions.current, undefined);
   });
 
   after('API has been called once', () => {
@@ -46,19 +46,19 @@ describe('#getVersion(initial)', () => {
     .reply(200, response.readVersions);
 
   it('active version should be undefined', async () => {
-    expect(await fastly.getVersion(undefined, 'active')).toBeUndefined();
+    assert.strictEqual(await fastly.getVersion(undefined, 'active'), undefined);
   });
 
   it('latest version should be 1', async () => {
-    expect(await fastly.getVersion(undefined, 'latest')).toBe(1);
+    assert.strictEqual(await fastly.getVersion(undefined, 'latest'), 1);
   });
 
   it('current version should be undefined', async () => {
-    expect(await fastly.getVersion(undefined, 'current')).toBeUndefined();
+    assert.strictEqual(await fastly.getVersion(undefined, 'current'), undefined);
   });
 
   it('current version should be 1 after fallbacks', async () => {
-    expect(await fastly.getVersion(undefined, 'nonsense', 'active', 'current', 'initial')).toBe(1);
+    assert.strictEqual(await fastly.getVersion(undefined, 'nonsense', 'active', 'current', 'initial'), 1);
   });
 
   after('API has been called once', () => {

@@ -4,7 +4,7 @@
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/cloneVersion.response');
@@ -25,31 +25,31 @@ describe('#cloneVersion.default', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an object', () => {
-    expect(typeof res.data).toBe('object');
+    assert.strictEqual(typeof res.data, 'object');
   });
 
   it('response body property should be greater than cloned version number', () => {
-    expect(res.data.number).toBeGreaterThan(1);
+    assert.ok(res.data.number > 1);
   });
 
   it('current version should be increased', async () => {
-    expect((await fastly.getVersions()).current).toBeGreaterThan(1);
+    assert.ok((await fastly.getVersions()).current > 1);
   });
 
   it('latest version should be increased', async () => {
-    expect((await fastly.getVersions()).latest).toBeGreaterThan(1);
+    assert.ok((await fastly.getVersions()).latest > 1);
   });
 
   it('active version should be unchanged', async () => {
-    expect((await fastly.getVersions()).active).toBe(1);
+    assert.strictEqual((await fastly.getVersions()).active, 1);
   });
 
   it('response body should contain all properties', () => {
@@ -66,7 +66,7 @@ describe('#cloneVersion.default', () => {
       'updated_at',
       'deployed',
     ].forEach((e) => {
-      expect(Object.keys(res.data)).toContain(e);
+      assert.ok(Object.keys(res.data).indexOf(e) >= 0);
     });
   });
 });

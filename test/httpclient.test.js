@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
 const assert = require('assert');
 const httpclient = require('../src/httpclient');
 
@@ -22,8 +21,8 @@ describe('#httpclient.caches', () => {
     const first = await client.get('/foo');
     const second = await client.get('/foo');
 
-    expect(first.data).toEqual(second.data);
-    expect(scope.isDone()).toBeFalsy();
+    assert.strictEqual(first.data, second.data);
+    assert.ok(!scope.isDone());
   });
 
   it('Status 200 can return JSON', async () => {
@@ -39,7 +38,7 @@ describe('#httpclient.caches', () => {
 
     const first = await client.get('/json');
 
-    expect(first.data).toMatchObject({ foo: 'bar' });
+    assert.deepStrictEqual(first.data, { foo: 'bar' });
   });
 
   it('Status 404 will not get cached', async () => {
@@ -57,14 +56,14 @@ describe('#httpclient.caches', () => {
 
     try {
       const first = await client.get('/bar');
-      expect(first).not.toBeDefined();
+      assert.strictEqual(first, undefined);
     } catch (e) {
-      expect(e.name).toEqual('FastlyError');
+      assert.strictEqual(e.name, 'FastlyError');
     }
     const second = await client.get('/bar');
-    expect(second.data).toEqual('second');
+    assert.strictEqual(second.data, 'second');
 
-    expect(scope.isDone()).toBeTruthy();
+    assert.ok(scope.isDone());
   });
 });
 
@@ -85,9 +84,9 @@ describe('#httpclient.retries', () => {
     });
 
     const res = await client.get('/');
-    expect(res.data).toEqual('thanks for trying again');
+    assert.strictEqual(res.data, 'thanks for trying again');
 
-    expect(scope.isDone()).toBeTruthy();
+    assert.ok(scope.isDone());
   });
 
   it('Hard errors trigger a retry', async () => {
@@ -106,9 +105,9 @@ describe('#httpclient.retries', () => {
     });
 
     const res = await client.get('/bang');
-    expect(res.data).toEqual('thanks for trying again');
+    assert.strictEqual(res.data, 'thanks for trying again');
 
-    expect(scope.isDone()).toBeTruthy();
+    assert.ok(scope.isDone());
   });
 
   it('Error 502 and 503 trigger a retry', async () => {
@@ -127,9 +126,9 @@ describe('#httpclient.retries', () => {
     });
 
     const res = await client.get('/gateway');
-    expect(res.data).toEqual('thanks for trying again');
+    assert.strictEqual(res.data, 'thanks for trying again');
 
-    expect(scope.isDone()).toBeTruthy();
+    assert.ok(scope.isDone());
   });
 
   it('Error 500 does not trigger a reply', async () => {
@@ -147,7 +146,7 @@ describe('#httpclient.retries', () => {
       await client.get('/boom');
       assert.fail();
     } catch (e) {
-      expect(scope.isDone()).toBeTruthy();
+      assert.ok(scope.isDone());
     }
   });
 });

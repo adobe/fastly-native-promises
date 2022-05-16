@@ -4,7 +4,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/readVersions.response');
@@ -22,15 +22,15 @@ describe('#getVersions', () => {
   });
 
   it('active version should be 1', () => {
-    expect(versions.active).toBe(1);
+    assert.strictEqual(versions.active, 1);
   });
 
   it('latest version should be 2', () => {
-    expect(versions.latest).toBe(2);
+    assert.strictEqual(versions.latest, 2);
   });
 
   it('current version should be 2', () => {
-    expect(versions.current).toBe(2);
+    assert.strictEqual(versions.current, 2);
   });
 
   after('API has been called once', () => {
@@ -46,23 +46,23 @@ describe('#getVersion', () => {
     .reply(200, response.readVersions);
 
   it('active version should be undefined', async () => {
-    expect(await fastly.getVersion(undefined, 'active')).toBe(1);
+    assert.strictEqual(await fastly.getVersion(undefined, 'active'), 1);
   });
 
   it('latest version should be 2', async () => {
-    expect(await fastly.getVersion(undefined, 'latest')).toBe(2);
+    assert.strictEqual(await fastly.getVersion(undefined, 'latest'), 2);
   });
 
   it('current version should be 2', async () => {
-    expect(await fastly.getVersion(undefined, 'current')).toBe(2);
+    assert.strictEqual(await fastly.getVersion(undefined, 'current'), 2);
   });
 
   it('current version should be 2 after fallbacks', async () => {
-    expect(await fastly.getVersion(undefined, 'nonsense', 'unknown', 'current', 'initial')).toBe(2);
+    assert.strictEqual(await fastly.getVersion(undefined, 'nonsense', 'unknown', 'current', 'initial'), 2);
   });
 
   it('initial version should be 1 after fallbacks', async () => {
-    expect(await fastly.getVersion(undefined, 'nonsense', 'initial', 'current', 'initial')).toBe(1);
+    assert.strictEqual(await fastly.getVersion(undefined, 'nonsense', 'initial', 'current', 'initial'), 1);
   });
 
   after('API has been called once', () => {

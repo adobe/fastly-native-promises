@@ -16,7 +16,7 @@ process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
 
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/readUser.response');
@@ -34,10 +34,10 @@ describe('#createUser', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should contain all properties', () => {
-    expect(res.data).toStrictEqual(response.readUser);
+    assert.deepStrictEqual(res.data, response.readUser);
   });
 });

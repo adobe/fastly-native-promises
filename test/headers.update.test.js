@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'false';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/condition.response');
@@ -62,6 +62,6 @@ describe('#fastly.headers.update', () => {
   });
 
   it('All requests have been made', () => {
-    expect(res).toBeUndefined();
+    assert.strictEqual(res, undefined);
   });
 });

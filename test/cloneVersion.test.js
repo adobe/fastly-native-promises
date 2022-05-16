@@ -4,7 +4,7 @@
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/cloneVersion.response');
@@ -22,19 +22,19 @@ describe('#cloneVersion', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an object', () => {
-    expect(typeof res.data).toBe('object');
+    assert.strictEqual(typeof res.data, 'object');
   });
 
   it('response body property should be greater than cloned version number', () => {
-    expect(res.data.number).toBeGreaterThan(134);
+    assert.ok(res.data.number > 134);
   });
 
   it('response body should contain all properties', () => {
@@ -51,7 +51,7 @@ describe('#cloneVersion', () => {
       'updated_at',
       'deployed',
     ].forEach((e) => {
-      expect(Object.keys(res.data)).toContain(e);
+      assert.ok(Object.keys(res.data).indexOf(e) >= 0);
     });
   });
 });

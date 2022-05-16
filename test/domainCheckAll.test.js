@@ -3,7 +3,7 @@
 /* eslint-env mocha */
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 const nock = require('nock');
-const expect = require('expect');
+const assert = require('assert');
 const config = require('../src/config');
 const fastlyPromises = require('../src/index');
 const response = require('./response/domainCheckAll.response');
@@ -21,26 +21,26 @@ describe('#domainCheckAll', () => {
   });
 
   it('response should be a status 200', () => {
-    expect(res.status).toBe(200);
+    assert.strictEqual(res.status, 200);
   });
 
   it('response body should exist', () => {
-    expect(res.data).toBeTruthy();
+    assert.ok(res.data);
   });
 
   it('response body should be an array', () => {
-    expect(Array.isArray(res.data)).toBe(true);
+    assert.strictEqual(Array.isArray(res.data), true);
   });
 
   it('response body should be an array of arrays', () => {
     res.data.forEach((item) => {
-      expect(Array.isArray(item)).toBe(true);
+      assert.strictEqual(Array.isArray(item), true);
     });
   });
 
   it('response body should have three items', () => {
     res.data.forEach((item) => {
-      expect(item.length).toEqual(3);
+      assert.strictEqual(item.length, 3);
     });
   });
 });
