@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "commit": "npm run lint && npm run docs && git-cz",
-    "test": "nyc --reporter=text --reporter=lcov --check-coverage --statements 90 --lines 90 mocha -p",
+    "test": "nyc mocha -p",
     "lint": "./node_modules/.bin/eslint .",
-    "junit": "nyc --reporter=text --reporter=lcov --check-coverage --statements 95 --lines 95 mocha --no-color --exit -R xunit --reporter-option output=junit/test-results.xml && codecov",
+    "junit": "nyc mocha --no-color --exit -R xunit --reporter-option output=junit/test-results.xml",
     "docs": "jsdoc2md --files src/*.js -t README.md.hbs -d 3 > README.md",
     "semantic-release": "semantic-release"
   },
@@ -36,7 +36,6 @@
     "@adobe/helix-testutils": "0.4.13",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
-    "codecov": "3.8.3",
     "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.15.0",
