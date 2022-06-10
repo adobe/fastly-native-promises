@@ -50,7 +50,7 @@
     "mocha": "10.0.0",
     "nock": "13.2.6",
     "nyc": "15.1.0",
-    "semantic-release": "19.0.2"
+    "semantic-release": "19.0.3"
   },
   "dependencies": {
     "@adobe/helix-fetch": "3.0.10",
