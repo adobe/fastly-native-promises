@@ -29,7 +29,7 @@ describe('#integration edge dictionary updates', () => {
   });
 
   condit('Do not create Edge Dictionary due to insufficient limits', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    await assert.rejects(fastly.transact(() => {}, false, 2000));
+    await assert.rejects(fastly.transact(() => { }, false, 2000));
   }).timeout(5000);
 
   condit('Create Edge Dictionary', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
@@ -144,7 +144,7 @@ describe('#integration edge dictionary updates', () => {
         fastly.writeDictItem(version, 'test_dict', 'baz', undefined),
       ]);
     } finally {
-    // create fresh
+      // create fresh
       const res1 = await fastly.bulkUpdateDictItems(
         version,
         'test_dict',
@@ -183,7 +183,7 @@ describe('#integration edge dictionary updates', () => {
         fastly.writeDictItem(version, 'test_wo_dict', 'baz', undefined),
       ]);
     } finally {
-    // create fresh
+      // create fresh
       const res1 = await fastly.bulkUpdateDictItems(
         version,
         'test_wo_dict',
@@ -198,7 +198,7 @@ describe('#integration edge dictionary updates', () => {
       const res2 = await fastly.bulkUpdateDictItems(
         version,
         'test_wo_dict',
-        { item_key: 'foo', item_value: 'eins', op: 'update' },
+        { item_key: 'foo', item_value: 'eins', op: 'upsert' }, // write-only dict entries can no longer be updated and need to be upserted
         { item_key: 'bar', item_value: 'zwei', op: 'upsert' },
         { item_key: 'nope', item_value: 'three', op: 'delete' },
         { item_key: 'baz', item_value: 'four', op: 'delete' },
