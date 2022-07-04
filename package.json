@@ -53,7 +53,7 @@
     "semantic-release": "19.0.3"
   },
   "dependencies": {
-    "@adobe/helix-fetch": "3.0.10",
+    "@adobe/helix-fetch": "3.1.1",
     "form-data": "4.0.0",
     "object-hash": "3.0.0"
   },
