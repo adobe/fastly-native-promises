@@ -42,7 +42,7 @@
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsdoc": "39.3.6",
-    "expect": "29.0.1",
+    "expect": "29.0.2",
     "ghooks": "2.0.4",
     "jsdoc-to-markdown": "7.1.1",
     "junit-report-builder": "3.0.1",
