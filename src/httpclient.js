@@ -1,5 +1,5 @@
 const hash = require('object-hash');
-const fetchAPI = require('@adobe/helix-fetch');
+const fetchAPI = require('@adobe/fetch');
 const FormData = require('form-data');
 
 const { AbortError, Headers } = fetchAPI;
