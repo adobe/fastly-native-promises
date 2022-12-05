@@ -44,7 +44,7 @@
     "eslint-plugin-jsdoc": "39.6.4",
     "expect": "29.3.1",
     "ghooks": "2.0.4",
-    "jsdoc-to-markdown": "7.1.1",
+    "jsdoc-to-markdown": "8.0.0",
     "junit-report-builder": "3.0.1",
     "lodash": "4.17.21",
     "mocha": "10.1.0",
