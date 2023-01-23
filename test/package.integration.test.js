@@ -41,7 +41,7 @@ describe('#integration compute@edge packages', () => {
         authors: ['trieloff@adobe.com'],
         language: 'javascript',
         size: 2752418,
-        hashsum: '2d3ee7ad885ea597f476a25eed751f52358f8739a5a3aed8e6114a1d0ec60efcc9a63b89418513d38839033d907dd956103748a5fdfbb3cb58bdb98560e11d96',
+        hashsum: 'a4ce30a465198dd72b446e001e803ec609c0f40062fb6277a64c82d4c12cae0b33597306465f03a375c8e817498299560e4580c7844c575254d42dae6ecba742',
       },
       updated_at: '2023-01-23T10:19:58Z',
       id: 'nnBCKkRFX9fEzSVKb6rZ73',
