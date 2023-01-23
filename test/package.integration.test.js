@@ -32,20 +32,20 @@ describe('#integration compute@edge packages', () => {
   condit('Get Package Metadata', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const { data } = await fastly.readPackage(2);
     assert.deepStrictEqual(data, {
-      created_at: '2021-06-16T12:53:33Z',
+      created_at: '2023-01-23T10:17:05Z',
       deleted_at: null,
       version: 2,
       metadata: {
-        name: 'js-proto',
-        description: 'Early version of a prototype starter kit for experimental JavaScript support for C@E.',
-        authors: ['<oss@fastly.com>'],
-        language: 'assemblyscript',
-        size: 2077176,
+        name: 'test-service',
+        description: '',
+        authors: ['trieloff@adobe.com'],
+        language: 'javascript',
+        size: 2752418,
         hashsum: '2d3ee7ad885ea597f476a25eed751f52358f8739a5a3aed8e6114a1d0ec60efcc9a63b89418513d38839033d907dd956103748a5fdfbb3cb58bdb98560e11d96',
       },
-      updated_at: '2021-06-16T12:53:34Z',
-      id: '3RoqPyBrAQBjtMSskwUv51',
-      service_id: '1yv1Wl7NQCFmNBkW4L8htc',
+      updated_at: '2023-01-23T10:19:58Z',
+      id: 'nnBCKkRFX9fEzSVKb6rZ73',
+      service_id: 'HcS29amvAoLOMIFvBukYN1',
     });
   }).timeout(5000);
 
