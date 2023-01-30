@@ -16,7 +16,6 @@ import assert from 'assert';
 import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#deleteToken', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
   let res;

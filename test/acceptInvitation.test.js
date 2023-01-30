@@ -16,7 +16,6 @@ import assert from 'assert';
 import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#acceptInvitations', () => {
   const fastly = fastlyPromises();
   let res;

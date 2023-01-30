@@ -6,7 +6,6 @@ import path from 'path';
 import fs from 'fs/promises';
 import f from '../src/index.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#integration compute@edge packages', () => {
   let fastly;
 
@@ -50,7 +49,7 @@ describe('#integration compute@edge packages', () => {
   }).timeout(5000);
 
   condit('Update Package', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
-    const buffer = await fs.readFile(path.resolve(__dirname, 'compute/pkg/Test.tar.gz'));
+    const buffer = await fs.readFile(path.resolve(__testdir, 'compute/pkg/Test.tar.gz'));
 
     const res = await fastly.writePackage(3, buffer);
     assert.deepStrictEqual(res.data.metadata, {

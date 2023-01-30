@@ -5,7 +5,6 @@ import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 import response from './response/readS3.response.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#readS3.401', () => {
   const fastly = fastlyPromises('invalid', 'SU1Z0isxPaozGVKXdv0eY');
   let res;

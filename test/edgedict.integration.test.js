@@ -5,7 +5,6 @@ import assert, { AssertionError } from 'assert';
 
 import f from '../src/index.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#integration edge dictionary updates', () => {
   let fastly;
 

@@ -9,7 +9,6 @@ import getversionsresponse from './response/readVersions.response.js';
 import readresponse from './response/readS3.response.js';
 import updateresponse from './response/updateS3.response.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#transactS3.update', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
   let res;

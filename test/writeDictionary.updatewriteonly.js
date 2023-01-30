@@ -5,7 +5,6 @@ import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 import response from './response/writedictionary.response.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#writeDictionary.updatewriteonly', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', '3l2MjGcHgWw5NUJz7OKYH3');
   let res;

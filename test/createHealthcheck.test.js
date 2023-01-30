@@ -5,7 +5,6 @@ import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 import response from './response/createHealthcheck.response.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#createHealthcheck', () => {
   const fastly = fastlyPromises('xDrqnDPrSim56UxQeZ442GQTgrAWNXun', '5gY6jizXEIvY6cgU1D1Yq4');
   let res;

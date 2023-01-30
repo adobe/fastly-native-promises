@@ -3,7 +3,6 @@ import nock from 'nock';
 import assert from 'assert';
 import { axiosCreate } from '../src/httpclient.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#httpclient.caches', () => {
   it('Status 200 can get cached', async () => {
     const scope = nock('http://www.example.com/')

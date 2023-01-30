@@ -6,7 +6,6 @@ import fastlyPromises from '../src/index.js';
 import response from './response/condition.response.js';
 import bodymatch from './bodymatch.js';
 
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#fastly.conditions.update', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
   let map;
