@@ -53,7 +53,7 @@
     "semantic-release": "20.0.3"
   },
   "dependencies": {
-    "@adobe/fetch": "3.3.1",
+    "@adobe/fetch": "4.0.1",
     "form-data": "4.0.0",
     "object-hash": "3.0.0"
   },
