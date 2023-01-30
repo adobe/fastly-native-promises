@@ -136,7 +136,7 @@ describe('#integration edge dictionary updates', () => {
 
     try {
       // clean up the dictionary
-      await Promise.all([
+      await Promise.allSettled([
         fastly.writeDictItem(version, 'test_dict', 'foo', undefined),
         fastly.writeDictItem(version, 'test_dict', 'bar', undefined),
         fastly.writeDictItem(version, 'test_dict', 'nope', undefined),
@@ -175,7 +175,7 @@ describe('#integration edge dictionary updates', () => {
 
     try {
       // clean up the dictionary
-      await Promise.all([
+      await Promise.allSettled([
         fastly.writeDictItem(version, 'test_wo_dict', 'foo', undefined),
         fastly.writeDictItem(version, 'test_wo_dict', 'bar', undefined),
         fastly.writeDictItem(version, 'test_wo_dict', 'nope', undefined),
