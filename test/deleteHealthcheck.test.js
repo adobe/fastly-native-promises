@@ -1,14 +1,11 @@
-'use strict';
+/* eslint-env mocha */
+import nock from 'nock';
+import assert from 'assert';
+import config from '../src/config.js';
+import fastlyPromises from '../src/index.js';
+import response from './response/deleteHealthcheck.response.js';
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-/* eslint-env mocha */
-
-const nock = require('nock');
-const assert = require('assert');
-const config = require('../src/config');
-const fastlyPromises = require('../src/index');
-const response = require('./response/deleteHealthcheck.response');
-
 describe('#deleteHealthcheck', () => {
   const fastly = fastlyPromises('xDrqnDPrSim56UxQeZ442GQTgrAWNXun', '5gY6jizXEIvY6cgU1D1Yq4');
   let res;

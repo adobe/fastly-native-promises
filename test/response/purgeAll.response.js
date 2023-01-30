@@ -1,5 +1,5 @@
-'use strict';
-
-module.exports.purgeAll = {
-  status: 'ok',
+export default {
+  purgeAll: {
+    status: 'ok',
+  },
 };

@@ -1,11 +1,11 @@
-const hash = require('object-hash');
-const fetchAPI = require('@adobe/fetch');
-const FormData = require('form-data');
+import hash from 'object-hash';
+import {
+  context as h2, h1, AbortError, Headers, timeoutSignal,
+} from '@adobe/fetch';
+import FormData from 'form-data';
+import { Lock } from './lock.js';
 
-const { AbortError, Headers } = fetchAPI;
-const { Lock } = require('./lock');
-
-class FastlyError extends Error {
+export class FastlyError extends Error {
   constructor(response, text) {
     try {
       const body = JSON.parse(text);
@@ -70,12 +70,8 @@ function repeat(responseOrError) {
   return responseOrError.status ? repeatResponse(responseOrError) : false;
 }
 
-function create({ baseURL, timeout, headers }) {
-  const context = process.env.HELIX_FETCH_FORCE_HTTP1
-    ? fetchAPI.context({
-      alpnProtocols: [fetchAPI.ALPN_HTTP1_1],
-    })
-    : fetchAPI.context();
+export function axiosCreate({ baseURL, timeout, headers }) {
+  const context = process.env.HELIX_FETCH_FORCE_HTTP1 ? h1() : h2();
   const { fetch } = context;
 
   const responselog = [];
@@ -106,7 +102,7 @@ function create({ baseURL, timeout, headers }) {
       const uri = `${baseURL}${path}`;
 
       if (timeout) {
-        options.signal = context.timeoutSignal(timeout);
+        options.signal = timeoutSignal(timeout);
       }
 
       // set body or form based on content type. default is form, except for patch ;-)
@@ -281,5 +277,3 @@ function create({ baseURL, timeout, headers }) {
   client.get.fresh = makereq('get');
   return client;
 }
-
-module.exports = { create, FastlyError };

@@ -9,12 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-'use strict';
-
-module.exports.createDomain = {
-  comment: 'foo bar',
-  name: 'www.example.com',
-  service_id: 'SU1Z0isxPaozGVKXdv0eY',
-  version: 1,
+export default {
+  createDomain: {
+    comment: 'foo bar',
+    name: 'www.example.com',
+    service_id: 'SU1Z0isxPaozGVKXdv0eY',
+    version: 1,
+  },
 };

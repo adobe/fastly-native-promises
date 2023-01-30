@@ -1,5 +1,3 @@
-'use strict';
-
-module.exports = {
+export default {
   mainEntryPoint: 'https://api.fastly.com',
 };

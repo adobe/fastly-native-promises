@@ -16,7 +16,7 @@
  * @see https://docs.fastly.com/api/purge#purge
  * @type {PurgeAPI}
  */
-class PurgeAPI {
+export default class PurgeAPI {
   constructor(base) {
     Object.assign(this, {
       service_id: base.service_id,
@@ -169,5 +169,3 @@ class PurgeAPI {
     });
   }
 }
-
-module.exports = PurgeAPI;

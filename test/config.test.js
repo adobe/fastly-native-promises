@@ -1,11 +1,8 @@
 /* eslint-env mocha */
-
-'use strict';
+import assert from 'assert';
+import config from '../src/config.js';
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const assert = require('assert');
-const config = require('../src/config');
-
 describe('#mainEntryPoint', () => {
   it('property should exist', () => {
     assert.ok(config.mainEntryPoint);

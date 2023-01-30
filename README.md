@@ -60,7 +60,7 @@ See the [changelog](CHANGELOG.md).
 ## Usage
 
 ```javascript
-const fastly = require('@adobe/fastly-native-promises');
+import fastly from '@adobe/fastly-native-promises';
 
 // create one or more instances
 const service_1 = fastly('token', 'service_id_1');
@@ -108,7 +108,7 @@ Purge all domains of the active version:
 5. Log the status text for each purge request.
 
 ```javascript
-const fastly = require('fastly-native-promises');
+import fastly from '@adobe/fastly-native-promises';
 
 const service = fastly('token', 'service_id');
 
@@ -147,7 +147,7 @@ Update `first_byte_timeout` property for every backend and service if the value 
 11. Activate the cloned version.
 
 ```javascript
-const fastly = require('fastly-native-promises');
+import fastly from '@adobe/fastly-native-promises';
 
 const account = fastly('token');
 
@@ -251,7 +251,7 @@ The return value of `update` is an object that maps condition statement to the c
 The headers helper eases the creation and management of conditional headers.
 
 ```javascript
-const fastly = require('fastly-native-promises');
+import fastly from '@adobe/fastly-native-promises';
 
 const instance = fastly('mykey', 'service-config');
 

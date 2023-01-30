@@ -1,12 +1,12 @@
 /* eslint-env mocha */
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const { condit } = require('@adobe/helix-testutils');
-const nock = require('nock');
-const assert = require('assert');
-const path = require('path');
-const fs = require('fs/promises');
-const f = require('../src/index');
+import { condit } from '@adobe/helix-testutils';
+import nock from 'nock';
+import assert from 'assert';
+import path from 'path';
+import fs from 'fs/promises';
+import f from '../src/index.js';
 
+process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#integration compute@edge packages', () => {
   let fastly;
 

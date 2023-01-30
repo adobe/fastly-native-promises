@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   list: [
     {
       created_at: '2016-04-29T22:16:23+00:00',

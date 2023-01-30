@@ -10,60 +10,60 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
-
-module.exports.readInvitations = {
-  data: [
-    {
-      id: 'deadbeefhomusGAasOVxo7',
-      type: 'invitation',
-      attributes: {
-        created_at: '2019-05-21T11:58:23Z',
-        email: 'deadbeef@gmail.com',
-        deleted_at: null,
-        role: 'engineer',
-        status_code: 1,
-        updated_at: '2019-05-21T11:58:23Z',
-        limit_services: false,
-      },
-      relationships: {
-        customer: {
-          data: {
-            id: 'deadbeefY19zEASHfCMNSu',
-            type: 'customer',
+export default {
+  readInvitations: {
+    data: [
+      {
+        id: 'deadbeefhomusGAasOVxo7',
+        type: 'invitation',
+        attributes: {
+          created_at: '2019-05-21T11:58:23Z',
+          email: 'deadbeef@gmail.com',
+          deleted_at: null,
+          role: 'engineer',
+          status_code: 1,
+          updated_at: '2019-05-21T11:58:23Z',
+          limit_services: false,
+        },
+        relationships: {
+          customer: {
+            data: {
+              id: 'deadbeefY19zEASHfCMNSu',
+              type: 'customer',
+            },
           },
         },
       },
-    },
-    {
-      id: 'deadbeefG60UQidrVmP5C',
-      type: 'invitation',
-      attributes: {
-        created_at: '2019-05-03T14:26:39Z',
-        email: 'deadbeef@gmail.com',
-        deleted_at: null,
-        role: 'engineer',
-        status_code: 1,
-        updated_at: '2019-05-03T14:26:39Z',
-        limit_services: true,
-      },
-      relationships: {
-        customer: {
-          data: {
-            id: 'deadbeef19zEASHfCMNSu',
-            type: 'customer',
+      {
+        id: 'deadbeefG60UQidrVmP5C',
+        type: 'invitation',
+        attributes: {
+          created_at: '2019-05-03T14:26:39Z',
+          email: 'deadbeef@gmail.com',
+          deleted_at: null,
+          role: 'engineer',
+          status_code: 1,
+          updated_at: '2019-05-03T14:26:39Z',
+          limit_services: true,
+        },
+        relationships: {
+          customer: {
+            data: {
+              id: 'deadbeef19zEASHfCMNSu',
+              type: 'customer',
+            },
           },
         },
       },
+    ],
+    links: {
+      last: 'https://api.fastly.com/invitations?page%5Bnumber%5D=1&page%5Bsize%5D=100',
     },
-  ],
-  links: {
-    last: 'https://api.fastly.com/invitations?page%5Bnumber%5D=1&page%5Bsize%5D=100',
-  },
-  meta: {
-    current_page: 1,
-    per_page: 100,
-    record_count: 2,
-    total_pages: 1,
+    meta: {
+      current_page: 1,
+      per_page: 100,
+      record_count: 2,
+      total_pages: 1,
+    },
   },
 };

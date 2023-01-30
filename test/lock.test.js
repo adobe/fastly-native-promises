@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Lock } = require('../src/lock');
+import assert from 'assert';
+import { Lock } from '../src/lock.js';
 
 describe('Lock Tests', () => {
   it('Lock can be acquired and released', async () => {

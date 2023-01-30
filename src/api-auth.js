@@ -9,8 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const axios = require('./httpclient');
-const config = require('./config');
+import { axiosCreate } from './httpclient.js';
+import config from './config.js';
 
 /**
  * The Fastly Auth API.
@@ -18,7 +18,7 @@ const config = require('./config');
  * @see https://docs.fastly.com/api/auth#top
  * @type {AuthAPI}
  */
-class AuthAPI {
+export default class AuthAPI {
   constructor(base) {
     this.base = base;
     this.defaultOptions = {
@@ -86,7 +86,7 @@ class AuthAPI {
    */
   async createToken(options) {
     // send POST w/o authentication.
-    const rp = axios.create({ ...this.defaultOptions });
+    const rp = axiosCreate({ ...this.defaultOptions });
     return rp.post('/tokens', options, {
       headers: {
         'content-type': 'application/json',
@@ -94,5 +94,3 @@ class AuthAPI {
     });
   }
 }
-
-module.exports = AuthAPI;

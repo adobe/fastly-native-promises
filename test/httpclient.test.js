@@ -1,9 +1,9 @@
 /* eslint-env mocha */
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const nock = require('nock');
-const assert = require('assert');
-const httpclient = require('../src/httpclient');
+import nock from 'nock';
+import assert from 'assert';
+import { axiosCreate } from '../src/httpclient.js';
 
+process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 describe('#httpclient.caches', () => {
   it('Status 200 can get cached', async () => {
     const scope = nock('http://www.example.com/')
@@ -12,7 +12,7 @@ describe('#httpclient.caches', () => {
       .get('/foo')
       .reply(200, 'second');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -30,7 +30,7 @@ describe('#httpclient.caches', () => {
       .get('/json')
       .reply(200, '{"foo": "bar"}');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -48,7 +48,7 @@ describe('#httpclient.caches', () => {
       .get('/bar')
       .reply(200, 'second');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -77,7 +77,7 @@ describe('#httpclient.retries', () => {
       .get('/')
       .reply(200, 'thanks for trying again');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -98,7 +98,7 @@ describe('#httpclient.retries', () => {
       .get('/bang')
       .reply(200, 'thanks for trying again');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -119,7 +119,7 @@ describe('#httpclient.retries', () => {
       .get('/gateway')
       .reply(200, 'thanks for trying again');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,
@@ -136,7 +136,7 @@ describe('#httpclient.retries', () => {
       .get('/boom')
       .reply(500, '500');
 
-    const client = httpclient.create({
+    const client = axiosCreate({
       baseURL: 'http://www.example.com',
       headers: {},
       timeout: 1000,

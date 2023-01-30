@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-function toString(schema) {
+export function toString(schema) {
   if (typeof schema === 'object') {
     return `{${Object
       .entries(schema)
@@ -19,30 +19,26 @@ function toString(schema) {
   return schema;
 }
 
-function concat(...args) {
+export function concat(...args) {
   return args.map(toString).join('');
 }
 
-function vcl([expr]) {
+export function vcl([expr]) {
   return `%{json.escape(${expr})}V`;
 }
 
-function str(expr) {
+export function str(expr) {
   return `"${expr}"`;
 }
 
-function time([expr]) {
+export function time([expr]) {
   return `%{${expr}}t`;
 }
 
-function req([expr]) {
+export function req([expr]) {
   return `"%{${expr}}i"`;
 }
 
-function res([expr]) {
+export function res([expr]) {
   return `"%{${expr}}o"`;
 }
-
-module.exports = {
-  toString, vcl, time, req, res, str, concat,
-};

@@ -1,7 +1,7 @@
-const hash = require('object-hash');
+import hash from 'object-hash';
 
 /** Helper class with high-level operations for condition-management. */
-class Conditions {
+export default class Conditions {
   constructor(fastly) {
     this._fastly = fastly;
   }
@@ -86,5 +86,3 @@ class Conditions {
     };
   }
 }
-
-module.exports = Conditions;

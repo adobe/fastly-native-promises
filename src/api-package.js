@@ -15,7 +15,7 @@
  * @see https://docs.fastly.com/api/config#domain
  * @type {PackageAPI}
  */
-class PackageAPI {
+export default class PackageAPI {
   constructor(base) {
     Object.assign(this, {
       service_id: base.service_id,
@@ -46,5 +46,3 @@ class PackageAPI {
     return this.request.put(`/service/${this.service_id}/version/${await this.getVersion(version, 'latest')}/package`, buffer);
   }
 }
-
-module.exports = PackageAPI;

@@ -10,10 +10,12 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
+import assert from 'assert';
+import { loghelpers } from '../src/index.js';
+
 const {
-  toString, vcl, time, req, res, str, concat,
-} = require('../src/index').loghelpers;
+  concat, req, res, str, time, toString, vcl,
+} = loghelpers;
 
 describe('Schema Helper Integration Tests', () => {
   it('toString works with empty schemas', () => {

@@ -9,8 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const axios = require('./httpclient');
-const config = require('./config');
+import { axiosCreate } from './httpclient.js';
+import config from './config.js';
 
 /**
  * The Fastly Account API.
@@ -18,7 +18,7 @@ const config = require('./config');
  * @see https://docs.fastly.com/api/account#top
  * @type {AccountAPI}
  */
-class AccountAPI {
+export default class AccountAPI {
   constructor(base) {
     this.base = base;
     this.defaultOptions = {
@@ -136,7 +136,7 @@ class AccountAPI {
    */
   async acceptInvitation(acceptCode, name, password) {
     // send PUT w/o authentication.
-    const rp = axios.create({ ...this.defaultOptions });
+    const rp = axiosCreate({ ...this.defaultOptions });
     return rp.put(`/invitation/accept/${acceptCode}`, {
       marketing_opt_in: false,
       name,
@@ -159,5 +159,3 @@ class AccountAPI {
     return this.request.delete(`/invitations/${id}`);
   }
 }
-
-module.exports = AccountAPI;

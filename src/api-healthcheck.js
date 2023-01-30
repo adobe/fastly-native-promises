@@ -4,7 +4,7 @@
  * @see https://docs.fastly.com/api/config#healthcheck
  * @type {HealthcheckAPI}
  */
-class HealthcheckAPI {
+export default class HealthcheckAPI {
   constructor(base) {
     Object.assign(this, {
       service_id: base.service_id,
@@ -73,5 +73,3 @@ class HealthcheckAPI {
     return this.request.delete(`/service/${this.service_id}/version/${await this.getVersion(version, 'current')}/healthcheck/${name}`);
   }
 }
-
-module.exports = HealthcheckAPI;

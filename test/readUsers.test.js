@@ -10,17 +10,15 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
+/* eslint-env mocha */
+import nock from 'nock';
+import assert from 'assert';
+import config from '../src/config.js';
+import fastlyPromises from '../src/index.js';
+import response0 from './response/readUser.response.js';
+import response1 from './response/readUsers.response.js';
 
 process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-/* eslint-env mocha */
-
-const nock = require('nock');
-const assert = require('assert');
-const config = require('../src/config');
-const fastlyPromises = require('../src/index');
-const { readUser } = require('./response/readUser.response');
-const { readUsers } = require('./response/readUsers.response');
 
 describe('#readUsers', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
@@ -28,9 +26,9 @@ describe('#readUsers', () => {
 
   nock(config.mainEntryPoint)
     .get('/customer/deadbeef19zEASHfCMNSu/users')
-    .reply(200, readUsers)
+    .reply(200, response1.readUsers)
     .get('/current_user')
-    .reply(200, readUser);
+    .reply(200, response0.readUser);
 
   before(async () => {
     res = await fastly.readUsers();
@@ -41,6 +39,6 @@ describe('#readUsers', () => {
   });
 
   it('response body should contain all properties', () => {
-    assert.deepStrictEqual(res.data, readUsers);
+    assert.deepStrictEqual(res.data, response1.readUsers);
   });
 });

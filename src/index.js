@@ -1,20 +1,22 @@
 /* eslint-disable max-classes-per-file */
-const axios = require('./httpclient');
-const config = require('./config');
-const Conditions = require('./conditions');
-const Headers = require('./headers');
-const AccountAPI = require('./api-account.js');
-const AuthAPI = require('./api-auth.js');
-const PurgeAPI = require('./api-purge.js');
-const DomainAPI = require('./api-domain.js');
-const PackageAPI = require('./api-package.js');
-const HealthcheckAPI = require('./api-healthcheck');
+import { axiosCreate } from './httpclient.js';
+import config from './config.js';
+import Conditions from './conditions.js';
+import Headers from './headers.js';
+import AccountAPI from './api-account.js';
+import AuthAPI from './api-auth.js';
+import PurgeAPI from './api-purge.js';
+import DomainAPI from './api-domain.js';
+import PackageAPI from './api-package.js';
+import HealthcheckAPI from './api-healthcheck.js';
 
-class RateLimitError extends Error {
+export * as loghelpers from './log-helpers.js';
+
+export class RateLimitError extends Error {
 
 }
 
-class Fastly {
+export class Fastly {
   /**
    * @typedef {Function} CreateFunction
    * A function that creates a resource of a specific type. If a resource of that
@@ -153,7 +155,7 @@ class Fastly {
    */
   constructor(token, service_id, timeout = 15000) {
     this.service_id = service_id;
-    this.request = axios.create({
+    this.request = axiosCreate({
       baseURL: config.mainEntryPoint,
       timeout,
       headers: { 'Fastly-Key': token },
@@ -1432,5 +1434,4 @@ class Fastly {
  * @param {number} timeout - Timeout in seconds.
  * @returns {Fastly} The exported module.
  */
-module.exports = (token, service_id, timeout) => new Fastly(token, service_id, timeout);
-module.exports.loghelpers = require('./log-helpers');
+export default (token, service_id, timeout) => new Fastly(token, service_id, timeout);
