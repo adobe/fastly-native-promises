@@ -1,13 +1,9 @@
-'use strict';
-
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
-
-const nock = require('nock');
-const assert = require('assert');
-const config = require('../src/config');
-const fastlyPromises = require('../src/index');
-const response = require('./response/readBigqueryLogs.response');
+import nock from 'nock';
+import assert from 'assert';
+import config from '../src/config.js';
+import fastlyPromises from '../src/index.js';
+import response from './response/readBigqueryLogs.response.js';
 
 describe('#readBigqueryLogs', () => {
   const fastly = fastlyPromises(

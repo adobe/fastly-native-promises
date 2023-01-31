@@ -1,4 +1,4 @@
-const hash = require('object-hash');
+import hash from 'object-hash';
 
 const typemap = {
   REQUEST: 'request_condition',
@@ -7,7 +7,7 @@ const typemap = {
 };
 
 /** Helper class with high-level operations for condition-management. */
-class Headers {
+export default class Headers {
   constructor(fastly) {
     this._fastly = fastly;
   }
@@ -110,5 +110,3 @@ class Headers {
     return createheaders;
   }
 }
-
-module.exports = Headers;

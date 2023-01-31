@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -9,16 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+// eslint-disable-next-line no-console
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 
-export default {
-  domainCheck: [
-    {
-      comment: '',
-      name: 'www.example.com',
-      service_id: 'SU1Z0isxPaozGVKXdv0eY',
-      version: 1,
-    },
-    'global.prod.fastly.net.',
-    true,
-  ],
-};
+// eslint-disable-next-line no-console
+console.log('Forcing HTTP/1.1 for Helix-Fetch');
+process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
+
+// eslint-disable-next-line no-underscore-dangle
+global.__testdir = resolve(fileURLToPath(import.meta.url), '..');

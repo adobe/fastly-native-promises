@@ -10,21 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
-
-module.exports.readUsers = [{
-  id: 'deadbeef4T75aJSZEhkCXcJaL',
-  created_at: '2018-02-28T12:57:38Z',
-  updated_at: '2018-02-28T12:57:38Z',
-  name: 'John Doe',
-  customer_id: 'deadbeef19zEASHfCMNSu',
-  require_new_password: false,
-  role: 'engineer',
-  login: 'john@example.com',
-  deleted_at: null,
-  locked: false,
-  two_factor_auth_enabled: false,
-  limit_services: false,
-  email_hash: 'deadbeef6859b9b04c34adf0603e227f7',
-  two_factor_setup_required: false,
-}];
+export default {
+  readUsers: [{
+    id: 'deadbeef4T75aJSZEhkCXcJaL',
+    created_at: '2018-02-28T12:57:38Z',
+    updated_at: '2018-02-28T12:57:38Z',
+    name: 'John Doe',
+    customer_id: 'deadbeef19zEASHfCMNSu',
+    require_new_password: false,
+    role: 'engineer',
+    login: 'john@example.com',
+    deleted_at: null,
+    locked: false,
+    two_factor_auth_enabled: false,
+    limit_services: false,
+    email_hash: 'deadbeef6859b9b04c34adf0603e227f7',
+    two_factor_setup_required: false,
+  }],
+};

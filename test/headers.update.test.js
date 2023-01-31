@@ -1,13 +1,13 @@
 /* eslint-env mocha */
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'false';
-const nock = require('nock');
-const assert = require('assert');
-const config = require('../src/config');
-const fastlyPromises = require('../src/index');
-const response = require('./response/condition.response');
-const headerresponse = require('./response/header.response');
-const bodymatch = require('./bodymatch');
+import nock from 'nock';
+import assert from 'assert';
+import config from '../src/config.js';
+import fastlyPromises from '../src/index.js';
+import response from './response/condition.response.js';
+import headerresponse from './response/header.response.js';
+import bodymatch from './bodymatch.js';
 
+process.env.HELIX_FETCH_FORCE_HTTP1 = 'false';
 describe('#fastly.headers.update', () => {
   let res;
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');

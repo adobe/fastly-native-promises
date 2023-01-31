@@ -1,9 +1,8 @@
 /* eslint-env mocha */
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const { condit } = require('@adobe/helix-testutils');
-const nock = require('nock');
-const assert = require('assert');
-const f = require('../src/index');
+import { condit } from '@adobe/helix-testutils';
+import nock from 'nock';
+import assert from 'assert';
+import f from '../src/index.js';
 
 describe('#integration condition updates', () => {
   let fastly;

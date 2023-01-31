@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-module.exports = (obj) => (str) => {
+export default (obj) => (str) => {
   const params = new URLSearchParams(str);
   let match = true;
   params.forEach((value, key) => {

@@ -1,10 +1,6 @@
-'use strict';
-
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
-
-const assert = require('assert');
-const fastlyPromises = require('../src/index');
+import assert from 'assert';
+import fastlyPromises from '../src/index.js';
 
 describe('#constructor', () => {
   const instance = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');

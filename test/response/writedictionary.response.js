@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   get: {
     version: 1040,
     name: 'strain_owners',

@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 
-class Lock {
+export class Lock {
   constructor() {
     this._acquired = false;
     this._waiting = [];
@@ -37,5 +37,3 @@ class Lock {
     }
   }
 }
-
-module.exports = { Lock };

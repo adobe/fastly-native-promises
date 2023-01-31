@@ -1,10 +1,9 @@
 /* eslint-env mocha */
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
-const { condit } = require('@adobe/helix-testutils');
-const nock = require('nock');
-const assert = require('assert');
-const { AssertionError } = require('assert');
-const f = require('../src/index');
+import { condit } from '@adobe/helix-testutils';
+import nock from 'nock';
+import assert, { AssertionError } from 'assert';
+
+import f from '../src/index.js';
 
 describe('#integration edge dictionary updates', () => {
   let fastly;
@@ -137,7 +136,7 @@ describe('#integration edge dictionary updates', () => {
 
     try {
       // clean up the dictionary
-      await Promise.all([
+      await Promise.allSettled([
         fastly.writeDictItem(version, 'test_dict', 'foo', undefined),
         fastly.writeDictItem(version, 'test_dict', 'bar', undefined),
         fastly.writeDictItem(version, 'test_dict', 'nope', undefined),
@@ -176,7 +175,7 @@ describe('#integration edge dictionary updates', () => {
 
     try {
       // clean up the dictionary
-      await Promise.all([
+      await Promise.allSettled([
         fastly.writeDictItem(version, 'test_wo_dict', 'foo', undefined),
         fastly.writeDictItem(version, 'test_wo_dict', 'bar', undefined),
         fastly.writeDictItem(version, 'test_wo_dict', 'nope', undefined),

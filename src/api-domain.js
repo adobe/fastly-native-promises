@@ -16,7 +16,7 @@
  * @see https://docs.fastly.com/api/config#domain
  * @type {DomainAPI}
  */
-class DomainAPI {
+export default class DomainAPI {
   constructor(base) {
     Object.assign(this, {
       service_id: base.service_id,
@@ -144,5 +144,3 @@ class DomainAPI {
     return this.request.delete(`/service/${this.service_id}/version/${await this.getVersion(version, 'latest')}/domain/${name}`);
   }
 }
-
-module.exports = DomainAPI;

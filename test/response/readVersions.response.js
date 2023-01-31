@@ -1,30 +1,30 @@
-'use strict';
-
-module.exports.readVersions = [
-  {
-    active: true,
-    comment: '',
-    created_at: '2016-05-01T19:40:49+00:00',
-    deleted_at: null,
-    deployed: null,
-    locked: true,
-    number: 1,
-    service_id: 'SU1Z0isxPaozGVKXdv0eY',
-    staging: null,
-    testing: null,
-    updated_at: '2016-05-09T16:19:09+00:00',
-  },
-  {
-    active: false,
-    comment: '',
-    created_at: '2016-05-01T19:40:49+00:00',
-    deleted_at: null,
-    deployed: null,
-    locked: false,
-    number: 2,
-    service_id: 'SU1Z0isxPaozGVKXdv0eY',
-    staging: null,
-    testing: null,
-    updated_at: '2016-05-09T16:19:09+00:00',
-  },
-];
+export default {
+  readVersions: [
+    {
+      active: true,
+      comment: '',
+      created_at: '2016-05-01T19:40:49+00:00',
+      deleted_at: null,
+      deployed: null,
+      locked: true,
+      number: 1,
+      service_id: 'SU1Z0isxPaozGVKXdv0eY',
+      staging: null,
+      testing: null,
+      updated_at: '2016-05-09T16:19:09+00:00',
+    },
+    {
+      active: false,
+      comment: '',
+      created_at: '2016-05-01T19:40:49+00:00',
+      deleted_at: null,
+      deployed: null,
+      locked: false,
+      number: 2,
+      service_id: 'SU1Z0isxPaozGVKXdv0eY',
+      staging: null,
+      testing: null,
+      updated_at: '2016-05-09T16:19:09+00:00',
+    },
+  ],
+};

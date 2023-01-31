@@ -1,5 +1,5 @@
-'use strict';
-
-module.exports.deleteHealthcheck = {
-  status: 'ok',
+export default {
+  deleteHealthcheck: {
+    status: 'ok',
+  },
 };

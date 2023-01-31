@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
-
-module.exports.updateDomain = {
-  comment: 'hello, world',
-  name: 'www2.example.com',
-  service_id: 'SU1Z0isxPaozGVKXdv0eY',
-  version: 1,
+export default {
+  updateDomain: {
+    comment: 'hello, world',
+    name: 'www2.example.com',
+    service_id: 'SU1Z0isxPaozGVKXdv0eY',
+    version: 1,
+  },
 };

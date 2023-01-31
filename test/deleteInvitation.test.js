@@ -10,15 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-'use strict';
-
-process.env.HELIX_FETCH_FORCE_HTTP1 = 'true';
 /* eslint-env mocha */
-
-const nock = require('nock');
-const assert = require('assert');
-const config = require('../src/config');
-const fastlyPromises = require('../src/index');
+import nock from 'nock';
+import assert from 'assert';
+import config from '../src/config.js';
+import fastlyPromises from '../src/index.js';
 
 describe('#deleteInvitations', () => {
   const fastly = fastlyPromises('923b6bd5266a7f932e41962755bd4254', 'SU1Z0isxPaozGVKXdv0eY');
