@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/adobe/fastly-native-promises/compare/v2.0.15...v3.0.0) (2023-01-31)
+
+
+### Bug Fixes
+
+* trigger release ([e75c14d](https://github.com/adobe/fastly-native-promises/commit/e75c14dd381b0e27589c9e86e1ab76893ee3a2f8))
+* use ESM ([53d6878](https://github.com/adobe/fastly-native-promises/commit/53d68786d8fd8e0614826333fce49f9d82efcd75))
+
+
+### BREAKING CHANGES
+
+* requires esm
+
 ## [2.0.15](https://github.com/adobe/fastly-native-promises/compare/v2.0.14...v2.0.15) (2022-12-25)
 
 
