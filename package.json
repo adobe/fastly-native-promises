@@ -51,11 +51,11 @@
     "c8": "7.12.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "8.32.0",
+    "eslint": "8.33.0",
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jsdoc": "39.6.7",
-    "expect": "29.3.1",
+    "eslint-plugin-jsdoc": "39.7.5",
+    "expect": "29.4.1",
     "husky": "8.0.3",
     "jsdoc-to-markdown": "8.0.0",
     "junit-report-builder": "3.0.1",
@@ -63,7 +63,7 @@
     "lodash": "4.17.21",
     "mocha": "10.2.0",
     "nock": "13.3.0",
-    "semantic-release": "20.0.3"
+    "semantic-release": "20.1.0"
   },
   "dependencies": {
     "@adobe/fetch": "4.0.1",
