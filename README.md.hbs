@@ -1,5 +1,14 @@
 # fastly-native-promises
 
+## DEPRECATION WARNING
+
+**THIS PACKAGE WILL LIKELY BE DEPRECATED IN THE NEAR FUTURE**
+
+As soon as the official [`fastly` package on NPM](https://www.npmjs.com/package/fastly) leaves beta for version 3.0.0, this package
+will be deprecated in favor of the official package and this package will no longer receive feature updates and likely be archived after Adobe migrated its own usage of this package.
+
+---
+
 > Native Promise based Fastly API client for Node.js
 
 [![NPM Version](https://img.shields.io/npm/v/@adobe/fastly-native-promises.svg)](https://www.npmjs.com/package/@adobe/fastly-native-promises)

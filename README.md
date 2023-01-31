@@ -282,37 +282,120 @@ When `update` is called with a list of `objects` that looks like `{ condition: '
 
 ## API
 
-### Classes
-
-<dl>
-<dt><a href="#AccountAPI">AccountAPI</a> : <code><a href="#AccountAPI">AccountAPI</a></code></dt>
-<dd><p>The Fastly Account API.</p>
-</dd>
-<dt><a href="#AuthAPI">AuthAPI</a> : <code><a href="#AuthAPI">AuthAPI</a></code></dt>
-<dd><p>The Fastly Auth API.</p>
-</dd>
-<dt><a href="#DomainAPI">DomainAPI</a> : <code><a href="#DomainAPI">DomainAPI</a></code></dt>
-<dd><p>The Fastly Domain API.</p>
-</dd>
-<dt><a href="#HealthcheckAPI">HealthcheckAPI</a> : <code><a href="#HealthcheckAPI">HealthcheckAPI</a></code></dt>
-<dd><p>The Fastly Healthcheck API.</p>
-</dd>
-<dt><a href="#PurgeAPI">PurgeAPI</a> : <code><a href="#PurgeAPI">PurgeAPI</a></code></dt>
-<dd><p>The Fastly Purge API.</p>
-</dd>
-<dt><a href="#Conditions">Conditions</a></dt>
-<dd><p>Helper class with high-level operations for condition-management.</p>
-</dd>
-<dt><a href="#Headers">Headers</a></dt>
-<dd><p>Helper class with high-level operations for condition-management.</p>
-</dd>
-<dt><a href="#Fastly">Fastly</a></dt>
-<dd></dd>
-</dl>
-
 ### Functions
 
 <dl>
+<dt><a href="#readCurrentUser">readCurrentUser()</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get the currently logged in user.</p>
+</dd>
+<dt><a href="#readUsers">readUsers()</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get a list of all users from the current customer.</p>
+</dd>
+<dt><a href="#readUser">readUser(id)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get the the user with the specific id.</p>
+</dd>
+<dt><a href="#createUser">createUser(name, login)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create a user.</p>
+</dd>
+<dt><a href="#readInvitations">readInvitations()</a> ⇒ <code>Promise</code></dt>
+<dd><p>List all invitations.</p>
+</dd>
+<dt><a href="#createInvitation">createInvitation(email, role)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create an invitation.</p>
+</dd>
+<dt><a href="#acceptInvitation">acceptInvitation(acceptCode, name, password)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Accept an invitation.</p>
+</dd>
+<dt><a href="#deleteInvitation">deleteInvitation(id)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Delete an invitation.</p>
+</dd>
+<dt><a href="#readTokens">readTokens([customerId])</a> ⇒ <code>Promise</code></dt>
+<dd><p>List all tokens of a customer.</p>
+</dd>
+<dt><a href="#readToken">readToken([id])</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get the token with the specified id. If the Id is missing, the self token is returned.</p>
+</dd>
+<dt><a href="#deleteToken">deleteToken([id])</a> ⇒ <code>Promise</code></dt>
+<dd><p>Delete the token with the specified id.</p>
+</dd>
+<dt><a href="#createToken">createToken(options)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create an API token.</p>
+</dd>
+<dt><a href="#domainCheck">domainCheck(version, name)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Checks the status of all domains for a particular service and version.</p>
+</dd>
+<dt><a href="#domainCheckAll">domainCheckAll(version)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Checks the status of all domains for a particular service and version.</p>
+</dd>
+<dt><a href="#readDomains">readDomains(version)</a> ⇒ <code>Promise</code></dt>
+<dd><p>List all the domains for a particular service and version.</p>
+</dd>
+<dt><a href="#readDomain">readDomain(version, name)</a> ⇒ <code>Promise</code></dt>
+<dd><p>List all the domains for a particular service and version.</p>
+</dd>
+<dt><a href="#readServiceDomains">readServiceDomains([serviceId])</a> ⇒ <code>Promise</code></dt>
+<dd><p>List the domains within a service.</p>
+</dd>
+<dt><a href="#createDomain">createDomain(version, name, comment)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create a domain for a particular service and version.</p>
+</dd>
+<dt><a href="#updateDomain">updateDomain(version, oldName, name, comment)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Update a domain for a particular service and version.</p>
+</dd>
+<dt><a href="#deleteDomain">deleteDomain(version, name)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Delete the domain for a particular service and version.</p>
+</dd>
+<dt><a href="#readHealthchecks">readHealthchecks(version)</a> ⇒ <code>Promise</code></dt>
+<dd><p>List all healthchecks for a particular service and version.</p>
+</dd>
+<dt><a href="#readHealthcheck">readHealthcheck(version, name)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get details of a single named healthcheck.</p>
+</dd>
+<dt><a href="#createHealthcheck">createHealthcheck(version, data)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create a healthcheck for a particular service and version.</p>
+</dd>
+<dt><a href="#updateHealthcheck">updateHealthcheck(version, name, data)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Update the healthcheck for a particular service and version.</p>
+</dd>
+<dt><a href="#deleteHealthcheck">deleteHealthcheck(version, name)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Delete the healthcheck for a particular service and version.</p>
+</dd>
+<dt><a href="#readPackage">readPackage(version)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get metadata about a package. The metadata is extracted from the package contents.</p>
+</dd>
+<dt><a href="#writePackage">writePackage(version, buffer)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Upload a new package version. The package is a Buffer of a ZIP file containing the
+manifest as well as the main WASM file.</p>
+</dd>
+<dt><a href="#purgeIndividual">purgeIndividual(url)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Instant Purge an individual URL.</p>
+</dd>
+<dt><a href="#purgeAll">purgeAll()</a> ⇒ <code>Promise</code></dt>
+<dd><p>Instant Purge everything from a service.</p>
+</dd>
+<dt><a href="#purgeKey">purgeKey(key)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Instant Purge a particular service of items tagged with a Surrogate Key.</p>
+</dd>
+<dt><a href="#purgeKeys">purgeKeys(keys)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Instant Purge a particular service of items tagged with Surrogate Keys in a batch.</p>
+</dd>
+<dt><a href="#softPurgeIndividual">softPurgeIndividual(url)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Soft Purge an individual URL.</p>
+</dd>
+<dt><a href="#softPurgeKey">softPurgeKey(key)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Soft Purge a particular service of items tagged with a Surrogate Key.</p>
+</dd>
+<dt><a href="#softPurgeKeys">softPurgeKeys(keys)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Soft Purge a particular service of items tagged with Surrogate Keys in a batch.</p>
+</dd>
+<dt><a href="#multistepupdate">multistepupdate(version, type, commentprefix, nameprefix)</a> ⇒ <code>Array.&lt;function()&gt;</code></dt>
+<dd><p>Creates functions for multi-step creation of missing and deletion of
+superflous conditions.</p>
+</dd>
+<dt><a href="#update">update(version, type, commentprefix, nameprefix, action, header, sub)</a> ⇒ <code>Array.&lt;function()&gt;</code></dt>
+<dd><p>Creates functions for multi-step creation of missing and deletion of
+superflous conditional headers.</p>
+</dd>
 <dt><a href="#repeat">repeat(responseOrError)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Determines if a response or error indicates that the response is repeatable.</p>
 </dd>
@@ -360,50 +443,34 @@ to update values, as it will work for existing and non-existing items.</p>
 </dd>
 <dt><a href="#Snippet">Snippet</a> : <code>object</code></dt>
 <dd></dd>
+<dt><a href="#ResponseObject">ResponseObject</a> : <code>object</code></dt>
+<dd></dd>
 <dt><a href="#VCL">VCL</a> : <code>object</code></dt>
 <dd></dd>
 </dl>
 
-<a name="AccountAPI"></a>
+<a name="readCurrentUser"></a>
 
-### AccountAPI : [<code>AccountAPI</code>](#AccountAPI)
-The Fastly Account API.
-
-**Kind**: global class  
-**See**: https://docs.fastly.com/api/account#top  
-
-* [AccountAPI](#AccountAPI) : [<code>AccountAPI</code>](#AccountAPI)
-    * [.readCurrentUser()](#AccountAPI+readCurrentUser) ⇒ <code>Promise</code>
-    * [.readUsers()](#AccountAPI+readUsers) ⇒ <code>Promise</code>
-    * [.readUser(id)](#AccountAPI+readUser) ⇒ <code>Promise</code>
-    * [.createUser(name, login)](#AccountAPI+createUser) ⇒ <code>Promise</code>
-    * [.readInvitations()](#AccountAPI+readInvitations) ⇒ <code>Promise</code>
-    * [.createInvitation(email, role)](#AccountAPI+createInvitation) ⇒ <code>Promise</code>
-    * [.acceptInvitation(acceptCode, name, password)](#AccountAPI+acceptInvitation) ⇒ <code>Promise</code>
-    * [.deleteInvitation(id)](#AccountAPI+deleteInvitation) ⇒ <code>Promise</code>
-
-<a name="AccountAPI+readCurrentUser"></a>
-
-#### accountAPI.readCurrentUser() ⇒ <code>Promise</code>
+### readCurrentUser() ⇒ <code>Promise</code>
 Get the currently logged in user.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#user_91db9d9178f3f4c7597899942bd3f941  
-<a name="AccountAPI+readUsers"></a>
+<a name="readUsers"></a>
 
-#### accountAPI.readUsers() ⇒ <code>Promise</code>
+### readUsers() ⇒ <code>Promise</code>
 Get a list of all users from the current customer.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#customer_12f4a69627ba3bbb1c8668aae03a60ad  
-<a name="AccountAPI+readUser"></a>
+<a name="readUser"></a>
 
-#### accountAPI.readUser(id) ⇒ <code>Promise</code>
+### readUser(id) ⇒ <code>Promise</code>
 Get the the user with the specific id.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#user_15a6c72980b9434ebb8253c7e882c26c  
 
@@ -411,12 +478,12 @@ Get the the user with the specific id.
 | --- | --- | --- |
 | id | <code>string</code> | The User ID. |
 
-<a name="AccountAPI+createUser"></a>
+<a name="createUser"></a>
 
-#### accountAPI.createUser(name, login) ⇒ <code>Promise</code>
+### createUser(name, login) ⇒ <code>Promise</code>
 Create a user.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#user_00b606002596bac1c652614de98bd260  
 
@@ -425,20 +492,20 @@ Create a user.
 | name | <code>string</code> | The user name. |
 | login | <code>string</code> | The user login. |
 
-<a name="AccountAPI+readInvitations"></a>
+<a name="readInvitations"></a>
 
-#### accountAPI.readInvitations() ⇒ <code>Promise</code>
+### readInvitations() ⇒ <code>Promise</code>
 List all invitations.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#invitations_6d8623de97ed7e50b7b6498e374bb657  
-<a name="AccountAPI+createInvitation"></a>
+<a name="createInvitation"></a>
 
-#### accountAPI.createInvitation(email, role) ⇒ <code>Promise</code>
+### createInvitation(email, role) ⇒ <code>Promise</code>
 Create an invitation.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#invitations_8c4da3ca11c75facd36cfaad024bd891  
 
@@ -447,12 +514,12 @@ Create an invitation.
 | email | <code>string</code> |  | The email address for the invitation. |
 | role | <code>string</code> | <code>&quot;engineer&quot;</code> | The user role. Defaults to {@code engineer}. |
 
-<a name="AccountAPI+acceptInvitation"></a>
+<a name="acceptInvitation"></a>
 
-#### accountAPI.acceptInvitation(acceptCode, name, password) ⇒ <code>Promise</code>
+### acceptInvitation(acceptCode, name, password) ⇒ <code>Promise</code>
 Accept an invitation.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 
 | Param | Type | Description |
@@ -461,12 +528,12 @@ Accept an invitation.
 | name | <code>string</code> | Name for the new user. |
 | password | <code>string</code> | Password for the new user. |
 
-<a name="AccountAPI+deleteInvitation"></a>
+<a name="deleteInvitation"></a>
 
-#### accountAPI.deleteInvitation(id) ⇒ <code>Promise</code>
+### deleteInvitation(id) ⇒ <code>Promise</code>
 Delete an invitation.
 
-**Kind**: instance method of [<code>AccountAPI</code>](#AccountAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/account#invitations_d70a7460c7e1bd8dd660c6f5b3558c2e  
 
@@ -474,26 +541,12 @@ Delete an invitation.
 | --- | --- | --- |
 | id | <code>string</code> | The invitation id. |
 
-<a name="AuthAPI"></a>
+<a name="readTokens"></a>
 
-### AuthAPI : [<code>AuthAPI</code>](#AuthAPI)
-The Fastly Auth API.
-
-**Kind**: global class  
-**See**: https://docs.fastly.com/api/auth#top  
-
-* [AuthAPI](#AuthAPI) : [<code>AuthAPI</code>](#AuthAPI)
-    * [.readTokens([customerId])](#AuthAPI+readTokens) ⇒ <code>Promise</code>
-    * [.readToken([id])](#AuthAPI+readToken) ⇒ <code>Promise</code>
-    * [.deleteToken([id])](#AuthAPI+deleteToken) ⇒ <code>Promise</code>
-    * [.createToken(options)](#AuthAPI+createToken) ⇒ <code>Promise</code>
-
-<a name="AuthAPI+readTokens"></a>
-
-#### authAPI.readTokens([customerId]) ⇒ <code>Promise</code>
+### readTokens([customerId]) ⇒ <code>Promise</code>
 List all tokens of a customer.
 
-**Kind**: instance method of [<code>AuthAPI</code>](#AuthAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/auth#tokens_d59ff8612bae27a2317278abb048db0c  
 
@@ -501,12 +554,12 @@ List all tokens of a customer.
 | --- | --- | --- |
 | [customerId] | <code>string</code> | The id of the customer. |
 
-<a name="AuthAPI+readToken"></a>
+<a name="readToken"></a>
 
-#### authAPI.readToken([id]) ⇒ <code>Promise</code>
+### readToken([id]) ⇒ <code>Promise</code>
 Get the token with the specified id. If the Id is missing, the self token is returned.
 
-**Kind**: instance method of [<code>AuthAPI</code>](#AuthAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/auth#tokens_bb00e7ed542cbcd7f32b5c908b8ce244  
 
@@ -514,12 +567,12 @@ Get the token with the specified id. If the Id is missing, the self token is ret
 | --- | --- | --- |
 | [id] | <code>string</code> | The token id. |
 
-<a name="AuthAPI+deleteToken"></a>
+<a name="deleteToken"></a>
 
-#### authAPI.deleteToken([id]) ⇒ <code>Promise</code>
+### deleteToken([id]) ⇒ <code>Promise</code>
 Delete the token with the specified id.
 
-**Kind**: instance method of [<code>AuthAPI</code>](#AuthAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/auth#tokens_4a958ba69402500937f0d8570f7ce86f  
 
@@ -527,12 +580,12 @@ Delete the token with the specified id.
 | --- | --- | --- |
 | [id] | <code>string</code> | The token id. |
 
-<a name="AuthAPI+createToken"></a>
+<a name="createToken"></a>
 
-#### authAPI.createToken(options) ⇒ <code>Promise</code>
+### createToken(options) ⇒ <code>Promise</code>
 Create an API token.
 
-**Kind**: instance method of [<code>AuthAPI</code>](#AuthAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/auth#tokens_db4655a45a0107448eb0676577446e40  
 
@@ -540,30 +593,12 @@ Create an API token.
 | --- | --- | --- |
 | options | <code>object</code> | The token options. |
 
-<a name="DomainAPI"></a>
+<a name="domainCheck"></a>
 
-### DomainAPI : [<code>DomainAPI</code>](#DomainAPI)
-The Fastly Domain API.
-
-**Kind**: global class  
-**See**: https://docs.fastly.com/api/config#domain  
-
-* [DomainAPI](#DomainAPI) : [<code>DomainAPI</code>](#DomainAPI)
-    * [.domainCheck(version, name)](#DomainAPI+domainCheck) ⇒ <code>Promise</code>
-    * [.domainCheckAll(version)](#DomainAPI+domainCheckAll) ⇒ <code>Promise</code>
-    * [.readDomains(version)](#DomainAPI+readDomains) ⇒ <code>Promise</code>
-    * [.readDomain(version, name)](#DomainAPI+readDomain) ⇒ <code>Promise</code>
-    * [.readServiceDomains([serviceId])](#DomainAPI+readServiceDomains) ⇒ <code>Promise</code>
-    * [.createDomain(version, name, comment)](#DomainAPI+createDomain) ⇒ <code>Promise</code>
-    * [.updateDomain(version, oldName, name, comment)](#DomainAPI+updateDomain) ⇒ <code>Promise</code>
-    * [.deleteDomain(version, name)](#DomainAPI+deleteDomain) ⇒ <code>Promise</code>
-
-<a name="DomainAPI+domainCheck"></a>
-
-#### domainAPI.domainCheck(version, name) ⇒ <code>Promise</code>
+### domainCheck(version, name) ⇒ <code>Promise</code>
 Checks the status of all domains for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_30a3f14c9a0ce5730757d39983ab7dc6  
 
@@ -572,12 +607,12 @@ Checks the status of all domains for a particular service and version.
 | version | <code>string</code> | The current version of a service. |
 | name | <code>string</code> | The name of the domain. |
 
-<a name="DomainAPI+domainCheckAll"></a>
+<a name="domainCheckAll"></a>
 
-#### domainAPI.domainCheckAll(version) ⇒ <code>Promise</code>
+### domainCheckAll(version) ⇒ <code>Promise</code>
 Checks the status of all domains for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_e33a599694c3316f00b6b8d53a2db7d9  
 
@@ -595,12 +630,12 @@ instance.domainCheckAll('182')
      console.log(err.message);
    });
 ```
-<a name="DomainAPI+readDomains"></a>
+<a name="readDomains"></a>
 
-#### domainAPI.readDomains(version) ⇒ <code>Promise</code>
+### readDomains(version) ⇒ <code>Promise</code>
 List all the domains for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_6d340186666771f022ca20f81609d03d  
 
@@ -618,12 +653,12 @@ instance.readDomains('182')
      console.log(err.message);
    });
 ```
-<a name="DomainAPI+readDomain"></a>
+<a name="readDomain"></a>
 
-#### domainAPI.readDomain(version, name) ⇒ <code>Promise</code>
+### readDomain(version, name) ⇒ <code>Promise</code>
 List all the domains for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_f1b5fab17a0729daeeaf7594b47759c5  
 
@@ -632,12 +667,12 @@ List all the domains for a particular service and version.
 | version | <code>string</code> | The current version of a service. |
 | name | <code>string</code> | The domain name. |
 
-<a name="DomainAPI+readServiceDomains"></a>
+<a name="readServiceDomains"></a>
 
-#### domainAPI.readServiceDomains([serviceId]) ⇒ <code>Promise</code>
+### readServiceDomains([serviceId]) ⇒ <code>Promise</code>
 List the domains within a service.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#service_d5578a1e3bc75512711ddd0a58ce7a36  
 
@@ -645,12 +680,12 @@ List the domains within a service.
 | --- | --- | --- |
 | [serviceId] | <code>string</code> | The service id. |
 
-<a name="DomainAPI+createDomain"></a>
+<a name="createDomain"></a>
 
-#### domainAPI.createDomain(version, name, comment) ⇒ <code>Promise</code>
+### createDomain(version, name, comment) ⇒ <code>Promise</code>
 Create a domain for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_90345101274774ff1b84f0a7dd010b01  
 
@@ -660,12 +695,12 @@ Create a domain for a particular service and version.
 | name | <code>string</code> | The domain name. |
 | comment | <code>string</code> | Optional comment. |
 
-<a name="DomainAPI+updateDomain"></a>
+<a name="updateDomain"></a>
 
-#### domainAPI.updateDomain(version, oldName, name, comment) ⇒ <code>Promise</code>
+### updateDomain(version, oldName, name, comment) ⇒ <code>Promise</code>
 Update a domain for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_2ef42bd9b4c56c86b46dc0e36096ab10  
 
@@ -676,12 +711,12 @@ Update a domain for a particular service and version.
 | name | <code>string</code> | The domain name. |
 | comment | <code>string</code> | Optional comment. |
 
-<a name="DomainAPI+deleteDomain"></a>
+<a name="deleteDomain"></a>
 
-#### domainAPI.deleteDomain(version, name) ⇒ <code>Promise</code>
+### deleteDomain(version, name) ⇒ <code>Promise</code>
 Delete the domain for a particular service and version.
 
-**Kind**: instance method of [<code>DomainAPI</code>](#DomainAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#domain_aab5a322f58df2b1db8dc276e8594a70  
 
@@ -690,27 +725,12 @@ Delete the domain for a particular service and version.
 | version | <code>string</code> | The current version of a service. |
 | name | <code>string</code> | The domain name. |
 
-<a name="HealthcheckAPI"></a>
+<a name="readHealthchecks"></a>
 
-### HealthcheckAPI : [<code>HealthcheckAPI</code>](#HealthcheckAPI)
-The Fastly Healthcheck API.
-
-**Kind**: global class  
-**See**: https://docs.fastly.com/api/config#healthcheck  
-
-* [HealthcheckAPI](#HealthcheckAPI) : [<code>HealthcheckAPI</code>](#HealthcheckAPI)
-    * [.readHealthchecks(version)](#HealthcheckAPI+readHealthchecks) ⇒ <code>Promise</code>
-    * [.readHealthcheck(version, name)](#HealthcheckAPI+readHealthcheck) ⇒ <code>Promise</code>
-    * [.createHealthcheck(version, data)](#HealthcheckAPI+createHealthcheck) ⇒ <code>Promise</code>
-    * [.updateHealthcheck(version, name, data)](#HealthcheckAPI+updateHealthcheck) ⇒ <code>Promise</code>
-    * [.deleteHealthcheck(version, name)](#HealthcheckAPI+deleteHealthcheck) ⇒ <code>Promise</code>
-
-<a name="HealthcheckAPI+readHealthchecks"></a>
-
-#### healthcheckAPI.readHealthchecks(version) ⇒ <code>Promise</code>
+### readHealthchecks(version) ⇒ <code>Promise</code>
 List all healthchecks for a particular service and version.
 
-**Kind**: instance method of [<code>HealthcheckAPI</code>](#HealthcheckAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#healthcheck_126cb37382d68583269420ba772ded36  
 
@@ -718,12 +738,12 @@ List all healthchecks for a particular service and version.
 | --- | --- | --- |
 | version | <code>string</code> | The current version of a service. |
 
-<a name="HealthcheckAPI+readHealthcheck"></a>
+<a name="readHealthcheck"></a>
 
-#### healthcheckAPI.readHealthcheck(version, name) ⇒ <code>Promise</code>
+### readHealthcheck(version, name) ⇒ <code>Promise</code>
 Get details of a single named healthcheck.
 
-**Kind**: instance method of [<code>HealthcheckAPI</code>](#HealthcheckAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#healthcheck_b54ea357a2377e62ae7649e609b94966  
 
@@ -732,12 +752,12 @@ Get details of a single named healthcheck.
 | version | <code>string</code> | The current version of a service. |
 | name | <code>string</code> | The name of the healthcheck. |
 
-<a name="HealthcheckAPI+createHealthcheck"></a>
+<a name="createHealthcheck"></a>
 
-#### healthcheckAPI.createHealthcheck(version, data) ⇒ <code>Promise</code>
+### createHealthcheck(version, data) ⇒ <code>Promise</code>
 Create a healthcheck for a particular service and version.
 
-**Kind**: instance method of [<code>HealthcheckAPI</code>](#HealthcheckAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#healthcheck_8712be8923dd419c54393da3ac31f6d3  
 
@@ -746,12 +766,12 @@ Create a healthcheck for a particular service and version.
 | version | <code>string</code> | The current version of a service. |
 | data | <code>object</code> | The healthcheck definition. |
 
-<a name="HealthcheckAPI+updateHealthcheck"></a>
+<a name="updateHealthcheck"></a>
 
-#### healthcheckAPI.updateHealthcheck(version, name, data) ⇒ <code>Promise</code>
+### updateHealthcheck(version, name, data) ⇒ <code>Promise</code>
 Update the healthcheck for a particular service and version.
 
-**Kind**: instance method of [<code>HealthcheckAPI</code>](#HealthcheckAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#healthcheck_9a60b6005125c4afeaa80111e69d7586  
 
@@ -761,12 +781,12 @@ Update the healthcheck for a particular service and version.
 | name | <code>string</code> | The name of the healthcheck to update. |
 | data | <code>object</code> | The healthcheck definition. |
 
-<a name="HealthcheckAPI+deleteHealthcheck"></a>
+<a name="deleteHealthcheck"></a>
 
-#### healthcheckAPI.deleteHealthcheck(version, name) ⇒ <code>Promise</code>
+### deleteHealthcheck(version, name) ⇒ <code>Promise</code>
 Delete the healthcheck for a particular service and version.
 
-**Kind**: instance method of [<code>HealthcheckAPI</code>](#HealthcheckAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/config#healthcheck_a22900c40a2fd59db5028061dc5dfa36  
 
@@ -775,29 +795,38 @@ Delete the healthcheck for a particular service and version.
 | version | <code>string</code> | The current version of a service. |
 | name | <code>string</code> | The name of the healthcheck to delete. |
 
-<a name="PurgeAPI"></a>
+<a name="readPackage"></a>
 
-### PurgeAPI : [<code>PurgeAPI</code>](#PurgeAPI)
-The Fastly Purge API.
+### readPackage(version) ⇒ <code>Promise</code>
+Get metadata about a package. The metadata is extracted from the package contents.
 
-**Kind**: global class  
-**See**: https://docs.fastly.com/api/purge#purge  
+**Kind**: global function  
+**Returns**: <code>Promise</code> - The response object.  
 
-* [PurgeAPI](#PurgeAPI) : [<code>PurgeAPI</code>](#PurgeAPI)
-    * [.purgeIndividual(url)](#PurgeAPI+purgeIndividual) ⇒ <code>Promise</code>
-    * [.purgeAll()](#PurgeAPI+purgeAll) ⇒ <code>Promise</code>
-    * [.purgeKey(key)](#PurgeAPI+purgeKey) ⇒ <code>Promise</code>
-    * [.purgeKeys(keys)](#PurgeAPI+purgeKeys) ⇒ <code>Promise</code>
-    * [.softPurgeIndividual(url)](#PurgeAPI+softPurgeIndividual) ⇒ <code>Promise</code>
-    * [.softPurgeKey(key)](#PurgeAPI+softPurgeKey) ⇒ <code>Promise</code>
-    * [.softPurgeKeys(keys)](#PurgeAPI+softPurgeKeys) ⇒ <code>Promise</code>
+| Param | Type | Description |
+| --- | --- | --- |
+| version | <code>string</code> | The current version of a service. |
 
-<a name="PurgeAPI+purgeIndividual"></a>
+<a name="writePackage"></a>
 
-#### purgeAPI.purgeIndividual(url) ⇒ <code>Promise</code>
+### writePackage(version, buffer) ⇒ <code>Promise</code>
+Upload a new package version. The package is a Buffer of a ZIP file containing the
+manifest as well as the main WASM file.
+
+**Kind**: global function  
+**Returns**: <code>Promise</code> - The response object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| version | <code>string</code> | The service version to update. |
+| buffer | <code>Buffer</code> | The package contents as a Buffer. |
+
+<a name="purgeIndividual"></a>
+
+### purgeIndividual(url) ⇒ <code>Promise</code>
 Instant Purge an individual URL.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#purge_3aa1d66ee81dbfed0b03deed0fa16a9a  
 
@@ -815,12 +844,12 @@ instance.purgeIndividual('www.example.com')
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+purgeAll"></a>
+<a name="purgeAll"></a>
 
-#### purgeAPI.purgeAll() ⇒ <code>Promise</code>
+### purgeAll() ⇒ <code>Promise</code>
 Instant Purge everything from a service.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#purge_bee5ed1a0cfd541e8b9f970a44718546  
 **Example**  
@@ -833,12 +862,12 @@ instance.purgeAll()
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+purgeKey"></a>
+<a name="purgeKey"></a>
 
-#### purgeAPI.purgeKey(key) ⇒ <code>Promise</code>
+### purgeKey(key) ⇒ <code>Promise</code>
 Instant Purge a particular service of items tagged with a Surrogate Key.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#purge_d8b8e8be84c350dd92492453a3df3230  
 
@@ -856,12 +885,12 @@ instance.purgeKey('key_1')
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+purgeKeys"></a>
+<a name="purgeKeys"></a>
 
-#### purgeAPI.purgeKeys(keys) ⇒ <code>Promise</code>
+### purgeKeys(keys) ⇒ <code>Promise</code>
 Instant Purge a particular service of items tagged with Surrogate Keys in a batch.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#purge_db35b293f8a724717fcf25628d713583  
 
@@ -879,12 +908,12 @@ instance.purgeKeys(['key_2', 'key_3', 'key_4'])
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+softPurgeIndividual"></a>
+<a name="softPurgeIndividual"></a>
 
-#### purgeAPI.softPurgeIndividual(url) ⇒ <code>Promise</code>
+### softPurgeIndividual(url) ⇒ <code>Promise</code>
 Soft Purge an individual URL.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#soft_purge_0c4f56f3d68e9bed44fb8b638b78ea36  
 
@@ -902,12 +931,12 @@ instance.softPurgeIndividual('www.example.com/images')
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+softPurgeKey"></a>
+<a name="softPurgeKey"></a>
 
-#### purgeAPI.softPurgeKey(key) ⇒ <code>Promise</code>
+### softPurgeKey(key) ⇒ <code>Promise</code>
 Soft Purge a particular service of items tagged with a Surrogate Key.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#soft_purge_2e4d29085640127739f8467f27a5b549  
 
@@ -925,12 +954,12 @@ instance.softPurgeKey('key_5')
      console.log(err.message);
    });
 ```
-<a name="PurgeAPI+softPurgeKeys"></a>
+<a name="softPurgeKeys"></a>
 
-#### purgeAPI.softPurgeKeys(keys) ⇒ <code>Promise</code>
+### softPurgeKeys(keys) ⇒ <code>Promise</code>
 Soft Purge a particular service of items tagged with Surrogate Keys in a batch.
 
-**Kind**: instance method of [<code>PurgeAPI</code>](#PurgeAPI)  
+**Kind**: global function  
 **Returns**: <code>Promise</code> - The response object representing the completion or failure.  
 **See**: https://docs.fastly.com/api/purge#purge_db35b293f8a724717fcf25628d713583  
 
@@ -948,19 +977,13 @@ instance.softPurgeKeys(['key_2', 'key_3', 'key_4'])
      console.log(err.message);
    });
 ```
-<a name="Conditions"></a>
+<a name="multistepupdate"></a>
 
-### Conditions
-Helper class with high-level operations for condition-management.
-
-**Kind**: global class  
-<a name="Conditions+multistepupdate"></a>
-
-#### conditions.multistepupdate(version, type, commentprefix, nameprefix) ⇒ <code>Array.&lt;function()&gt;</code>
+### multistepupdate(version, type, commentprefix, nameprefix) ⇒ <code>Array.&lt;function()&gt;</code>
 Creates functions for multi-step creation of missing and deletion of
 superflous conditions.
 
-**Kind**: instance method of [<code>Conditions</code>](#Conditions)  
+**Kind**: global function  
 **Returns**: <code>Array.&lt;function()&gt;</code> - A pair of a create and cleanup function.  
 
 | Param | Type | Description |
@@ -970,19 +993,13 @@ superflous conditions.
 | commentprefix | <code>string</code> | The prefix to be used for comments. |
 | nameprefix | <code>string</code> | - The prefix to be used for names. |
 
-<a name="Headers"></a>
+<a name="update"></a>
 
-### Headers
-Helper class with high-level operations for condition-management.
-
-**Kind**: global class  
-<a name="Headers+update"></a>
-
-#### headers.update(version, type, commentprefix, nameprefix, action, header, sub) ⇒ <code>Array.&lt;function()&gt;</code>
+### update(version, type, commentprefix, nameprefix, action, header, sub) ⇒ <code>Array.&lt;function()&gt;</code>
 Creates functions for multi-step creation of missing and deletion of
 superflous conditional headers.
 
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
+**Kind**: global function  
 **Returns**: <code>Array.&lt;function()&gt;</code> - A pair of a create and cleanup function.  
 
 | Param | Type | Description |
@@ -994,1051 +1011,6 @@ superflous conditional headers.
 | action | <code>string</code> | What do do with the header, can be `set`, `append`, `delete`. |
 | header | <code>string</code> | The name of the header to set. |
 | sub | <code>string</code> | Name of the subroutine where the header should be applied, can be `request`, `fetch`, `cache`, or `response`. |
-
-<a name="Fastly"></a>
-
-### Fastly
-**Kind**: global class  
-
-* [Fastly](#Fastly)
-    * [new Fastly(token, service_id, timeout)](#new_Fastly_new)
-    * [.readLogsFn(service)](#Fastly+readLogsFn) ⇒ [<code>ListFunction</code>](#ListFunction)
-    * [.readLogFn(service)](#Fastly+readLogFn) ⇒ [<code>ReadFunction</code>](#ReadFunction)
-    * [.createLogFn(service)](#Fastly+createLogFn) ⇒ [<code>CreateFunction</code>](#CreateFunction)
-    * [.updateLogFn(service)](#Fastly+updateLogFn) ⇒ [<code>UpdateFunction</code>](#UpdateFunction)
-    * [.upsertFn(createFn, updateFn, readFn)](#Fastly+upsertFn) ⇒ [<code>UpdateFunction</code>](#UpdateFunction)
-    * [.discard()](#Fastly+discard)
-    * [.dataCenters()](#Fastly+dataCenters) ⇒ <code>Promise</code>
-    * [.publicIpList()](#Fastly+publicIpList) ⇒ <code>Promise</code>
-    * [.edgeCheck(url)](#Fastly+edgeCheck) ⇒ <code>Promise</code>
-    * [.readServices()](#Fastly+readServices) ⇒ <code>Promise</code>
-    * [.readServicesById()](#Fastly+readServicesById) ⇒ <code>Promise</code>
-    * [.readService([serviceId])](#Fastly+readService) ⇒ <code>Promise</code>
-    * [.readVersions()](#Fastly+readVersions) ⇒ <code>Promise</code>
-    * [.getVersions()](#Fastly+getVersions) ⇒ [<code>Versions</code>](#Versions)
-    * [.cloneVersion(version)](#Fastly+cloneVersion) ⇒ <code>Promise</code>
-    * [.activateVersion(version)](#Fastly+activateVersion) ⇒ <code>Promise</code>
-    * [.readDictItems(version, name)](#Fastly+readDictItems) ⇒ <code>Promise</code>
-    * [.readDictItem(version, name, key)](#Fastly+readDictItem) ⇒ <code>Promise</code>
-    * [.createDictItem(version, name, key, value)](#Fastly+createDictItem) ⇒ <code>Promise</code>
-    * [.bulkUpdateDictItems(version, name, ...items)](#Fastly+bulkUpdateDictItems) ⇒ <code>Promise</code>
-    * [.updateDictItem(version, name, key, value)](#Fastly+updateDictItem) ⇒ <code>Promise</code>
-    * [.deleteDictItem(version, name, key)](#Fastly+deleteDictItem) ⇒ <code>Promise</code>
-    * [.writeDictItem(version, name, key, value)](#Fastly+writeDictItem) ⇒ <code>Promise</code>
-    * [.readDictionaries(version)](#Fastly+readDictionaries) ⇒ <code>Promise</code>
-    * [.readDictionary(version, name)](#Fastly+readDictionary) ⇒ <code>Promise</code>
-    * [.createDictionary(version, data)](#Fastly+createDictionary) ⇒ <code>Promise</code>
-    * [.updateDictionary(version, name, data)](#Fastly+updateDictionary) ⇒ <code>Promise</code>
-    * [.deleteDictionary(version, name)](#Fastly+deleteDictionary) ⇒ <code>Promise</code>
-    * [.readConditions(version)](#Fastly+readConditions) ⇒ <code>Promise</code>
-    * [.readCondition(version, name)](#Fastly+readCondition) ⇒ <code>Promise</code>
-    * [.readSnippet(version, name)](#Fastly+readSnippet) ⇒ <code>Promise</code>
-    * [.createCondition(version, data)](#Fastly+createCondition) ⇒ <code>Promise</code>
-    * [.updateCondition(version, name, data)](#Fastly+updateCondition) ⇒ <code>Promise</code>
-    * [.deleteCondition(version, name)](#Fastly+deleteCondition) ⇒ <code>Promise</code>
-    * [.readHeaders(version)](#Fastly+readHeaders) ⇒ <code>Promise</code>
-    * [.readHeader(version, name)](#Fastly+readHeader) ⇒ <code>Promise</code>
-    * [.createHeader(version, data)](#Fastly+createHeader) ⇒ <code>Promise</code>
-    * [.updateHeader(version, name, data)](#Fastly+updateHeader) ⇒ <code>Promise</code>
-    * [.deleteHeader(version, name)](#Fastly+deleteHeader) ⇒ <code>Promise</code>
-    * [.readBackends(version)](#Fastly+readBackends) ⇒ <code>Promise</code>
-    * [.updateBackend(version, name, data)](#Fastly+updateBackend) ⇒ <code>Promise</code>
-    * [.createBackend(version, data)](#Fastly+createBackend) ⇒ <code>Promise</code>
-    * [.readSnippets(version)](#Fastly+readSnippets) ⇒ <code>Promise</code>
-    * [.createSnippet(version, data)](#Fastly+createSnippet) ⇒ <code>Promise</code>
-    * [.updateSnippet(version, name, data)](#Fastly+updateSnippet) ⇒ <code>Promise</code>
-    * [.createVCL(version, data)](#Fastly+createVCL) ⇒ <code>Promise</code>
-    * [.updateVCL(version, name, data)](#Fastly+updateVCL) ⇒ <code>Promise</code>
-    * [.setMainVCL(version, name)](#Fastly+setMainVCL) ⇒ <code>Promise</code>
-    * [.transact(operations, activate, limit)](#Fastly+transact) ⇒ <code>object</code>
-    * [.dryrun(operations)](#Fastly+dryrun) ⇒ <code>object</code>
-
-<a name="new_Fastly_new"></a>
-
-#### new Fastly(token, service_id, timeout)
-The constructor method for creating a fastly-promises instance.
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| token | <code>string</code> |  | The Fastly API token. |
-| service_id | <code>string</code> |  | The Fastly service ID. |
-| timeout | <code>number</code> | <code>15000</code> | HTTP timeout for requests to the Fastly API, default: 15 seconds. |
-
-<a name="Fastly+readLogsFn"></a>
-
-#### fastly.readLogsFn(service) ⇒ [<code>ListFunction</code>](#ListFunction)
-Create a new function that lists all log configurations for a given service
-and version. The function can be parametrized with the name of the logging
-service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>ListFunction</code>](#ListFunction) - A logging function.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| service | <code>string</code> | The id of the logging service. Supported services are: s3, s3canary, azureblob, cloudfiles, digitalocean, ftp, bigquery, gcs, honeycomb, logshuttle, logentries, loggly, heroku, https, openstack, papertrail, scalyr, splunk, sumologic, syslog. |
-
-<a name="Fastly+readLogFn"></a>
-
-#### fastly.readLogFn(service) ⇒ [<code>ReadFunction</code>](#ReadFunction)
-Create a new function that returns a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
-service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>ReadFunction</code>](#ReadFunction) - A logging function.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| service | <code>string</code> | The id of the logging service. Supported services are: s3, s3canary, azureblob, cloudfiles, digitalocean, ftp, bigquery, gcs, honeycomb, logshuttle, logentries, loggly, heroku, https, openstack, papertrail, scalyr, splunk, sumologic, syslog. |
-
-<a name="Fastly+createLogFn"></a>
-
-#### fastly.createLogFn(service) ⇒ [<code>CreateFunction</code>](#CreateFunction)
-Create a new function that creates a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
-service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>CreateFunction</code>](#CreateFunction) - A logging function.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| service | <code>string</code> | The id of the logging service. Supported services are: s3, s3canary, azureblob, cloudfiles, digitalocean, ftp, bigquery, gcs, honeycomb, logshuttle, logentries, loggly, heroku, https, openstack, papertrail, scalyr, splunk, sumologic, syslog. |
-
-<a name="Fastly+updateLogFn"></a>
-
-#### fastly.updateLogFn(service) ⇒ [<code>UpdateFunction</code>](#UpdateFunction)
-Create a new function that updates a named log configuration for a given service
-and version. The function can be parametrized with the name of the logging
-service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>UpdateFunction</code>](#UpdateFunction) - A logging function.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| service | <code>string</code> | The id of the logging service. Supported services are: s3, s3canary, azureblob, cloudfiles, digitalocean, ftp, bigquery, gcs, honeycomb, logshuttle, logentries, loggly, heroku, https, openstack, papertrail, scalyr, splunk, sumologic, syslog. |
-
-<a name="Fastly+upsertFn"></a>
-
-#### fastly.upsertFn(createFn, updateFn, readFn) ⇒ [<code>UpdateFunction</code>](#UpdateFunction)
-Creates an update-or-create or "safe create" function that will either create
-(if it does not exist) or update (if it does) a named resource. The function
-will attempt to check if the resource exists first (if a reader function has been
-provided), alternatively, it will just blindly create and fall back with an
-update.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>UpdateFunction</code>](#UpdateFunction) - An update function that does not fail on conflict.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| createFn | [<code>CreateFunction</code>](#CreateFunction) | A function that creates a resource. |
-| updateFn | [<code>UpdateFunction</code>](#UpdateFunction) | A function that updates a resource. |
-| readFn | [<code>ReadFunction</code>](#ReadFunction) | An optional function that checks for the existence of a resource. |
-
-<a name="Fastly+discard"></a>
-
-#### fastly.discard()
-Free resources bound to the HTTP client (pending sessions/sockets)
-and allow the node process to quit.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - A promise which resolves when all resources have been freed.  
-<a name="Fastly+dataCenters"></a>
-
-#### fastly.dataCenters() ⇒ <code>Promise</code>
-Get a list of all Fastly datacenters.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/tools#datacenter_1c8d3b9dd035e301155b44eae05e0554  
-**Example**  
-```js
-instance.dataCenters()
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+publicIpList"></a>
-
-#### fastly.publicIpList() ⇒ <code>Promise</code>
-Fastly's services IP ranges.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/tools#public_ip_list_ef2e9900a1c9522b58f5abed92ec785e  
-**Example**  
-```js
-instance.publicIpList()
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+edgeCheck"></a>
-
-#### fastly.edgeCheck(url) ⇒ <code>Promise</code>
-Retrieve headers and MD5 hash of the content for a particular URL from each Fastly edge server.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/tools#content_4d2d4548b29c7661e17ebe7098872d6d  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| url | <code>string</code> | Full URL (host and path) to check on all nodes. If protocol is omitted,    http will be assumed. |
-
-**Example**  
-```js
-instance.edgeCheck('api.example.com')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readServices"></a>
-
-#### fastly.readServices() ⇒ <code>Promise</code>
-List all services.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#service_74d98f7e5d018256e44d1cf820388ef8  
-**Example**  
-```js
-instance.readServices()
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readServicesById"></a>
-
-#### fastly.readServicesById() ⇒ <code>Promise</code>
-Reads the services and returns a data object that contains a map where the service id is
-the key.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-<a name="Fastly+readService"></a>
-
-#### fastly.readService([serviceId]) ⇒ <code>Promise</code>
-Get a specific service by id.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#service_a884a9abd5af9723f6fcbb1ed13ae4cc  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [serviceId] | <code>string</code> | The service id. |
-
-<a name="Fastly+readVersions"></a>
-
-#### fastly.readVersions() ⇒ <code>Promise</code>
-List the versions for a particular service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#version_dfde9093f4eb0aa2497bbfd1d9415987  
-**Example**  
-```js
-instance.readVersions()
-   .then(res => {
-     const active = res.data.filter(version => version.active);
-     console.log(active);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+getVersions"></a>
-
-#### fastly.getVersions() ⇒ [<code>Versions</code>](#Versions)
-Gets the version footprint for the service.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: [<code>Versions</code>](#Versions) - The latest, current, and active versions of the service.  
-<a name="Fastly+cloneVersion"></a>
-
-#### fastly.cloneVersion(version) ⇒ <code>Promise</code>
-Clone the current configuration into a new version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#version_7f4937d0663a27fbb765820d4c76c709  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The version to be cloned. |
-
-**Example**  
-```js
-instance.cloneVersion('45')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+activateVersion"></a>
-
-#### fastly.activateVersion(version) ⇒ <code>Promise</code>
-Activate the current version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#version_0b79ae1ba6aee61d64cc4d43fed1e0d5  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The version to be activated. |
-
-**Example**  
-```js
-instance.activateVersion('23')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readDictItems"></a>
-
-#### fastly.readDictItems(version, name) ⇒ <code>Promise</code>
-List all dictionary items for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_item_a48de28cd7e76c1ea58523f39bb7204b  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The version of the dictionary. |
-| name | <code>string</code> | The name of the dictionary. |
-
-**Example**  
-```js
-instance.readDictItems(1, 'my_dictionary')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readDictItem"></a>
-
-#### fastly.readDictItem(version, name, key) ⇒ <code>Promise</code>
-Get details of a single dictionary item.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_item_08f090cd03ed4602ae63f131087e2f29  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | Name of the dictionary. |
-| key | <code>string</code> | The key to retrieve values by. |
-
-**Example**  
-```js
-instance.readDictItem('12', 'extensions', 'some_key')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createDictItem"></a>
-
-#### fastly.createDictItem(version, name, key, value) ⇒ <code>Promise</code>
-Create a new dictionary item for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
-**See**: https://docs.fastly.com/api/config#dictionary_item_6ec455c0ba1b21671789e1362bc7fe55  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version number (current if omitted). |
-| name | <code>object</code> | The dictionary definition. |
-| key | <code>string</code> | The key. |
-| value | <code>string</code> | The value to write. |
-
-<a name="Fastly+bulkUpdateDictItems"></a>
-
-#### fastly.bulkUpdateDictItems(version, name, ...items) ⇒ <code>Promise</code>
-Updates multiple dictionary items in bulk.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version numer (current if ommitted). |
-| name | <code>string</code> | Name of the dictionary. |
-| ...items | [<code>DictUpdate</code>](#DictUpdate) | The dictionary update operations. |
-
-**Example**  
-```js
-// single item
-fastly.bulkUpdateDictItems(1, 'secret_dictionary',
-  { item_key: 'some_key', item_value: 'some_value', op: 'upsert' });
-
-// multiple items
-fastly.bulkUpdateDictItems(1, 'secret_dictionary',
-  { item_key: 'some_key', item_value: 'some_value', op: 'update' },
-  { item_key: 'other_key', item_value: 'other_value', op: 'update' });
-```
-<a name="Fastly+updateDictItem"></a>
-
-#### fastly.updateDictItem(version, name, key, value) ⇒ <code>Promise</code>
-Update a dictionary item value for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_item_34c884a7cdce84dfcfd38dac7a0b5bb0  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the dictionary. |
-| key | <code>string</code> | The key to update data under. |
-| value | <code>string</code> | The value to update the dictionary with. |
-
-**Example**  
-```js
-instance.updateDictItem(1, 'extensions', 'html', 'text/html')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+deleteDictItem"></a>
-
-#### fastly.deleteDictItem(version, name, key) ⇒ <code>Promise</code>
-Delete a dictionary item for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_item_664347e743b8eafc9a93c729d9da0427  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the dictionary. |
-| key | <code>string</code> | The key to update data under. |
-
-**Example**  
-```js
-instance.deleteDictItem('34', 'extensions', 'html')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+writeDictItem"></a>
-
-#### fastly.writeDictItem(version, name, key, value) ⇒ <code>Promise</code>
-Safely create, update or delete a dictionary item in a named dictionary.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | Service version to use for dictionary lookup. |
-| name | <code>string</code> | Name of the dictionary (not ID). |
-| key | <code>string</code> | Key to create, update or delete. |
-| value | <code>string</code> | Value to update. Empty strings will delete the dictionary entry. |
-
-<a name="Fastly+readDictionaries"></a>
-
-#### fastly.readDictionaries(version) ⇒ <code>Promise</code>
-List all dictionaries for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_6d2cc293b994eb8c16d93e92e91f3915  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-
-**Example**  
-```js
-instance.readDictionaries('12')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readDictionary"></a>
-
-#### fastly.readDictionary(version, name) ⇒ <code>Promise</code>
-Get details of a single dictionary.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_0e16df083830ed3b6c30b73dcef64014  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | Name of the dictionary. |
-
-**Example**  
-```js
-instance.readDictionary('12', 'extensions')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createDictionary"></a>
-
-#### fastly.createDictionary(version, data) ⇒ <code>Promise</code>
-Create a new dictionary for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
-**See**: https://docs.fastly.com/api/config#dictionary_7d48b87bf82433162a3b209292722125  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version number (current if omitted). |
-| data | <code>object</code> | The dictionary definition. |
-
-<a name="Fastly+updateDictionary"></a>
-
-#### fastly.updateDictionary(version, name, data) ⇒ <code>Promise</code>
-Update a dictionary for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_8c9da370b1591d99e5389143a5589a32  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the dictionary. |
-| data | <code>object</code> | The data to be sent as the request body. |
-
-**Example**  
-```js
-instance.updateDictionary('34', 'old-name', { name: 'new-name' })
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+deleteDictionary"></a>
-
-#### fastly.deleteDictionary(version, name) ⇒ <code>Promise</code>
-Delete a dictionary for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#dictionary_8c9da370b1591d99e5389143a5589a32  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the dictionary. |
-
-**Example**  
-```js
-instance.deleteDictionary('34', 'extensions')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readConditions"></a>
-
-#### fastly.readConditions(version) ⇒ <code>Promise</code>
-List all conditions for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#condition_b61196c572f473c89863a81cc5912861  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-
-**Example**  
-```js
-instance.readConditions('12')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readCondition"></a>
-
-#### fastly.readCondition(version, name) ⇒ <code>Promise</code>
-Get details of a single named condition.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#condition_149a2f48485ceb335f70504e5269b77e  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | Name of the condition. |
-
-**Example**  
-```js
-instance.readCondition('12', 'returning')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readSnippet"></a>
-
-#### fastly.readSnippet(version, name) ⇒ <code>Promise</code>
-Get details of a single named snippet.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://developer.fastly.com/reference/api/vcl-services/snippet/  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | Name of the snippet. |
-
-**Example**  
-```js
-instance.readSnippet('12', 'returning')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createCondition"></a>
-
-#### fastly.createCondition(version, data) ⇒ <code>Promise</code>
-Create a new condition for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
-**See**: https://docs.fastly.com/api/config#condition_551199dbec2271195319b675d8659226  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version number (current if omitted). |
-| data | <code>object</code> | The condition definition. |
-
-<a name="Fastly+updateCondition"></a>
-
-#### fastly.updateCondition(version, name, data) ⇒ <code>Promise</code>
-Update a condition for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#condition_01a2c4e4b44943b541e001013b665deb  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the condition. |
-| data | <code>object</code> | The data to be sent as the request body. |
-
-**Example**  
-```js
-instance.updateCondition('34', 'returning', { name: 'returning-visitor' })
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+deleteCondition"></a>
-
-#### fastly.deleteCondition(version, name) ⇒ <code>Promise</code>
-Delete a condition for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#condition_2b902b7649c46b4541f00a920d06c94d  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the condition. |
-
-**Example**  
-```js
-instance.deleteCondition('34', 'extensions')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readHeaders"></a>
-
-#### fastly.readHeaders(version) ⇒ <code>Promise</code>
-List all headers for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#header_dd9da0592b2f1ff8ef0a4c1943f8abff  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-
-**Example**  
-```js
-instance.readHeaders('12')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readHeader"></a>
-
-#### fastly.readHeader(version, name) ⇒ <code>Promise</code>
-Get details of a single named header.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#header_86469e5eba4e5d6b1463e81f82a847e0  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | Name of the header. |
-
-**Example**  
-```js
-instance.readHeader('12', 'returning')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createHeader"></a>
-
-#### fastly.createHeader(version, data) ⇒ <code>Promise</code>
-Create a new header for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
-**See**: https://docs.fastly.com/api/config#header_151df4ce647a8e222e730b260287cb39  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version number (current if omitted). |
-| data | <code>object</code> | The header definition. |
-
-<a name="Fastly+updateHeader"></a>
-
-#### fastly.updateHeader(version, name, data) ⇒ <code>Promise</code>
-Update a header for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#header_c4257a0fd0eb017ea47b1fbb318fd61c  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the header. |
-| data | <code>object</code> | The data to be sent as the request body. |
-
-**Example**  
-```js
-instance.updateHeader('34', 'returning', { name: 'returning-visitor' })
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+deleteHeader"></a>
-
-#### fastly.deleteHeader(version, name) ⇒ <code>Promise</code>
-Delete a header for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#header_4bbb73fffda4d189bf5a19b474399a83  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the header. |
-
-**Example**  
-```js
-instance.deleteHeader('34', 'extensions')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+readBackends"></a>
-
-#### fastly.readBackends(version) ⇒ <code>Promise</code>
-List all backends for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#backend_fb0e875c9a7669f071cbf89ca32c7f69  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-
-**Example**  
-```js
-instance.readBackends('12')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+updateBackend"></a>
-
-#### fastly.updateBackend(version, name, data) ⇒ <code>Promise</code>
-Update the backend for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#backend_fb3b3529417c70f57458644f7aec652e  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the backend. |
-| data | <code>object</code> | The data to be sent as the request body. |
-
-**Example**  
-```js
-instance.updateBackend('34', 'slow-server', { name: 'fast-server' })
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createBackend"></a>
-
-#### fastly.createBackend(version, data) ⇒ <code>Promise</code>
-Create a new backend for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The reponse object.  
-**See**: https://docs.fastly.com/api/config#backend_85c170418ee71191dbb3b5046aeb6c2c  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>number</code> | The version number (current if omitted). |
-| data | <code>object</code> | The backend definition. |
-
-<a name="Fastly+readSnippets"></a>
-
-#### fastly.readSnippets(version) ⇒ <code>Promise</code>
-List all snippets for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#api-section-snippet  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-
-**Example**  
-```js
-instance.readSnippets('12')
-   .then(res => {
-     console.log(res.data);
-   })
-   .catch(err => {
-     console.log(err.message);
-   });
-```
-<a name="Fastly+createSnippet"></a>
-
-#### fastly.createSnippet(version, data) ⇒ <code>Promise</code>
-Create a snippet for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#snippet_41e0e11c662d4d56adada215e707f30d  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| data | [<code>Snippet</code>](#Snippet) | The data to be sent as the request body. |
-
-**Example**  
-```js
-instance.createSnippet('36', {
-    name: 'your_snippet',
-    priority: 10,
-    dynamic: 1,
-    content: 'table referer_blacklist {}',
-    type: 'init'
-  })
-  .then(res => {
-    console.log(res.data);
-  })
-  .catch(err => {
-    console.log(err.message);
-  });
-```
-<a name="Fastly+updateSnippet"></a>
-
-#### fastly.updateSnippet(version, name, data) ⇒ <code>Promise</code>
-Update a VCL snippet for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the snippet to update. |
-| data | [<code>Snippet</code>](#Snippet) | The data to be sent as the request body. |
-
-<a name="Fastly+createVCL"></a>
-
-#### fastly.createVCL(version, data) ⇒ <code>Promise</code>
-Create custom VCL for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#vcl_7ade6ab5926b903b6acf3335a85060cc  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| data | [<code>VCL</code>](#VCL) | The data to be sent as the request body. |
-
-<a name="Fastly+updateVCL"></a>
-
-#### fastly.updateVCL(version, name, data) ⇒ <code>Promise</code>
-Update custom VCL for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#vcl_0971365908e17086751c5ef2a8053087  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the VCL to update. |
-| data | [<code>VCL</code>](#VCL) | The data to be sent as the request body. |
-
-<a name="Fastly+setMainVCL"></a>
-
-#### fastly.setMainVCL(version, name) ⇒ <code>Promise</code>
-Define a custom VCL to be the main VCL for a particular service and version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>Promise</code> - The response object representing the completion or failure.  
-**See**: https://docs.fastly.com/api/config#vcl_5576c38e7652f5a7261bfcad41c0faf1  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| version | <code>string</code> | The current version of a service. |
-| name | <code>string</code> | The name of the VCL to declare main. |
-
-<a name="Fastly+transact"></a>
-
-#### fastly.transact(operations, activate, limit) ⇒ <code>object</code>
-Creates a new version, runs the function `operations` and then
-optionally activates the newly created version. This function
-is useful for making modifications to a service config.
-
-You can provide a `limit` of write operations, which is an estimate
-of the number of write operations that will be attempted. If the
-limit is higher than the number of actions allowed by Fastly's rate
-limits, the function will fail fast after cloning the service config.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>object</code> - The return value of the wrapped function.  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| operations | <code>function</code> |  | A function that performs changes on the service config. |
-| activate | <code>boolean</code> | <code>true</code> | Set to false to prevent automatic activation. |
-| limit | <code>number</code> | <code>0</code> | Number of write operations that will be performed in this action. |
-
-**Example**  
-```javascript
-await fastly.transact(async (newversion) => {
- await fastly.doSomething(newversion);
-});
-// new version has been activated
-```
-<a name="Fastly+dryrun"></a>
-
-#### fastly.dryrun(operations) ⇒ <code>object</code>
-See `transact`, but this version does not activate the created version.
-
-**Kind**: instance method of [<code>Fastly</code>](#Fastly)  
-**Returns**: <code>object</code> - Whatever `operations` returns.  
-**See**: #transact  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| operations | <code>function</code> | The operations that should be applied to the cloned service config version. |
 
 <a name="repeat"></a>
 
@@ -2202,6 +1174,20 @@ to update values, as it will work for existing and non-existing items.
 | --- | --- | --- |
 | name | <code>string</code> | The name of the snippet, as visible in the Fastly UI. |
 | content | <code>string</code> | The VCL body of the snippet. |
+
+<a name="ResponseObject"></a>
+
+### ResponseObject : <code>object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the synthetic response, as visible in the Fastly UI. |
+| content | <code>string</code> | The body of the response. |
+| content_type | <code>string</code> | The content type. |
+| status | <code>number</code> | Http status code. |
+| request_condition | <code>string</code> | Name of a request condition. |
 
 <a name="VCL"></a>
 
