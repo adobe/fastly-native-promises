@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/adobe/fastly-native-promises/compare/v3.0.0...v3.0.1) (2023-02-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/fetch to v4.0.2 ([ec57ff5](https://github.com/adobe/fastly-native-promises/commit/ec57ff52a50e313eba304c725ba96f7bb3e7e2fb))
+
 # [3.0.0](https://github.com/adobe/fastly-native-promises/compare/v2.0.15...v3.0.0) (2023-01-31)
 
 
