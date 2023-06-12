@@ -10,3 +10,4 @@
 
 /* Mocha */
 junit
+.env
