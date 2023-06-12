@@ -12,6 +12,9 @@
 // eslint-disable-next-line no-console
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { config } from 'dotenv';
+
+config();
 
 // eslint-disable-next-line no-console
 console.log('Forcing HTTP/1.1 for Helix-Fetch');

@@ -51,6 +51,7 @@
     "c8": "7.13.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
+    "dotenv": "16.1.4",
     "eslint": "8.36.0",
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.27.5",

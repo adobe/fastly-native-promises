@@ -58,6 +58,7 @@ describe('#integration compute@edge packages', () => {
       authors: ['Lars Trieloff'],
       language: 'javascript',
       size: 2735861,
+      files_hash: 'a24353ecf54c2be005f3dea934a50e62916d829b62c16041f991cc1abbf9687a0836ec55b8c97d70b028b48a710b85a78b27c2a930a19cfbe946fb108a2eb657',
       hashsum: '22c0a39699a3743001c8de6fc9a9422ac1dac13e9204b80d7f5ec3988a362e7eb3d589cd2a472edded08b712fb9ddf0fffec60642e6361fb5e16e28fc00b2e17',
     });
   }).timeout(60000);
