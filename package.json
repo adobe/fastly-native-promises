@@ -56,7 +56,7 @@
     "eslint-plugin-header": "3.1.1",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsdoc": "46.4.3",
-    "expect": "29.6.0",
+    "expect": "29.6.1",
     "husky": "8.0.3",
     "jsdoc-to-markdown": "8.0.0",
     "junit-report-builder": "3.0.1",
