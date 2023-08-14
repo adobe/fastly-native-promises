@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-import nock from 'nock';
 import assert from 'assert';
+import nock from 'nock';
 import { axiosCreate } from '../src/httpclient.js';
 
 describe('#httpclient.caches', () => {
