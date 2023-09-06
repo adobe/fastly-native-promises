@@ -31,20 +31,21 @@ describe('#integration compute@edge packages', () => {
   condit('Get Package Metadata', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const { data } = await fastly.readPackage(2);
     assert.deepStrictEqual(data, {
-      created_at: '2023-01-23T10:17:05Z',
+      created_at: '2023-09-05T12:05:15Z',
       deleted_at: null,
       version: 2,
       metadata: {
-        name: 'test-service',
-        description: '',
-        authors: ['trieloff@adobe.com'],
+        name: 'Test Service 2 for Fastly Native Promises',
+        description: 'Test Service 2 for Fastly Native Promises',
+        files_hash: '18dce82b1924155da7183943eee276cc556b9bc92f3ef25d813f69649c371a16239d2e22bfda1df02c0de0539a1ea7c05c01ec951651849ade234a8c31b2d908',
+        authors: ['bosschae@adobe.com'],
         language: 'javascript',
-        size: 2752418,
-        hashsum: 'a4ce30a465198dd72b446e001e803ec609c0f40062fb6277a64c82d4c12cae0b33597306465f03a375c8e817498299560e4580c7844c575254d42dae6ecba742',
+        size: 5118629,
+        hashsum: '999c7c767484b285378429cc3e02e68564142b46ed76d3d375367b5b37f12903f444ffa73ee552ab5052cb91884c5c9ddc3cc4d00bfc4eaf4ebbc3b924704726',
       },
-      updated_at: '2023-01-23T10:19:58Z',
-      id: 'nnBCKkRFX9fEzSVKb6rZ73',
-      service_id: 'HcS29amvAoLOMIFvBukYN1',
+      updated_at: '2023-09-06T09:49:12Z',
+      id: 'qFeBJHlwkqLYJtWijGjqb1',
+      service_id: 'Jc28E3W2ESYMwXi9fRe2Z5',
     });
   }).timeout(5000);
 
