@@ -1221,3 +1221,4 @@ $ npm run commit
 ## License
 
 Licensed under the [MIT License](LICENSE) © 2017 Philipp Schulte
+
