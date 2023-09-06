@@ -1,7 +1,7 @@
 /* eslint-env mocha */
+import assert, { AssertionError } from 'assert';
 import { condit } from '@adobe/helix-testutils';
 import nock from 'nock';
-import assert, { AssertionError } from 'assert';
 
 import f from '../src/index.js';
 

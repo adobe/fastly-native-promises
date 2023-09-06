@@ -1,6 +1,6 @@
 /* eslint-env mocha */
-import nock from 'nock';
 import assert from 'assert';
+import nock from 'nock';
 import config from '../src/config.js';
 import fastlyPromises from '../src/index.js';
 import response from './response/readVersions.response.js';
