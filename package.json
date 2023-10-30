@@ -67,7 +67,7 @@
     "semantic-release": "22.0.5"
   },
   "dependencies": {
-    "@adobe/fetch": "4.1.0",
+    "@adobe/fetch": "4.1.1",
     "form-data": "4.0.0",
     "object-hash": "3.0.0"
   },
