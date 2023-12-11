@@ -64,7 +64,7 @@
     "lodash": "4.17.21",
     "mocha": "10.2.0",
     "nock": "13.4.0",
-    "semantic-release": "22.0.8"
+    "semantic-release": "22.0.10"
   },
   "dependencies": {
     "@adobe/fetch": "4.1.1",
