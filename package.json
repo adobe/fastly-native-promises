@@ -52,10 +52,10 @@
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "16.3.1",
-    "eslint": "8.55.0",
+    "eslint": "8.56.0",
     "eslint-plugin-header": "3.1.1",
-    "eslint-plugin-import": "2.29.0",
-    "eslint-plugin-jsdoc": "46.9.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsdoc": "46.9.1",
     "expect": "29.7.0",
     "husky": "8.0.3",
     "jsdoc-to-markdown": "8.0.0",
@@ -64,7 +64,7 @@
     "lodash": "4.17.21",
     "mocha": "10.2.0",
     "nock": "13.4.0",
-    "semantic-release": "22.0.10"
+    "semantic-release": "22.0.12"
   },
   "dependencies": {
     "@adobe/fetch": "4.1.1",
