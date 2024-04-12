@@ -1,3 +1,11 @@
+## [3.0.7](https://github.com/adobe/fastly-native-promises/compare/v3.0.6...v3.0.7) (2024-04-12)
+
+
+### Bug Fixes
+
+* use fetch 4.1.2 ([#531](https://github.com/adobe/fastly-native-promises/issues/531)) ([c9285ac](https://github.com/adobe/fastly-native-promises/commit/c9285aca4cea0b1e5da4928c38c55830db848353))
+* use node 20 for release ([d17e1bd](https://github.com/adobe/fastly-native-promises/commit/d17e1bd398656b4fa751dc2991eaf0d2311da3da))
+
 ## [3.0.6](https://github.com/adobe/fastly-native-promises/compare/v3.0.5...v3.0.6) (2023-10-30)
 
 
