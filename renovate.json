@@ -38,5 +38,5 @@
       }
     }
   ],
-  "includeForks": true
+  "forkProcessing": true
 }
