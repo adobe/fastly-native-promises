@@ -1,6 +1,6 @@
 {
   "name": "@adobe/fastly-native-promises",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Promise based Fastly API client for Node.js",
   "main": "src/index.js",
   "type": "module",
