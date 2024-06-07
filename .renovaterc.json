@@ -1,17 +1,19 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     "schedule:earlyMondays",
     ":semanticCommits"
   ],
   "timezone": "Europe/Zurich",
   "packageRules": [
     {
-      "packageNames": ["cimg/node"],
+      "matchPackageNames": [
+        "cimg/node"
+      ],
       "allowedVersions": "<15"
     },
     {
-      "packagePatterns": [
+      "matchPackagePatterns": [
         "^@adobe/"
       ],
       "groupName": "@adobe",
@@ -24,7 +26,7 @@
       ]
     },
     {
-      "packagePatterns": [
+      "matchPackagePatterns": [
         "^.+"
       ],
       "excludePackagePatterns": [
