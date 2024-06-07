@@ -37,5 +37,6 @@
         "automerge": true
       }
     }
-  ]
+  ],
+  "includeForks": true
 }
