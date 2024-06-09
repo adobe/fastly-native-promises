@@ -11,6 +11,7 @@
     "junit": "c8 mocha --no-color --exit -R xunit --reporter-option output=junit/test-results.xml",
     "docs": "jsdoc2md --files src/*.js -t README.md.hbs -d 3 > README.md",
     "semantic-release": "semantic-release",
+    "semantic-release-dry": "semantic-release --dry-run --no-ci --branches $CI_BRANCH",
     "prepare": "husky install"
   },
   "exports": {
