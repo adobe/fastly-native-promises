@@ -58,13 +58,13 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "48.11.0",
     "expect": "29.7.0",
-    "husky": "9.1.4",
+    "husky": "9.1.5",
     "jsdoc-to-markdown": "8.0.3",
     "junit-report-builder": "3.2.1",
     "lint-staged": "15.2.9",
     "lodash": "4.17.21",
     "mocha": "10.7.3",
-    "nock": "13.5.4",
+    "nock": "13.5.5",
     "semantic-release": "24.1.0"
   },
   "dependencies": {
