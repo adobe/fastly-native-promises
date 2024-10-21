@@ -3,8 +3,8 @@ import assert from 'assert';
 import path from 'path';
 import fs from 'fs/promises';
 import nock from 'nock';
-import { condit } from '@adobe/helix-testutils';
 import f from '../src/index.js';
+import { condit } from './utils.js';
 
 describe('#integration compute@edge packages', () => {
   let fastly;

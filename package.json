@@ -12,7 +12,7 @@
     "docs": "jsdoc2md --files src/*.js -t README.md.hbs -d 3 > README.md",
     "semantic-release": "semantic-release",
     "semantic-release-dry": "semantic-release --dry-run --no-ci --branches $CI_BRANCH",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "exports": {
     ".": "./src/index.js",
@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "2.0.8",
-    "@adobe/helix-testutils": "0.4.17",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "c8": "9.1.0",
