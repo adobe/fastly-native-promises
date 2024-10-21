@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 import assert, { AssertionError } from 'assert';
-import { condit } from '@adobe/helix-testutils';
 import nock from 'nock';
 
 import f from '../src/index.js';
+import { condit } from './utils.js';
 
 describe('#integration edge dictionary updates', () => {
   let fastly;
