@@ -61,7 +61,7 @@
     "lint-staged": "16.1.5",
     "lodash": "4.17.21",
     "mocha": "11.7.1",
-    "nock": "14.0.9",
+    "nock": "14.0.10",
     "semantic-release": "24.2.7"
   },
   "dependencies": {
