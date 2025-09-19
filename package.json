@@ -45,7 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@adobe/eslint-config-helix": "3.0.9",
+    "@adobe/eslint-config-helix": "3.0.10",
     "@eslint/config-helpers": "0.3.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
@@ -65,7 +65,7 @@
     "semantic-release": "24.2.8"
   },
   "dependencies": {
-    "@adobe/fetch": "4.2.2",
+    "@adobe/fetch": "4.2.3",
     "form-data": "4.0.4",
     "object-hash": "3.0.0"
   },
