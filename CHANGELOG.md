@@ -1,3 +1,10 @@
+## [3.0.18](https://github.com/adobe/fastly-native-promises/compare/v3.0.17...v3.0.18) (2025-10-16)
+
+
+### Bug Fixes
+
+* update semantic-release to v25 and node to 24.x for OIDC ([c1cce51](https://github.com/adobe/fastly-native-promises/commit/c1cce5104f4957dd3233fe87d4b7f2740c4374dd))
+
 ## [3.0.17](https://github.com/adobe/fastly-native-promises/compare/v3.0.16...v3.0.17) (2025-09-19)
 
 
