@@ -18,11 +18,18 @@ describe('#integration secret store operations', () => {
     try {
       const stores = await fastly.readSecretStores();
       const testStores = stores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
-      await Promise.allSettled(
-        testStores.map((store) => fastly.deleteSecretStore(store.id)),
-      );
+      console.log(`Found ${testStores.length} test secret stores to clean up`);
+      if (testStores.length > 0) {
+        const results = await Promise.allSettled(
+          testStores.map((store) => fastly.deleteSecretStore(store.id)),
+        );
+        const failed = results.filter((r) => r.status === 'rejected');
+        if (failed.length > 0) {
+          console.log(`Failed to delete ${failed.length} secret stores`);
+        }
+      }
     } catch (e) {
-      // Ignore cleanup errors
+      console.log('Error during secret store cleanup:', e.message);
     }
   });
 

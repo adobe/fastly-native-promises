@@ -20,17 +20,31 @@ describe('#integration resource linking operations', () => {
     try {
       const secretStores = await fastly.readSecretStores();
       const testSecretStores = secretStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
-      await Promise.allSettled(
-        testSecretStores.map((store) => fastly.deleteSecretStore(store.id)),
-      );
+      console.log(`Found ${testSecretStores.length} test secret stores to clean up`);
+      if (testSecretStores.length > 0) {
+        const results = await Promise.allSettled(
+          testSecretStores.map((store) => fastly.deleteSecretStore(store.id)),
+        );
+        const failed = results.filter((r) => r.status === 'rejected');
+        if (failed.length > 0) {
+          console.log(`Failed to delete ${failed.length} secret stores`);
+        }
+      }
 
       const configStores = await fastly.readConfigStores();
       const testConfigStores = configStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
-      await Promise.allSettled(
-        testConfigStores.map((store) => fastly.deleteConfigStore(store.id)),
-      );
+      console.log(`Found ${testConfigStores.length} test config stores to clean up`);
+      if (testConfigStores.length > 0) {
+        const results = await Promise.allSettled(
+          testConfigStores.map((store) => fastly.deleteConfigStore(store.id)),
+        );
+        const failed = results.filter((r) => r.status === 'rejected');
+        if (failed.length > 0) {
+          console.log(`Failed to delete ${failed.length} config stores`);
+        }
+      }
     } catch (e) {
-      // Ignore cleanup errors
+      console.log('Error during cleanup:', e.message);
     }
   });
 

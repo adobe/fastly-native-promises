@@ -18,11 +18,18 @@ describe('#integration config store operations', () => {
     try {
       const stores = await fastly.readConfigStores();
       const testStores = stores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
-      await Promise.allSettled(
-        testStores.map((store) => fastly.deleteConfigStore(store.id)),
-      );
+      console.log(`Found ${testStores.length} test config stores to clean up`);
+      if (testStores.length > 0) {
+        const results = await Promise.allSettled(
+          testStores.map((store) => fastly.deleteConfigStore(store.id)),
+        );
+        const failed = results.filter((r) => r.status === 'rejected');
+        if (failed.length > 0) {
+          console.log(`Failed to delete ${failed.length} config stores`);
+        }
+      }
     } catch (e) {
-      // Ignore cleanup errors
+      console.log('Error during config store cleanup:', e.message);
     }
   });
 
