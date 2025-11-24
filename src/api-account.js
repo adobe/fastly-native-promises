@@ -97,7 +97,7 @@ export default class AccountAPI {
    *
    * @see https://docs.fastly.com/api/account#invitations_8c4da3ca11c75facd36cfaad024bd891
    * @param {string} email - The email address for the invitation.
-   * @param {string} role - The user role. Defaults to {@code engineer}.
+   * @param {string} role - The user role. Defaults to `'engineer'`.
    * @returns {Promise} The response object representing the completion or failure.
    */
   async createInvitation(email, role = 'engineer') {
