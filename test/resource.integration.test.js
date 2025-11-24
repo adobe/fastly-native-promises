@@ -9,15 +9,43 @@ describe('#integration resource linking operations', () => {
   let fastly;
   let testSecretStoreId;
   let testConfigStoreId;
-  const testSecretStoreName = `test-resource-secret-${Date.now()}`;
-  const testConfigStoreName = `test-resource-config-${Date.now()}`;
+  const testSecretStoreName = 'test-resource-secret';
+  const testConfigStoreName = 'test-resource-config';
 
-  before(() => {
+  before(async () => {
     nock.restore();
     fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+
+    // Clean up any existing test stores
+    try {
+      const secretStores = await fastly.readSecretStores();
+      const testSecretStore = secretStores.data?.data?.find((s) => s.name === testSecretStoreName);
+      if (testSecretStore) {
+        await fastly.deleteSecretStore(testSecretStore.id);
+      }
+
+      const configStores = await fastly.readConfigStores();
+      const testConfigStore = configStores.data?.data?.find((s) => s.name === testConfigStoreName);
+      if (testConfigStore) {
+        await fastly.deleteConfigStore(testConfigStore.id);
+      }
+    } catch (e) {
+      // Ignore cleanup errors
+    }
   });
 
-  after(() => {
+  after(async () => {
+    // Clean up test stores
+    try {
+      if (testSecretStoreId) {
+        await fastly.deleteSecretStore(testSecretStoreId);
+      }
+      if (testConfigStoreId) {
+        await fastly.deleteConfigStore(testConfigStoreId);
+      }
+    } catch (e) {
+      // Ignore cleanup errors
+    }
     nock.activate();
   });
 
@@ -115,11 +143,13 @@ describe('#integration resource linking operations', () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
     const res = await fastly.deleteSecretStore(testSecretStoreId);
     assert.ok(res.data);
+    testSecretStoreId = null; // Clear so after() hook doesn't try to delete again
   }).timeout(10000);
 
   condit('Cleanup: Delete Config Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
     assert.ok(testConfigStoreId, 'Config Store ID should be set');
     const res = await fastly.deleteConfigStore(testConfigStoreId);
     assert.ok(res.data);
+    testConfigStoreId = null; // Clear so after() hook doesn't try to delete again
   }).timeout(10000);
 });

@@ -8,14 +8,33 @@ import { condit } from './utils.js';
 describe('#integration secret store operations', () => {
   let fastly;
   let testStoreId;
-  const testStoreName = `test-secret-store-${Date.now()}`;
+  const testStoreName = 'test-secret-store';
 
-  before(() => {
+  before(async () => {
     nock.restore();
     fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+
+    // Clean up any existing test stores
+    try {
+      const stores = await fastly.readSecretStores();
+      const testStore = stores.data?.data?.find((s) => s.name === testStoreName);
+      if (testStore) {
+        await fastly.deleteSecretStore(testStore.id);
+      }
+    } catch (e) {
+      // Ignore cleanup errors
+    }
   });
 
-  after(() => {
+  after(async () => {
+    // Clean up test store
+    if (testStoreId) {
+      try {
+        await fastly.deleteSecretStore(testStoreId);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+    }
     nock.activate();
   });
 
@@ -101,5 +120,6 @@ describe('#integration secret store operations', () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.deleteSecretStore(testStoreId);
     assert.ok(res.data);
+    testStoreId = null; // Clear so after() hook doesn't try to delete again
   }).timeout(10000);
 });

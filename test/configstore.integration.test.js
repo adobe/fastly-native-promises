@@ -8,14 +8,33 @@ import { condit } from './utils.js';
 describe('#integration config store operations', () => {
   let fastly;
   let testStoreId;
-  const testStoreName = `test-config-store-${Date.now()}`;
+  const testStoreName = 'test-config-store';
 
-  before(() => {
+  before(async () => {
     nock.restore();
     fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+
+    // Clean up any existing test stores
+    try {
+      const stores = await fastly.readConfigStores();
+      const testStore = stores.data?.data?.find((s) => s.name === testStoreName);
+      if (testStore) {
+        await fastly.deleteConfigStore(testStore.id);
+      }
+    } catch (e) {
+      // Ignore cleanup errors
+    }
   });
 
-  after(() => {
+  after(async () => {
+    // Clean up test store
+    if (testStoreId) {
+      try {
+        await fastly.deleteConfigStore(testStoreId);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+    }
     nock.activate();
   });
 
@@ -145,5 +164,6 @@ describe('#integration config store operations', () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.deleteConfigStore(testStoreId);
     assert.ok(res.data);
+    testStoreId = null; // Clear so after() hook doesn't try to delete again
   }).timeout(10000);
 });
