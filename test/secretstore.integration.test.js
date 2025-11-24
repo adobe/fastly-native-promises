@@ -14,13 +14,13 @@ describe('#integration secret store operations', () => {
     nock.restore();
     fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
 
-    // Clean up any existing test stores
+    // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const stores = await fastly.readSecretStores();
-      const testStore = stores.data?.data?.find((s) => s.name === testStoreName);
-      if (testStore) {
-        await fastly.deleteSecretStore(testStore.id);
-      }
+      const testStores = stores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      await Promise.allSettled(
+        testStores.map((store) => fastly.deleteSecretStore(store.id)),
+      );
     } catch (e) {
       // Ignore cleanup errors
     }

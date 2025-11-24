@@ -16,19 +16,19 @@ describe('#integration resource linking operations', () => {
     nock.restore();
     fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
 
-    // Clean up any existing test stores
+    // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const secretStores = await fastly.readSecretStores();
-      const testSecretStore = secretStores.data?.data?.find((s) => s.name === testSecretStoreName);
-      if (testSecretStore) {
-        await fastly.deleteSecretStore(testSecretStore.id);
-      }
+      const testSecretStores = secretStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      await Promise.allSettled(
+        testSecretStores.map((store) => fastly.deleteSecretStore(store.id)),
+      );
 
       const configStores = await fastly.readConfigStores();
-      const testConfigStore = configStores.data?.data?.find((s) => s.name === testConfigStoreName);
-      if (testConfigStore) {
-        await fastly.deleteConfigStore(testConfigStore.id);
-      }
+      const testConfigStores = configStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      await Promise.allSettled(
+        testConfigStores.map((store) => fastly.deleteConfigStore(store.id)),
+      );
     } catch (e) {
       // Ignore cleanup errors
     }
