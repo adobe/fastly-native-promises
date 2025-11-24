@@ -1,6 +1,10 @@
 name: Build
 on: [push]
 
+concurrency:
+  group: integration-tests
+  cancel-in-progress: false
+
 env:
   CI_BUILD_NUM: ${{ github.run_id }}
   CI_BRANCH: ${{ github.ref_name }}
