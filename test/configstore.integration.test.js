@@ -17,15 +17,17 @@ describe('#integration config store operations', () => {
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const stores = await fastly.readConfigStores();
-      const testStores = stores.data?.data?.filter((s) => s.name.toLowerCase().startsWith('test-')) || [];
-      console.log(`Found ${testStores.length} test config stores to clean up`);
+      const allStores = stores.data?.data || [];
+      console.log(`Total config stores: ${allStores.length}`, allStores.map((s) => s.name));
+      const testStores = allStores.filter((s) => s.name.toLowerCase().startsWith('test-'));
+      console.log(`Found ${testStores.length} test config stores to clean up`, testStores.map((s) => s.name));
       if (testStores.length > 0) {
         const results = await Promise.allSettled(
           testStores.map((store) => fastly.deleteConfigStore(store.id)),
         );
         const failed = results.filter((r) => r.status === 'rejected');
         if (failed.length > 0) {
-          console.log(`Failed to delete ${failed.length} config stores`);
+          console.log(`Failed to delete ${failed.length} config stores`, failed.map((r) => r.reason?.message));
         }
       }
     } catch (e) {
