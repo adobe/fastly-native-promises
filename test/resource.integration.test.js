@@ -19,7 +19,7 @@ describe('#integration resource linking operations', () => {
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const secretStores = await fastly.readSecretStores();
-      const testSecretStores = secretStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      const testSecretStores = secretStores.data?.data?.filter((s) => s.name.toLowerCase().startsWith('test-')) || [];
       console.log(`Found ${testSecretStores.length} test secret stores to clean up`);
       if (testSecretStores.length > 0) {
         const results = await Promise.allSettled(
@@ -32,7 +32,7 @@ describe('#integration resource linking operations', () => {
       }
 
       const configStores = await fastly.readConfigStores();
-      const testConfigStores = configStores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      const testConfigStores = configStores.data?.data?.filter((s) => s.name.toLowerCase().startsWith('test-')) || [];
       console.log(`Found ${testConfigStores.length} test config stores to clean up`);
       if (testConfigStores.length > 0) {
         const results = await Promise.allSettled(

@@ -17,7 +17,7 @@ describe('#integration config store operations', () => {
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const stores = await fastly.readConfigStores();
-      const testStores = stores.data?.data?.filter((s) => s.name.startsWith('test-')) || [];
+      const testStores = stores.data?.data?.filter((s) => s.name.toLowerCase().startsWith('test-')) || [];
       console.log(`Found ${testStores.length} test config stores to clean up`);
       if (testStores.length > 0) {
         const results = await Promise.allSettled(
