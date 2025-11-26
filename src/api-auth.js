@@ -13,6 +13,42 @@ import { axiosCreate } from './httpclient.js';
 import config from './config.js';
 
 /**
+ * @typedef {object} Token
+ * @property {string} id - The token ID.
+ * @property {string} access_token - The access token string.
+ * @property {string} name - The token name.
+ * @property {string} scope - The token scope.
+ * @property {string} created_at - Token creation timestamp.
+ * @property {string} last_used_at - Last usage timestamp.
+ * @property {string} user_id - Associated user ID.
+ * @property {string} customer_id - Associated customer ID.
+ */
+
+/**
+ * @typedef {object} TokenResponse
+ * @property {Token} data - The token object.
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ */
+
+/**
+ * @typedef {object} TokenListResponse
+ * @property {Token[]} data - Array of token objects.
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ */
+
+/**
+ * @typedef {object} DeleteResponse
+ * @property {object} data - Delete confirmation data.
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ */
+
+/**
  * The Fastly Auth API.
  *
  * @see https://docs.fastly.com/api/auth#top
@@ -37,7 +73,7 @@ export default class AuthAPI {
    *
    * @see https://docs.fastly.com/api/auth#tokens_d59ff8612bae27a2317278abb048db0c
    * @param {string} [customerId] - The id of the customer.
-   * @returns {Promise} The response object representing the completion or failure.
+   * @returns {Promise<TokenListResponse>} List of all tokens for the customer or current user.
    */
   async readTokens(customerId = '') {
     if (customerId) {
@@ -51,7 +87,8 @@ export default class AuthAPI {
    *
    * @see https://docs.fastly.com/api/auth#tokens_bb00e7ed542cbcd7f32b5c908b8ce244
    * @param {string} [id] - The token id.
-   * @returns {Promise} The response object representing the completion or failure.
+   * @returns {Promise<TokenResponse>} Details of the specified token or current token if no ID
+   *   provided.
    */
   async readToken(id) {
     if (!id) {
@@ -71,7 +108,7 @@ export default class AuthAPI {
    *
    * @see https://docs.fastly.com/api/auth#tokens_4a958ba69402500937f0d8570f7ce86f
    * @param {string} [id] - The token id.
-   * @returns {Promise} The response object representing the completion or failure.
+   * @returns {Promise<DeleteResponse>} Confirmation of token deletion.
    */
   async deleteToken(id) {
     return this.request.delete(`/tokens/${id}`);
@@ -82,7 +119,7 @@ export default class AuthAPI {
    *
    * @see https://docs.fastly.com/api/auth#tokens_db4655a45a0107448eb0676577446e40
    * @param {object} options - The token options.
-   * @returns {Promise} The response object representing the completion or failure.
+   * @returns {Promise<TokenResponse>} The newly created token object including access token.
    */
   async createToken(options) {
     // send POST w/o authentication.
