@@ -14,7 +14,7 @@ describe('#integration resource linking operations', () => {
 
   before(async () => {
     nock.restore();
-    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+    fastly = f(process.env.FASTLY_AUTH_CE, process.env.FASTLY_CE_SERVICE_ID);
 
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
@@ -71,19 +71,19 @@ describe('#integration resource linking operations', () => {
     });
   });
 
-  condit('Setup: Create Secret Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Setup: Create Secret Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const res = await fastly.createSecretStore(testSecretStoreName);
     assert.ok(res.data);
     testSecretStoreId = res.data.id;
   }).timeout(10000);
 
-  condit('Setup: Create Config Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Setup: Create Config Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const res = await fastly.createConfigStore(testConfigStoreName);
     assert.ok(res.data);
     testConfigStoreId = res.data.id;
   }).timeout(10000);
 
-  condit('Link Secret Store to Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Link Secret Store to Service Version', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
 
     await fastly.transact(async (version) => {
@@ -94,7 +94,7 @@ describe('#integration resource linking operations', () => {
     }, false);
   }).timeout(15000);
 
-  condit('Link Config Store to Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Link Config Store to Service Version', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testConfigStoreId, 'Config Store ID should be set');
 
     await fastly.transact(async (version) => {
@@ -105,7 +105,7 @@ describe('#integration resource linking operations', () => {
     }, false);
   }).timeout(15000);
 
-  condit('Read Resources for Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Resources for Service Version', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const version = await fastly.getVersion(undefined, 'current');
     const res = await fastly.readResources(version);
     assert.ok(res.data);
@@ -120,7 +120,7 @@ describe('#integration resource linking operations', () => {
     assert.strictEqual(configResource.name, 'test_config');
   }).timeout(10000);
 
-  condit('Read Specific Resource Link', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Specific Resource Link', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
     const version = await fastly.getVersion(undefined, 'current');
     const res = await fastly.readResource(version, testSecretStoreId);
@@ -129,7 +129,7 @@ describe('#integration resource linking operations', () => {
     assert.strictEqual(res.data.name, 'test_secrets');
   }).timeout(10000);
 
-  condit('Update Resource Link', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Update Resource Link', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
 
     await fastly.transact(async (version) => {
@@ -140,7 +140,7 @@ describe('#integration resource linking operations', () => {
     }, false);
   }).timeout(15000);
 
-  condit('Delete Resource Links', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Delete Resource Links', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
     assert.ok(testConfigStoreId, 'Config Store ID should be set');
 
@@ -153,14 +153,14 @@ describe('#integration resource linking operations', () => {
     }, false);
   }).timeout(15000);
 
-  condit('Cleanup: Delete Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Cleanup: Delete Secret Store', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testSecretStoreId, 'Secret Store ID should be set');
     const res = await fastly.deleteSecretStore(testSecretStoreId);
     assert.ok(res.data);
     testSecretStoreId = null; // Clear so after() hook doesn't try to delete again
   }).timeout(10000);
 
-  condit('Cleanup: Delete Config Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Cleanup: Delete Config Store', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testConfigStoreId, 'Config Store ID should be set');
     const res = await fastly.deleteConfigStore(testConfigStoreId);
     assert.ok(res.data);

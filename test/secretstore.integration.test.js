@@ -12,7 +12,7 @@ describe('#integration secret store operations', () => {
 
   before(async () => {
     nock.restore();
-    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+    fastly = f(process.env.FASTLY_AUTH_CE, process.env.FASTLY_CE_SERVICE_ID);
 
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
@@ -53,7 +53,7 @@ describe('#integration secret store operations', () => {
     });
   });
 
-  condit('Create Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Create Secret Store', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     try {
       const res = await fastly.createSecretStore(testStoreName);
       assert.ok(res.data);
@@ -67,7 +67,7 @@ describe('#integration secret store operations', () => {
     }
   }).timeout(10000);
 
-  condit('Read Secret Stores', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Secret Stores', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const res = await fastly.readSecretStores();
     assert.ok(res.data);
     assert.ok(res.data.data);
@@ -76,7 +76,7 @@ describe('#integration secret store operations', () => {
     assert.ok(store);
   }).timeout(10000);
 
-  condit('Read Secret Store by ID', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Secret Store by ID', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.readSecretStore(testStoreId);
     assert.ok(res.data);
@@ -84,20 +84,20 @@ describe('#integration secret store operations', () => {
     assert.strictEqual(res.data.name, testStoreName);
   }).timeout(10000);
 
-  condit('Write Secret Store (create or get)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Write Secret Store (create or get)', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     const res = await fastly.writeSecretStore(testStoreName);
     assert.ok(res.data);
     assert.strictEqual(res.data.name || res.data.data?.name, testStoreName);
   }).timeout(10000);
 
-  condit('Put Secret', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Put Secret', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.putSecret(testStoreId, 'test_secret_key', 'test_secret_value');
     assert.ok(res.data);
     assert.strictEqual(res.data.name, 'test_secret_key');
   }).timeout(10000);
 
-  condit('Read Secrets (metadata only)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Secrets (metadata only)', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.readSecrets(testStoreId);
     assert.ok(res.data);
@@ -108,14 +108,14 @@ describe('#integration secret store operations', () => {
     assert.strictEqual(secret.name, 'test_secret_key');
   }).timeout(10000);
 
-  condit('Read Secret (metadata)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Read Secret (metadata)', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.readSecret(testStoreId, 'test_secret_key');
     assert.ok(res.data);
     assert.strictEqual(res.data.name, 'test_secret_key');
   }).timeout(10000);
 
-  condit('Update Secret', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Update Secret', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.putSecret(testStoreId, 'test_secret_key', 'updated_secret_value');
     assert.ok(res.data);
@@ -123,13 +123,13 @@ describe('#integration secret store operations', () => {
     assert.strictEqual(res.data.recreated, true);
   }).timeout(10000);
 
-  condit('Delete Secret', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Delete Secret', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.deleteSecret(testStoreId, 'test_secret_key');
     assert.ok(res.data);
   }).timeout(10000);
 
-  condit('Delete Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+  condit('Delete Secret Store', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
     assert.ok(testStoreId, 'Store ID should be set from Create test');
     const res = await fastly.deleteSecretStore(testStoreId);
     assert.ok(res.data);
