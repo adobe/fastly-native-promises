@@ -9,8 +9,8 @@ describe('#integration resource linking operations', () => {
   let fastly;
   let testSecretStoreId;
   let testConfigStoreId;
-  const testSecretStoreName = 'test-resource-secret';
-  const testConfigStoreName = 'test-resource-config';
+  const testSecretStoreName = 'test_resource_secret';
+  const testConfigStoreName = 'test_resource_config';
 
   before(async () => {
     nock.restore();

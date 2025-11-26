@@ -8,7 +8,7 @@ import { condit } from './utils.js';
 describe('#integration secret store operations', () => {
   let fastly;
   let testStoreId;
-  const testStoreName = 'test-secret-store';
+  const testStoreName = 'test_secret_store';
 
   before(async () => {
     nock.restore();
@@ -54,11 +54,17 @@ describe('#integration secret store operations', () => {
   });
 
   condit('Create Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.createSecretStore(testStoreName);
-    assert.ok(res.data);
-    assert.strictEqual(res.data.name, testStoreName);
-    assert.ok(res.data.id);
-    testStoreId = res.data.id;
+    try {
+      const res = await fastly.createSecretStore(testStoreName);
+      assert.ok(res.data);
+      assert.strictEqual(res.data.name, testStoreName);
+      assert.ok(res.data.id);
+      testStoreId = res.data.id;
+    } catch (e) {
+      console.log('Error creating secret store:', e.message);
+      console.log('Store name:', testStoreName);
+      throw e;
+    }
   }).timeout(10000);
 
   condit('Read Secret Stores', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {

@@ -8,7 +8,7 @@ import { condit } from './utils.js';
 describe('#integration config store operations', () => {
   let fastly;
   let testStoreId;
-  const testStoreName = 'test-config-store';
+  const testStoreName = 'test_config_store';
 
   before(async () => {
     nock.restore();
