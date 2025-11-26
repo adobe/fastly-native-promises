@@ -49,26 +49,19 @@ export default class SecretStoreAPI {
    *
    * @see https://www.fastly.com/documentation/reference/api/services/resources/secret-store/
    * @param {string} name - The name of the secret store.
-   * @param {object} options - Additional options.
-   * @param {boolean} [options.write_only=false] - Whether the store is write-only.
    * @returns {Promise} The response object.
    */
-  async createSecretStore(name, options = {}) {
-    const body = { name };
-    if (options.write_only !== undefined) {
-      body.write_only = options.write_only;
-    }
-    return this.request.post('/resources/stores/secret', body);
+  async createSecretStore(name) {
+    return this.request.post('/resources/stores/secret', { name });
   }
 
   /**
    * Create or get a secret store by name.
    *
    * @param {string} name - The name of the secret store.
-   * @param {object} options - Additional options.
    * @returns {Promise} The response object with the store ID.
    */
-  async writeSecretStore(name, options = {}) {
+  async writeSecretStore(name) {
     try {
       const stores = await this.readSecretStores();
       const existing = stores.data?.data?.find((s) => s.name === name);
@@ -78,7 +71,7 @@ export default class SecretStoreAPI {
     } catch (e) {
       // If listing fails, try to create anyway
     }
-    return this.createSecretStore(name, options);
+    return this.createSecretStore(name);
   }
 
   /**
