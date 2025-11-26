@@ -1,3 +1,25 @@
+# [3.1.0](https://github.com/adobe/fastly-native-promises/compare/v3.0.19...v3.1.0) (2025-11-26)
+
+
+### Bug Fixes
+
+* add cleanup logic to integration tests to prevent store limit errors ([a9082cc](https://github.com/adobe/fastly-native-promises/commit/a9082cc8fc35bfa2081b1c5977daec461f8847d5))
+* implement aggressive cleanup for all test stores ([e90a644](https://github.com/adobe/fastly-native-promises/commit/e90a64477103222b0de9aaf84e0bd440b5ecd86b))
+* make test store cleanup case-insensitive to match Test- stores ([85c1608](https://github.com/adobe/fastly-native-promises/commit/85c16085fa0fc5918dae0f3efc892dced7cfbdc5))
+* resolve integration test failures for Secret Store, Package, and Resource tests ([2036214](https://github.com/adobe/fastly-native-promises/commit/203621491fd049a6334249b3c6bc405c025dd7bf))
+* resolve secret store invalid input error and config store test assertion ([a917456](https://github.com/adobe/fastly-native-promises/commit/a9174566eb6f150aef8840e4b8e7de038be1692a))
+* **resource:** resolve Resource API integration test failures ([129e592](https://github.com/adobe/fastly-native-promises/commit/129e5924f63e856b251329c979f0579757cf7cde))
+* simplify secret store creation request body ([27979d5](https://github.com/adobe/fastly-native-promises/commit/27979d5350fc1d324acd1d99f5ad2b5cf9b76c99))
+* update integration tests to use correct service types ([adc2890](https://github.com/adobe/fastly-native-promises/commit/adc28902168b7e3455e303249bf76a2db69a965b))
+* use underscores instead of hyphens in test store names ([63685bc](https://github.com/adobe/fastly-native-promises/commit/63685bcd6c5d88a54d5a5611dc4e3b201a5f6f5d))
+
+
+### Features
+
+* add Resource Linking API support ([c73f0d6](https://github.com/adobe/fastly-native-promises/commit/c73f0d61999f575cb46f51a70bc53bab0a7aca74)), closes [#603](https://github.com/adobe/fastly-native-promises/issues/603)
+* add Secret Store API support ([4645561](https://github.com/adobe/fastly-native-promises/commit/464556136ac4fbaa5863746aa99f7adc6d8ea31c)), closes [#601](https://github.com/adobe/fastly-native-promises/issues/601)
+* implement comprehensive Config Store API support ([fdde75f](https://github.com/adobe/fastly-native-promises/commit/fdde75f0a899047e6bb01e393a3a54161566f824))
+
 ## [3.0.19](https://github.com/adobe/fastly-native-promises/compare/v3.0.18...v3.0.19) (2025-11-24)
 
 
