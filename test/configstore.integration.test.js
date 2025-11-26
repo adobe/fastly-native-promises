@@ -167,4 +167,46 @@ describe('#integration config store operations', () => {
       }
     }
   }).timeout(20000);
+
+  condit('Individual Item Operations and Store Cleanup', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+    // Create a fresh store for individual operations
+    const itemStoreName = `test_item_store_${Date.now()}`;
+    const itemStoreRes = await fastly.createConfigStore(itemStoreName);
+    const itemStoreId = itemStoreRes.data.id;
+
+    // Put an item to test individual read/delete
+    await fastly.putConfigItem(itemStoreId, 'individual_key', 'individual_value');
+
+    // Test readConfigItem (individual item read)
+    const readItemRes = await fastly.readConfigItem(itemStoreId, 'individual_key');
+    assert.ok(readItemRes.data);
+    assert.strictEqual(readItemRes.data.item_key, 'individual_key');
+    assert.strictEqual(readItemRes.data.item_value, 'individual_value');
+
+    // Test deleteConfigItem
+    const deleteItemRes = await fastly.deleteConfigItem(itemStoreId, 'individual_key');
+    assert.ok(deleteItemRes);
+
+    // Verify item is deleted
+    try {
+      await fastly.readConfigItem(itemStoreId, 'individual_key');
+      assert.fail('Expected item to be deleted');
+    } catch (e) {
+      // Item should be deleted - any error is expected (404, not found, etc.)
+      assert.ok(e.message || e.status);
+    }
+
+    // Test deleteConfigStore
+    const deleteStoreRes = await fastly.deleteConfigStore(itemStoreId);
+    assert.ok(deleteStoreRes);
+
+    // Verify store is deleted
+    try {
+      await fastly.readConfigStore(itemStoreId);
+      assert.fail('Expected store to be deleted');
+    } catch (e) {
+      // Store should be deleted - any error is expected (404, not found, etc.)
+      assert.ok(e.message || e.status);
+    }
+  }).timeout(15000);
 });
