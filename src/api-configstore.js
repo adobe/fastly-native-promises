@@ -64,14 +64,33 @@ export default class ConfigStoreAPI {
   async writeConfigStore(name) {
     try {
       const stores = await this.readConfigStores();
-      const existing = stores.data?.data?.find((s) => s.name === name);
+      const existing = stores.data?.find((s) => s.name === name);
       if (existing) {
         return { data: existing };
       }
     } catch (e) {
       // If listing fails, try to create anyway
     }
-    return this.createConfigStore(name);
+
+    try {
+      return await this.createConfigStore(name);
+    } catch (e) {
+      // If creation fails with "Duplicate attachment", the store exists
+      // but wasn't visible in the list due to eventual consistency
+      if (e.message && e.message.includes('Duplicate attachment')) {
+        // Wait a bit for eventual consistency
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1000);
+        });
+        // Try to find the store again
+        const stores = await this.readConfigStores();
+        const existing = stores.data?.find((s) => s.name === name);
+        if (existing) {
+          return { data: existing };
+        }
+      }
+      throw e;
+    }
   }
 
   /**

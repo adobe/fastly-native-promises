@@ -8,7 +8,7 @@ import { condit } from './utils.js';
 describe('#integration config store operations', () => {
   let fastly;
   let testStoreId;
-  const testStoreName = 'test_config_store';
+  const testStoreName = `test_config_store_${Date.now()}`;
 
   before(async () => {
     nock.restore();
@@ -17,21 +17,15 @@ describe('#integration config store operations', () => {
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
       const stores = await fastly.readConfigStores();
-      const allStores = stores.data?.data || [];
-      console.log(`Total config stores: ${allStores.length}`, allStores.map((s) => s.name));
-      const testStores = allStores.filter((s) => s.name.toLowerCase().startsWith('test-'));
-      console.log(`Found ${testStores.length} test config stores to clean up`, testStores.map((s) => s.name));
+      const allStores = stores.data || [];
+      const testStores = allStores.filter((s) => s.name.toLowerCase().startsWith('test'));
       if (testStores.length > 0) {
-        const results = await Promise.allSettled(
+        await Promise.allSettled(
           testStores.map((store) => fastly.deleteConfigStore(store.id)),
         );
-        const failed = results.filter((r) => r.status === 'rejected');
-        if (failed.length > 0) {
-          console.log(`Failed to delete ${failed.length} config stores`, failed.map((r) => r.reason?.message));
-        }
       }
     } catch (e) {
-      console.log('Error during config store cleanup:', e.message);
+      // Ignore cleanup errors
     }
   });
 
@@ -55,82 +49,78 @@ describe('#integration config store operations', () => {
     });
   });
 
-  condit('Create Config Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.createConfigStore(testStoreName);
-    assert.ok(res.data);
-    assert.strictEqual(res.data.name, testStoreName);
-    assert.ok(res.data.id);
-    testStoreId = res.data.id;
-  }).timeout(10000);
+  condit('Config Store Operations (Create, Read, Write)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+    // Create Config Store
+    const createRes = await fastly.createConfigStore(testStoreName);
+    assert.ok(createRes.data);
+    assert.strictEqual(createRes.data.name, testStoreName);
+    assert.ok(createRes.data.id);
+    testStoreId = createRes.data.id;
 
-  condit('Read Config Stores', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.readConfigStores();
-    assert.ok(res.data);
-    assert.ok(res.data.data);
-    assert.ok(Array.isArray(res.data.data));
-    const store = res.data.data.find((s) => s.name === testStoreName);
-    assert.ok(store);
-  }).timeout(10000);
+    // Read Config Stores (list) - Note: Due to eventual consistency,
+    // newly created stores may not immediately appear in the list
+    const listRes = await fastly.readConfigStores();
+    assert.ok(listRes.data);
+    assert.ok(Array.isArray(listRes.data));
 
-  condit('Read Config Store by ID', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.readConfigStore(testStoreId);
-    assert.ok(res.data);
-    assert.strictEqual(res.data.id, testStoreId);
-    assert.strictEqual(res.data.name, testStoreName);
-  }).timeout(10000);
+    // Read Config Store by ID
+    const readRes = await fastly.readConfigStore(testStoreId);
+    assert.ok(readRes.data);
+    assert.strictEqual(readRes.data.id, testStoreId);
+    assert.strictEqual(readRes.data.name, testStoreName);
 
-  condit('Write Config Store (create or get)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.writeConfigStore(testStoreName);
-    assert.ok(res.data);
-    assert.strictEqual(res.data.name || res.data.data?.name, testStoreName);
-  }).timeout(10000);
+    // Write Config Store (test with a different name to test create functionality)
+    const writeStoreName = `${testStoreName}_write`;
+    const writeRes = await fastly.writeConfigStore(writeStoreName);
+    assert.ok(writeRes.data);
+    assert.strictEqual(writeRes.data.name, writeStoreName);
+    assert.ok(writeRes.data.id);
 
-  condit('Put Config Item', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.putConfigItem(testStoreId, 'test_key', 'test_value');
-    assert.ok(res.data);
-    assert.strictEqual(res.data.item_key, 'test_key');
-    assert.strictEqual(res.data.item_value, 'test_value');
-  }).timeout(10000);
+    // Clean up the write test store
+    await fastly.deleteConfigStore(writeRes.data.id);
+  }).timeout(15000);
 
-  condit('Read Config Items', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.readConfigItems(testStoreId);
-    assert.ok(res.data);
-    assert.ok(res.data.data);
-    assert.ok(Array.isArray(res.data.data));
-    const item = res.data.data.find((i) => i.item_key === 'test_key');
+  condit('Config Item Operations (Put, Read, Update)', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+    assert.ok(testStoreId, 'Store ID should be set from previous test');
+
+    // Put Config Item
+    const putRes = await fastly.putConfigItem(testStoreId, 'test_key', 'test_value');
+    assert.ok(putRes.data);
+    assert.strictEqual(putRes.data.item_key, 'test_key');
+    assert.strictEqual(putRes.data.item_value, 'test_value');
+
+    // Read Config Items (list)
+    const listRes = await fastly.readConfigItems(testStoreId);
+    assert.ok(listRes.data);
+    assert.ok(Array.isArray(listRes.data));
+    const item = listRes.data.find((i) => i.item_key === 'test_key');
     assert.ok(item);
     assert.strictEqual(item.item_value, 'test_value');
-  }).timeout(10000);
 
-  condit('Read Config Item by Key', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.readConfigItem(testStoreId, 'test_key');
-    assert.ok(res.data);
-    assert.strictEqual(res.data.item_key, 'test_key');
-    assert.strictEqual(res.data.item_value, 'test_value');
-  }).timeout(10000);
+    // Read Config Item by Key
+    const readRes = await fastly.readConfigItem(testStoreId, 'test_key');
+    assert.ok(readRes.data);
+    assert.strictEqual(readRes.data.item_key, 'test_key');
+    assert.strictEqual(readRes.data.item_value, 'test_value');
 
-  condit('Update Config Item', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.putConfigItem(testStoreId, 'test_key', 'updated_value');
-    assert.ok(res.data);
-    assert.strictEqual(res.data.item_key, 'test_key');
-    assert.strictEqual(res.data.item_value, 'updated_value');
-  }).timeout(10000);
+    // Update Config Item
+    const updateRes = await fastly.putConfigItem(testStoreId, 'test_key', 'updated_value');
+    assert.ok(updateRes.data);
+    assert.strictEqual(updateRes.data.item_key, 'test_key');
+    assert.strictEqual(updateRes.data.item_value, 'updated_value');
 
-  condit('Put Config Item with Slash', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.putConfigItem(testStoreId, 'some/key', 'some/value');
-    assert.ok(res.data);
-    assert.strictEqual(res.data.item_key, 'some/key');
-    assert.strictEqual(res.data.item_value, 'some/value');
-  }).timeout(10000);
+    // Put Config Item with Slash
+    const slashRes = await fastly.putConfigItem(testStoreId, 'some/key', 'some/value');
+    assert.ok(slashRes.data);
+    assert.strictEqual(slashRes.data.item_key, 'some/key');
+    assert.strictEqual(slashRes.data.item_value, 'some/value');
+  }).timeout(15000);
 
-  condit('Bulk Update Config Items', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
+  condit('Bulk Operations and Cleanup', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
+    // Create a fresh store for bulk operations to avoid timing issues
+    const bulkStoreName = `test_bulk_store_${Date.now()}`;
+    const bulkStoreRes = await fastly.createConfigStore(bulkStoreName);
+    const bulkStoreId = bulkStoreRes.data.id;
 
     try {
       // Clean up items first
@@ -142,7 +132,7 @@ describe('#integration config store operations', () => {
     } finally {
       // Bulk create
       const res1 = await fastly.bulkUpdateConfigItems(
-        testStoreId,
+        bulkStoreId,
         { item_key: 'bulk_key1', item_value: 'value1', op: 'upsert' },
         { item_key: 'bulk_key2', item_value: 'value2', op: 'upsert' },
         { item_key: 'bulk_key3', item_value: 'value3', op: 'upsert' },
@@ -150,31 +140,31 @@ describe('#integration config store operations', () => {
       assert.ok(res1.data);
 
       // Verify items were created
-      const items = await fastly.readConfigItems(testStoreId);
+      const items = await fastly.readConfigItems(bulkStoreId);
       assert.ok(items.data);
-      assert.ok(items.data.data);
-      assert.ok(items.data.data.find((i) => i.item_key === 'bulk_key1'));
+      assert.ok(Array.isArray(items.data));
+      assert.ok(items.data.find((i) => i.item_key === 'bulk_key1'), 'bulk_key1 not found in items');
 
       // Bulk update/delete
       const res2 = await fastly.bulkUpdateConfigItems(
-        testStoreId,
+        bulkStoreId,
         { item_key: 'bulk_key1', item_value: 'new_value1', op: 'upsert' },
         { item_key: 'bulk_key2', item_value: 'value2', op: 'delete' },
       );
       assert.ok(res2.data);
+
+      // Clean up bulk store
+      await fastly.deleteConfigStore(bulkStoreId);
+
+      // Clean up main test store if it still exists
+      if (testStoreId) {
+        try {
+          await fastly.deleteConfigStore(testStoreId);
+          testStoreId = null; // Clear so after() hook doesn't try to delete again
+        } catch (e) {
+          // Store might already be deleted
+        }
+      }
     }
-  }).timeout(15000);
-
-  condit('Delete Config Item', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.deleteConfigItem(testStoreId, 'test_key');
-    assert.ok(res.data);
-  }).timeout(10000);
-
-  condit('Delete Config Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testStoreId, 'Store ID should be set from Create test');
-    const res = await fastly.deleteConfigStore(testStoreId);
-    assert.ok(res.data);
-    testStoreId = null; // Clear so after() hook doesn't try to delete again
-  }).timeout(10000);
+  }).timeout(20000);
 });

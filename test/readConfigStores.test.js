@@ -26,11 +26,11 @@ describe('#readConfigStores', () => {
   });
 
   it('response body data should be an array', () => {
-    assert.ok(Array.isArray(res.data.data));
+    assert.ok(Array.isArray(res.data));
   });
 
   it('response body should contain store properties', () => {
-    const store = res.data.data[0];
+    const store = res.data[0];
     ['id', 'name', 'created_at'].forEach((e) => {
       assert.ok(Object.keys(store).indexOf(e) >= 0);
     });

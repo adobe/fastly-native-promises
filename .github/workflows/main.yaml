@@ -10,6 +10,8 @@ env:
   CI_BRANCH: ${{ github.ref_name }}
   FASTLY_AUTH: ${{ secrets.FASTLY_AUTH }}
   FASTLY_SERVICE_ID: ${{ secrets.FASTLY_SERVICE_ID }}
+  FASTLY_AUTH_CE: ${{ secrets.FASTLY_AUTH_CE }}
+  FASTLY_CE_SERVICE_ID: ${{ secrets.FASTLY_CE_SERVICE_ID }}
 
 jobs:
   test:

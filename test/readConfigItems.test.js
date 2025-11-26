@@ -26,11 +26,11 @@ describe('#readConfigItems', () => {
   });
 
   it('response body data should be an array', () => {
-    assert.ok(Array.isArray(res.data.data));
+    assert.ok(Array.isArray(res.data));
   });
 
   it('response body should contain item properties', () => {
-    const item = res.data.data[0];
+    const item = res.data[0];
     ['item_key', 'item_value', 'created_at', 'updated_at'].forEach((e) => {
       assert.ok(Object.keys(item).indexOf(e) >= 0);
     });
