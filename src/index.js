@@ -17,382 +17,382 @@ export * as loghelpers from './log-helpers.js';
 
 /**
  * @typedef {object} Service
- * @property {string} id - The service ID
- * @property {string} name - The service name
- * @property {string} comment - Service description
- * @property {string} customer_id - Customer ID
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {boolean} paused - Whether the service is paused
- * @property {Array<Version>} versions - Array of service versions
+ * @property {string} id - The service ID.
+ * @property {string} name - The service name.
+ * @property {string} comment - Service description.
+ * @property {string} customer_id - Customer ID.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {boolean} paused - Whether the service is paused.
+ * @property {Array<Version>} versions - Array of service versions.
  */
 
 /**
  * @typedef {object} Version
- * @property {number} number - Version number
- * @property {string} service_id - Service ID
- * @property {boolean} active - Whether this version is active
- * @property {boolean} locked - Whether this version is locked
- * @property {boolean} deployed - Whether this version is deployed
- * @property {boolean} staging - Whether this version is staging
- * @property {boolean} testing - Whether this version is testing
- * @property {string} comment - Version comment
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
+ * @property {number} number - Version number.
+ * @property {string} service_id - Service ID.
+ * @property {boolean} active - Whether this version is active.
+ * @property {boolean} locked - Whether this version is locked.
+ * @property {boolean} deployed - Whether this version is deployed.
+ * @property {boolean} staging - Whether this version is staging.
+ * @property {boolean} testing - Whether this version is testing.
+ * @property {string} comment - Version comment.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
  */
 
 /**
  * @typedef {object} Dictionary
- * @property {string} id - Dictionary ID
- * @property {string} name - Dictionary name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {boolean} write_only - Whether dictionary is write-only
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} id - Dictionary ID.
+ * @property {string} name - Dictionary name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {boolean} write_only - Whether dictionary is write-only.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} DictionaryItem
- * @property {string} dictionary_id - Dictionary ID
- * @property {string} service_id - Service ID
- * @property {string} item_key - Item key
- * @property {string} item_value - Item value
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} dictionary_id - Dictionary ID.
+ * @property {string} service_id - Service ID.
+ * @property {string} item_key - Item key.
+ * @property {string} item_value - Item value.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} Condition
- * @property {string} name - Condition name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} statement - VCL condition statement
- * @property {string} type - Condition type (REQUEST, RESPONSE, CACHE)
- * @property {number} priority - Priority (0-100)
- * @property {string} comment - Condition comment
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} name - Condition name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} statement - VCL condition statement.
+ * @property {string} type - Condition type (REQUEST, RESPONSE, CACHE).
+ * @property {number} priority - Priority (0-100).
+ * @property {string} comment - Condition comment.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} Header
- * @property {string} name - Header name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} action - Header action (set, append, delete, regex, regex_repeat)
- * @property {string} type - Header type (request, fetch, cache, response)
- * @property {string} dst - Destination header name
- * @property {string} src - Source value or header name
- * @property {string} regex - Regular expression for regex actions
- * @property {string} substitution - Substitution string for regex actions
- * @property {number} priority - Priority (0-100)
- * @property {string} request_condition - Request condition name
- * @property {string} cache_condition - Cache condition name
- * @property {string} response_condition - Response condition name
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} name - Header name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} action - Header action (set, append, delete, regex, regex_repeat).
+ * @property {string} type - Header type (request, fetch, cache, response).
+ * @property {string} dst - Destination header name.
+ * @property {string} src - Source value or header name.
+ * @property {string} regex - Regular expression for regex actions.
+ * @property {string} substitution - Substitution string for regex actions.
+ * @property {number} priority - Priority (0-100).
+ * @property {string} request_condition - Request condition name.
+ * @property {string} cache_condition - Cache condition name.
+ * @property {string} response_condition - Response condition name.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} Backend
- * @property {string} name - Backend name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} address - Backend address
- * @property {number} port - Backend port
- * @property {string} comment - Backend comment
- * @property {boolean} use_ssl - Whether to use SSL
- * @property {string} ssl_hostname - SSL hostname
- * @property {string} ssl_cert_hostname - SSL certificate hostname
- * @property {string} ssl_sni_hostname - SSL SNI hostname
- * @property {number} min_tls_version - Minimum TLS version
- * @property {number} max_tls_version - Maximum TLS version
- * @property {string} ssl_ciphers - SSL ciphers
- * @property {string} ssl_ca_cert - SSL CA certificate
- * @property {string} ssl_client_cert - SSL client certificate
- * @property {string} ssl_client_key - SSL client key
- * @property {number} max_conn - Maximum connections
- * @property {number} first_byte_timeout - First byte timeout
- * @property {number} connect_timeout - Connect timeout
- * @property {number} between_bytes_timeout - Between bytes timeout
- * @property {boolean} auto_loadbalance - Auto load balance
- * @property {number} weight - Backend weight
- * @property {string} request_condition - Request condition name
- * @property {string} healthcheck - Healthcheck name
- * @property {string} shield - Shield POP
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} name - Backend name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} address - Backend address.
+ * @property {number} port - Backend port.
+ * @property {string} comment - Backend comment.
+ * @property {boolean} use_ssl - Whether to use SSL.
+ * @property {string} ssl_hostname - SSL hostname.
+ * @property {string} ssl_cert_hostname - SSL certificate hostname.
+ * @property {string} ssl_sni_hostname - SSL SNI hostname.
+ * @property {number} min_tls_version - Minimum TLS version.
+ * @property {number} max_tls_version - Maximum TLS version.
+ * @property {string} ssl_ciphers - SSL ciphers.
+ * @property {string} ssl_ca_cert - SSL CA certificate.
+ * @property {string} ssl_client_cert - SSL client certificate.
+ * @property {string} ssl_client_key - SSL client key.
+ * @property {number} max_conn - Maximum connections.
+ * @property {number} first_byte_timeout - First byte timeout.
+ * @property {number} connect_timeout - Connect timeout.
+ * @property {number} between_bytes_timeout - Between bytes timeout.
+ * @property {boolean} auto_loadbalance - Auto load balance.
+ * @property {number} weight - Backend weight.
+ * @property {string} request_condition - Request condition name.
+ * @property {string} healthcheck - Healthcheck name.
+ * @property {string} shield - Shield POP.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} ServiceResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Service} data - Service data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Service} data - Service data.
  */
 
 /**
  * @typedef {object} ServiceListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Service>} data - Array of services
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Service>} data - Array of services.
  */
 
 /**
  * @typedef {object} VersionResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Version} data - Version data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Version} data - Version data.
  */
 
 /**
  * @typedef {object} VersionListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Version>} data - Array of versions
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Version>} data - Array of versions.
  */
 
 /**
  * @typedef {object} DictionaryResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Dictionary} data - Dictionary data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Dictionary} data - Dictionary data.
  */
 
 /**
  * @typedef {object} DictionaryListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Dictionary>} data - Array of dictionaries
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Dictionary>} data - Array of dictionaries.
  */
 
 /**
  * @typedef {object} DictionaryItemResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {DictionaryItem} data - Dictionary item data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {DictionaryItem} data - Dictionary item data.
  */
 
 /**
  * @typedef {object} DictionaryItemListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<DictionaryItem>} data - Array of dictionary items
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<DictionaryItem>} data - Array of dictionary items.
  */
 
 /**
  * @typedef {object} ConditionResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Condition} data - Condition data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Condition} data - Condition data.
  */
 
 /**
  * @typedef {object} ConditionListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Condition>} data - Array of conditions
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Condition>} data - Array of conditions.
  */
 
 /**
  * @typedef {object} HeaderResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Header} data - Header data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Header} data - Header data.
  */
 
 /**
  * @typedef {object} HeaderListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Header>} data - Array of headers
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Header>} data - Array of headers.
  */
 
 /**
  * @typedef {object} BackendResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Backend} data - Backend data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Backend} data - Backend data.
  */
 
 /**
  * @typedef {object} BackendListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Backend>} data - Array of backends
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Backend>} data - Array of backends.
  */
 
 /**
  * @typedef {object} BulkOperationResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {object} data - Bulk operation result data
- * @property {string} data.status - Operation status
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {object} data - Bulk operation result data.
+ * @property {string} data.status - Operation status.
  */
 
 /**
  * @typedef {object} DeleteResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {object} data - Delete operation result
- * @property {string} data.status - Delete status
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {object} data - Delete operation result.
+ * @property {string} data.status - Delete status.
  */
 
 /**
  * @typedef {object} Snippet
- * @property {string} name - Snippet name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} content - VCL snippet content
+ * @property {string} name - Snippet name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} content - VCL snippet content.
  * @property {string} type - Snippet type (init, recv, hash, hit, miss, pass, fetch, error,
- *   deliver, log)
- * @property {number} priority - Priority (0-100)
- * @property {boolean} dynamic - Whether snippet is dynamic
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ *   deliver, log).
+ * @property {number} priority - Priority (0-100).
+ * @property {boolean} dynamic - Whether snippet is dynamic.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} ResponseObject
- * @property {string} name - Response object name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} content - Response content
- * @property {string} content_type - Content type
- * @property {number} status - HTTP status code
- * @property {string} response - Response name
- * @property {string} request_condition - Request condition name
- * @property {string} cache_condition - Cache condition name
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} name - Response object name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} content - Response content.
+ * @property {string} content_type - Content type.
+ * @property {number} status - HTTP status code.
+ * @property {string} response - Response name.
+ * @property {string} request_condition - Request condition name.
+ * @property {string} cache_condition - Cache condition name.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} VCL
- * @property {string} name - VCL name
- * @property {string} service_id - Service ID
- * @property {number} version - Version number
- * @property {string} content - VCL content
- * @property {boolean} main - Whether this is the main VCL
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string} deleted_at - Deletion timestamp
+ * @property {string} name - VCL name.
+ * @property {string} service_id - Service ID.
+ * @property {number} version - Version number.
+ * @property {string} content - VCL content.
+ * @property {boolean} main - Whether this is the main VCL.
+ * @property {string} created_at - Creation timestamp.
+ * @property {string} updated_at - Last update timestamp.
+ * @property {string} deleted_at - Deletion timestamp.
  */
 
 /**
  * @typedef {object} VCLResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {VCL} data - VCL data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {VCL} data - VCL data.
  */
 
 /**
  * @typedef {object} SnippetResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Snippet} data - Snippet data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Snippet} data - Snippet data.
  */
 
 /**
  * @typedef {object} SnippetListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<Snippet>} data - Array of snippets
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<Snippet>} data - Array of snippets.
  */
 
 /**
  * @typedef {object} ResponseObjectResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {ResponseObject} data - Response object data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {ResponseObject} data - Response object data.
  */
 
 /**
  * @typedef {object} ResponseObjectListResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {Array<ResponseObject>} data - Array of response objects
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {Array<ResponseObject>} data - Array of response objects.
  */
 
 /**
  * @typedef {object} ApiResponse
- * @property {number} status - HTTP status code
- * @property {string} statusText - HTTP status text
- * @property {object} headers - Response headers
- * @property {object} config - Request configuration
- * @property {object} request - HTTP request object
- * @property {any} data - Response data
+ * @property {number} status - HTTP status code.
+ * @property {string} statusText - HTTP status text.
+ * @property {object} headers - Response headers.
+ * @property {object} config - Request configuration.
+ * @property {object} request - HTTP request object.
+ * @property {any} data - Response data.
  */
 
 export class RateLimitError extends Error {
