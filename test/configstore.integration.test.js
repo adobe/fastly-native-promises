@@ -151,6 +151,8 @@ describe('#integration config store operations', () => {
 
       // Verify items were created
       const items = await fastly.readConfigItems(testStoreId);
+      assert.ok(items.data);
+      assert.ok(items.data.data);
       assert.ok(items.data.data.find((i) => i.item_key === 'bulk_key1'));
 
       // Bulk update/delete

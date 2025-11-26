@@ -54,10 +54,11 @@ export default class SecretStoreAPI {
    * @returns {Promise} The response object.
    */
   async createSecretStore(name, options = {}) {
-    return this.request.post('/resources/stores/secret', {
-      name,
-      write_only: options.write_only || false,
-    });
+    const body = { name };
+    if (options.write_only !== undefined) {
+      body.write_only = options.write_only;
+    }
+    return this.request.post('/resources/stores/secret', body);
   }
 
   /**

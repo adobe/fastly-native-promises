@@ -54,7 +54,7 @@ describe('#integration secret store operations', () => {
   });
 
   condit('Create Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.createSecretStore(testStoreName, { write_only: false });
+    const res = await fastly.createSecretStore(testStoreName);
     assert.ok(res.data);
     assert.strictEqual(res.data.name, testStoreName);
     assert.ok(res.data.id);
