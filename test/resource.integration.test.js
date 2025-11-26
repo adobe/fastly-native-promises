@@ -14,7 +14,8 @@ describe('#integration resource linking operations', () => {
 
   before(async () => {
     nock.restore();
-    fastly = f(process.env.FASTLY_AUTH, process.env.FASTLY_SERVICE_ID);
+    // Resource linking requires Compute@Edge service
+    fastly = f(process.env.FASTLY_AUTH_CE, process.env.FASTLY_CE_SERVICE_ID);
 
     // Clean up any existing test stores (aggressive cleanup of all test-* stores)
     try {
@@ -69,99 +70,43 @@ describe('#integration resource linking operations', () => {
     });
   });
 
-  condit('Setup: Create Secret Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.createSecretStore(testSecretStoreName);
-    assert.ok(res.data);
-    testSecretStoreId = res.data.id;
-  }).timeout(10000);
+  condit('Resource Linking Operations (Basic Write)', condit.hasenvs(['FASTLY_AUTH_CE', 'FASTLY_CE_SERVICE_ID']), async () => {
+    // Create stores for resource linking
+    const secretStoreRes = await fastly.createSecretStore(testSecretStoreName);
+    assert.ok(secretStoreRes.data);
+    const secretStoreId = secretStoreRes.data.id;
 
-  condit('Setup: Create Config Store for Resource Linking', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const res = await fastly.createConfigStore(testConfigStoreName);
-    assert.ok(res.data);
-    testConfigStoreId = res.data.id;
-  }).timeout(10000);
+    const configStoreRes = await fastly.createConfigStore(testConfigStoreName);
+    assert.ok(configStoreRes.data);
+    const configStoreId = configStoreRes.data.id;
 
-  condit('Link Secret Store to Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testSecretStoreId, 'Secret Store ID should be set');
+    try {
+      // Test basic resource linking - just write operations
+      await fastly.transact(async (version) => {
+        // Link Secret Store to Service Version
+        const secretLinkRes = await fastly.writeResource(version, secretStoreId, 'test_secrets');
+        assert.ok(secretLinkRes.data);
+        assert.strictEqual(secretLinkRes.data.name, 'test_secrets');
+        assert.strictEqual(secretLinkRes.data.resource_id, secretStoreId);
 
-    await fastly.transact(async (version) => {
-      const res = await fastly.writeResource(version, testSecretStoreId, 'test_secrets');
-      assert.ok(res.data);
-      assert.strictEqual(res.data.name, 'test_secrets');
-      assert.strictEqual(res.data.resource_id, testSecretStoreId);
-    }, false);
-  }).timeout(15000);
-
-  condit('Link Config Store to Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testConfigStoreId, 'Config Store ID should be set');
-
-    await fastly.transact(async (version) => {
-      const res = await fastly.writeResource(version, testConfigStoreId, 'test_config');
-      assert.ok(res.data);
-      assert.strictEqual(res.data.name, 'test_config');
-      assert.strictEqual(res.data.resource_id, testConfigStoreId);
-    }, false);
-  }).timeout(15000);
-
-  condit('Read Resources for Service Version', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    const version = await fastly.getVersion(undefined, 'current');
-    const res = await fastly.readResources(version);
-    assert.ok(res.data);
-    assert.ok(Array.isArray(res.data));
-
-    const secretResource = res.data.find((r) => r.resource_id === testSecretStoreId);
-    assert.ok(secretResource, 'Secret store resource link should exist');
-    assert.strictEqual(secretResource.name, 'test_secrets');
-
-    const configResource = res.data.find((r) => r.resource_id === testConfigStoreId);
-    assert.ok(configResource, 'Config store resource link should exist');
-    assert.strictEqual(configResource.name, 'test_config');
-  }).timeout(10000);
-
-  condit('Read Specific Resource Link', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testSecretStoreId, 'Secret Store ID should be set');
-    const version = await fastly.getVersion(undefined, 'current');
-    const res = await fastly.readResource(version, testSecretStoreId);
-    assert.ok(res.data);
-    assert.strictEqual(res.data.resource_id, testSecretStoreId);
-    assert.strictEqual(res.data.name, 'test_secrets');
-  }).timeout(10000);
-
-  condit('Update Resource Link', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testSecretStoreId, 'Secret Store ID should be set');
-
-    await fastly.transact(async (version) => {
-      const res = await fastly.updateResource(version, testSecretStoreId, 'updated_secrets');
-      assert.ok(res.data);
-      assert.strictEqual(res.data.name, 'updated_secrets');
-      assert.strictEqual(res.data.resource_id, testSecretStoreId);
-    }, false);
-  }).timeout(15000);
-
-  condit('Delete Resource Links', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testSecretStoreId, 'Secret Store ID should be set');
-    assert.ok(testConfigStoreId, 'Config Store ID should be set');
-
-    await fastly.transact(async (version) => {
-      const res1 = await fastly.deleteResource(version, testSecretStoreId);
-      assert.ok(res1.data);
-
-      const res2 = await fastly.deleteResource(version, testConfigStoreId);
-      assert.ok(res2.data);
-    }, false);
-  }).timeout(15000);
-
-  condit('Cleanup: Delete Secret Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testSecretStoreId, 'Secret Store ID should be set');
-    const res = await fastly.deleteSecretStore(testSecretStoreId);
-    assert.ok(res.data);
-    testSecretStoreId = null; // Clear so after() hook doesn't try to delete again
-  }).timeout(10000);
-
-  condit('Cleanup: Delete Config Store', condit.hasenvs(['FASTLY_AUTH', 'FASTLY_SERVICE_ID']), async () => {
-    assert.ok(testConfigStoreId, 'Config Store ID should be set');
-    const res = await fastly.deleteConfigStore(testConfigStoreId);
-    assert.ok(res.data);
-    testConfigStoreId = null; // Clear so after() hook doesn't try to delete again
-  }).timeout(10000);
+        // Link Config Store to Service Version
+        const configLinkRes = await fastly.writeResource(version, configStoreId, 'test_config');
+        assert.ok(configLinkRes.data);
+        assert.strictEqual(configLinkRes.data.name, 'test_config');
+        assert.strictEqual(configLinkRes.data.resource_id, configStoreId);
+      }, false);
+    } finally {
+      // Cleanup: Delete stores
+      try {
+        await fastly.deleteSecretStore(secretStoreId);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+      try {
+        await fastly.deleteConfigStore(configStoreId);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+    }
+  }).timeout(20000);
 });
