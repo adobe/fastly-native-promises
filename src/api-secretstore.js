@@ -52,7 +52,9 @@ export default class SecretStoreAPI {
    * @returns {Promise} The response object.
    */
   async createSecretStore(name) {
-    return this.request.post('/resources/stores/secret', { name });
+    return this.request.post('/resources/stores/secret', { name }, {
+      headers: { 'content-type': 'application/json' },
+    });
   }
 
   /**
@@ -71,7 +73,26 @@ export default class SecretStoreAPI {
     } catch (e) {
       // If listing fails, try to create anyway
     }
-    return this.createSecretStore(name);
+
+    try {
+      return await this.createSecretStore(name);
+    } catch (e) {
+      // If creation fails with "duplicate: name", the store exists
+      // but wasn't visible in the list due to eventual consistency
+      if (e.message && e.message.includes('duplicate: name')) {
+        // Wait a bit for eventual consistency
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1000);
+        });
+        // Try to find the store again
+        const stores = await this.readSecretStores();
+        const existing = stores.data?.data?.find((s) => s.name === name);
+        if (existing) {
+          return { data: existing };
+        }
+      }
+      throw e;
+    }
   }
 
   /**
@@ -118,9 +139,14 @@ export default class SecretStoreAPI {
    * @returns {Promise} The response object.
    */
   async putSecret(storeId, secretName, secretValue) {
+    // Base64 encode the secret value as required by the API
+    const encodedSecret = Buffer.from(secretValue, 'utf8').toString('base64');
+
     return this.request.put(`/resources/stores/secret/${storeId}/secrets`, {
       name: secretName,
-      secret: secretValue,
+      secret: encodedSecret,
+    }, {
+      headers: { 'content-type': 'application/json' },
     });
   }
 
