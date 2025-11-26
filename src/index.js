@@ -9,6 +9,9 @@ import PurgeAPI from './api-purge.js';
 import DomainAPI from './api-domain.js';
 import PackageAPI from './api-package.js';
 import HealthcheckAPI from './api-healthcheck.js';
+import SecretStoreAPI from './api-secretstore.js';
+import ConfigStoreAPI from './api-configstore.js';
+import ResourceAPI from './api-resource.js';
 
 export * as loghelpers from './log-helpers.js';
 
@@ -320,7 +323,17 @@ export class Fastly {
     this.headers = new Headers(this);
 
     // bind the methods of the API classes.
-    [AccountAPI, AuthAPI, PurgeAPI, DomainAPI, HealthcheckAPI, PackageAPI].forEach((API) => {
+    [
+      AccountAPI,
+      AuthAPI,
+      PurgeAPI,
+      DomainAPI,
+      HealthcheckAPI,
+      PackageAPI,
+      SecretStoreAPI,
+      ConfigStoreAPI,
+      ResourceAPI,
+    ].forEach((API) => {
       const api = new API(this);
       Object.getOwnPropertyNames(API.prototype).forEach((name) => {
         const prop = api[name];
