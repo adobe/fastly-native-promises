@@ -16,6 +16,7 @@ import { recommended, source, test } from '@adobe/eslint-config-helix';
 export default defineConfig([
   globalIgnores([
     'test/compute/*',
+    '.yolo/**',
   ]),
   {
     rules: {

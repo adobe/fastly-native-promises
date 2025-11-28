@@ -11,6 +11,18 @@
  */
 
 /**
+ * @typedef {object} PurgeResponse
+ * @property {string} status - The status of the purge operation.
+ * @property {string} id - The unique identifier for the purge request.
+ */
+
+/**
+ * @typedef {object} BulkPurgeResponse
+ * @property {string} status - The status of the bulk purge operation.
+ * @property {string} id - The unique identifier for the bulk purge request.
+ */
+
+/**
  * The Fastly Purge API.
  *
  * @see https://docs.fastly.com/api/purge#purge
@@ -29,7 +41,7 @@ export default class PurgeAPI {
    *
    * @see https://docs.fastly.com/api/purge#purge_3aa1d66ee81dbfed0b03deed0fa16a9a
    * @param {string} url - The URL to purge.
-   * @returns {Promise} The response object representing the completion or failure.
+   * @returns {Promise<PurgeResponse>} Purge confirmation for the individual URL.
    * @example
    * instance.purgeIndividual('www.example.com')
    .then(res => {
@@ -47,6 +59,8 @@ export default class PurgeAPI {
    * Instant Purge everything from a service.
    *
    * @see https://docs.fastly.com/api/purge#purge_bee5ed1a0cfd541e8b9f970a44718546
+   * @returns {Promise<BulkPurgeResponse>} Confirmation that all content for the service
+   *   has been purged.
    * @example
    * instance.purgeAll()
    .then(res => {
@@ -55,7 +69,6 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async purgeAll() {
     return this.request.post(`/service/${this.service_id}/purge_all`);
@@ -65,6 +78,8 @@ export default class PurgeAPI {
    * Instant Purge a particular service of items tagged with a Surrogate Key.
    *
    * @see https://docs.fastly.com/api/purge#purge_d8b8e8be84c350dd92492453a3df3230
+   * @param {string} key - The surrogate key to purge.
+   * @returns {Promise<PurgeResponse>} Purge confirmation for the surrogate key.
    * @example
    * instance.purgeKey('key_1')
    .then(res => {
@@ -73,8 +88,6 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @param {string} key - The surrogate key to purge.
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async purgeKey(key) {
     return this.request.post(`/service/${this.service_id}/purge/${key}`);
@@ -84,6 +97,9 @@ export default class PurgeAPI {
    * Instant Purge a particular service of items tagged with Surrogate Keys in a batch.
    *
    * @see https://docs.fastly.com/api/purge#purge_db35b293f8a724717fcf25628d713583
+   * @param {Array} keys - The array of surrogate keys to purge.
+   * @returns {Promise<BulkPurgeResponse>} Confirmation that all content tagged with the
+   *   specified surrogate keys has been purged.
    * @example
    * instance.purgeKeys(['key_2', 'key_3', 'key_4'])
    .then(res => {
@@ -92,8 +108,6 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @param {Array} keys - The array of surrogate keys to purge.
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async purgeKeys(keys) {
     return this.request.post(`/service/${this.service_id}/purge`, {
@@ -108,8 +122,9 @@ export default class PurgeAPI {
   /**
    * Soft Purge an individual URL.
    *
-   * @param {string} url - The URL to soft purge.
    * @see https://docs.fastly.com/api/purge#soft_purge_0c4f56f3d68e9bed44fb8b638b78ea36
+   * @param {string} url - The URL to soft purge.
+   * @returns {Promise<PurgeResponse>} Soft purge confirmation for the individual URL.
    * @example
    * instance.softPurgeIndividual('www.example.com/images')
    .then(res => {
@@ -118,16 +133,19 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async softPurgeIndividual(url) {
-    return this.request.post(`/purge/${url}`, undefined, { headers: { 'Fastly-Soft-Purge': 1 } });
+    return this.request.post(`/purge/${url}`, undefined, {
+      headers: { 'Fastly-Soft-Purge': 1 },
+    });
   }
 
   /**
    * Soft Purge a particular service of items tagged with a Surrogate Key.
    *
    * @see https://docs.fastly.com/api/purge#soft_purge_2e4d29085640127739f8467f27a5b549
+   * @param {string} key - The surrogate key to soft purge.
+   * @returns {Promise<PurgeResponse>} Soft purge confirmation for the surrogate key.
    * @example
    * instance.softPurgeKey('key_5')
    .then(res => {
@@ -136,17 +154,20 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @param {string} key - The surrogate key to soft purge.
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async softPurgeKey(key) {
-    return this.request.post(`/service/${this.service_id}/purge/${key}`, undefined, { headers: { 'Fastly-Soft-Purge': 1 } });
+    return this.request.post(`/service/${this.service_id}/purge/${key}`, undefined, {
+      headers: { 'Fastly-Soft-Purge': 1 },
+    });
   }
 
   /**
    * Soft Purge a particular service of items tagged with Surrogate Keys in a batch.
    *
    * @see https://docs.fastly.com/api/purge#purge_db35b293f8a724717fcf25628d713583
+   * @param {Array} keys - The array of surrogate keys to purge.
+   * @returns {Promise<BulkPurgeResponse>} Confirmation that all content tagged with the
+   *   specified surrogate keys has been soft purged.
    * @example
    * instance.softPurgeKeys(['key_2', 'key_3', 'key_4'])
    .then(res => {
@@ -155,8 +176,6 @@ export default class PurgeAPI {
    .catch(err => {
      console.log(err.message);
    });
-   * @param {Array} keys - The array of surrogate keys to purge.
-   * @returns {Promise} The response object representing the completion or failure.
    */
   async softPurgeKeys(keys) {
     return this.request.post(`/service/${this.service_id}/purge`, {
