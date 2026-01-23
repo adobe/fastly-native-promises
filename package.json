@@ -59,7 +59,7 @@
     "husky": "9.1.7",
     "junit-report-builder": "5.1.1",
     "lint-staged": "16.2.7",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "mocha": "11.7.5",
     "nock": "14.0.10",
     "semantic-release": "25.0.2"
