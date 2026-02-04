@@ -165,6 +165,10 @@ describe('#integration edge dictionary updates', () => {
       );
       assert.deepEqual(res2.data, { status: 'ok' });
 
+      // Wait for eventual consistency
+      // eslint-disable-next-line no-promise-executor-return
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       const val = await fastly.readDictItem(version, 'test_dict', 'bar');
       assert.deepEqual(val.data.item_value, 'zwei');
     }
