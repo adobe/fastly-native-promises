@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/adobe/fastly-native-promises/compare/v3.1.0...v3.1.1) (2026-02-04)
+
+
+### Bug Fixes
+
+* add delay for eventual consistency in edge dictionary integration test ([eae7099](https://github.com/adobe/fastly-native-promises/commit/eae70998714acb502b92a76cc37364b53e44c800))
+
 # [3.1.0](https://github.com/adobe/fastly-native-promises/compare/v3.0.19...v3.1.0) (2025-11-26)
 
 
