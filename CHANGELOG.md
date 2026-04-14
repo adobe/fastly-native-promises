@@ -1,3 +1,11 @@
+## [3.1.3](https://github.com/adobe/fastly-native-promises/compare/v3.1.2...v3.1.3) (2026-04-14)
+
+
+### Bug Fixes
+
+* **ci:** grant contents:write so semantic-release dry-run can verify push access ([a0db32c](https://github.com/adobe/fastly-native-promises/commit/a0db32cfca527dad1f0997170602b3db951350b9))
+* **ci:** use OIDC for npm auth in test job, remove expired NPM_TOKEN ([f516ab4](https://github.com/adobe/fastly-native-promises/commit/f516ab45e5a5aca8d6ae89142e749517d9b3b736))
+
 ## [3.1.2](https://github.com/adobe/fastly-native-promises/compare/v3.1.1...v3.1.2) (2026-04-08)
 
 
