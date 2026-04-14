@@ -17,6 +17,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # semantic-release dry-run verifies push access
+      id-token: write # needed for npm OIDC verification in dry-run
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js 20.x
@@ -33,7 +36,6 @@ jobs:
         run: npm run semantic-release-dry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
 
   release:
     name: Release
@@ -55,4 +57,3 @@ jobs:
       - run: npm run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.ADOBE_BOT_NPM_TOKEN }}
