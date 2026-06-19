@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/adobe/fastly-native-promises/compare/v3.1.3...v3.1.4) (2026-06-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency form-data to v4.0.6 [security] ([#650](https://github.com/adobe/fastly-native-promises/issues/650)) ([13f2989](https://github.com/adobe/fastly-native-promises/commit/13f2989d8b24034aba91ea51054565870a3dce48))
+
 ## [3.1.3](https://github.com/adobe/fastly-native-promises/compare/v3.1.2...v3.1.3) (2026-04-14)
 
 
