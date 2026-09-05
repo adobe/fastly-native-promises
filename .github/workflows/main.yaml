@@ -21,15 +21,15 @@ jobs:
       contents: write # semantic-release dry-run verifies push access
       id-token: write # needed for npm OIDC verification in dry-run
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
       - run: npm i
       - run: npm run lint
       - run: npm test
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Semantic Release (Dry Run)
@@ -48,9 +48,9 @@ jobs:
       pull-requests: write
       id-token: write # needed for npm trusted publishers with OIDC
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
       - run: npm i
