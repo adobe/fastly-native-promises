@@ -1,3 +1,10 @@
+## [3.1.6](https://github.com/adobe/fastly-native-promises/compare/v3.1.5...v3.1.6) (2026-10-21)
+
+
+### Bug Fixes
+
+* **deps:** update [@adobe](https://github.com/adobe) ([#669](https://github.com/adobe/fastly-native-promises/issues/669)) ([13b3168](https://github.com/adobe/fastly-native-promises/commit/13b3168f7b2e69374a2be20cefb69447f67c36fc))
+
 ## [3.1.5](https://github.com/adobe/fastly-native-promises/compare/v3.1.4...v3.1.5) (2026-08-10)
 
 
