@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 import assert, { AssertionError } from 'assert';
 import nock from 'nock';
 
