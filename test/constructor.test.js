@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 import assert from 'assert';
 import fastlyPromises from '../src/index.js';
 

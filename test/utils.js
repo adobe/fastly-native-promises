@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-env mocha */
 export function condit(name, condition, mochafn) {
   if (condition()) {
     return it(name, mochafn);
