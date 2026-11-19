@@ -1212,11 +1212,7 @@ $ npm test
 
 ## Contribute
 
-PRs accepted. I am open to suggestions in improving this library. Commit by:
-
-```bash
-$ npm run commit
-```
+PRs accepted. I am open to suggestions in improving this library. Please use [Conventional Commits](https://www.conventionalcommits.org/) for your commit messages (e.g. `fix: handle empty response`), as releases are automated with `semantic-release`.
 
 ## License
 
