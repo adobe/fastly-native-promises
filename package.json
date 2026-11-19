@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "commit": "npm run lint && npm run docs && git-cz",
     "test": "c8 mocha -p",
     "lint": "eslint .",
     "junit": "c8 mocha --no-color --exit -R xunit --reporter-option output=junit/test-results.xml",
@@ -50,8 +49,6 @@
     "@semantic-release/changelog": "7.0.0",
     "@semantic-release/git": "11.0.1",
     "c8": "12.0.0",
-    "commitizen": "4.3.2",
-    "cz-conventional-changelog": "3.3.0",
     "dotenv": "18.0.10",
     "eslint": "9.39.5",
     "eslint-plugin-jsdoc": "65.4.5",
@@ -68,11 +65,6 @@
     "@adobe/fetch": "4.3.2",
     "form-data": "4.0.6",
     "object-hash": "3.0.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
   },
   "lint-staged": {
     "*.js": "eslint"
